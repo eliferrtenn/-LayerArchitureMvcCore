@@ -1,0 +1,304 @@
+﻿@model InformsISG.Entities.Dtos.Ortam_OlcumDTO
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Index";
+    var OrtamOlcumleriIndex = (List<InformsISG.Entities.Dtos.Ortam_OlcumDTO>)ViewBag.OrtamOlcumleriIndex;
+    var siraNo = 1;
+}
+
+<form asp-action="Index">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">Ortam Ölçümleri</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Tali_Birim_Id" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Tali_Birim_Id" class="form-control" asp-items="ViewBag.Tali_Birim_Id"></select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <label asp-for="Olcum_Tur" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Olcum_Tur" class="form-control" />
+                        <span asp-validation-for="Olcum_Tur" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Olcum_Tarih" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Olcum_Tarih" class="form-control" />
+                        <span asp-validation-for="Olcum_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Olcum_Birim" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Olcum_Birim" class="form-control" />
+                        <span asp-validation-for="Olcum_Birim" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <span class="form-check-label">
+                        @Html.DisplayNameFor(model => model.Olcum_Sonuc)
+                    </span>
+                    <label class="form-check form-switch form-check-custom form-check-solid">
+                        <input class="form-check-input" type="checkbox" asp-for="Olcum_Sonuc" />
+                    </label>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Aciklama" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-question"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Aciklama" class="form-control"></textarea>
+                        <span asp-validation-for="Aciklama" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <div class="form-group">
+                        <label asp-for="Isveren_Id" class="control-label"></label>
+                        <select asp-for="Isveren_Id" class="form-control" asp-items="ViewBag.Isveren_Id"></select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+
+    </div>
+
+</form>
+
+<div class="card shadow-sm">
+    <div class="card-header">
+
+    </div>
+    <div class="card-body">
+        <table id="tblBirim" class="table table-striped table-row-bordered gy-5 gs-7">
+            <thead>
+                <tr>
+                    <th>
+                        SIRA NO
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Olcum_Tur)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Olcum_Tarih)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Olcum_Sonuc)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Olcum_Birim)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Aciklama)
+                    </th>
+                    <th>İŞLEMLER</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in OrtamOlcumleriIndex)
+                {
+                    <tr>
+                        <td>
+                            @siraNo
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Olcum_Tur)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Olcum_Tarih)
+                        </td>
+                        @if (item.Olcum_Sonuc == true)
+                        {
+                            <td>Başarılı</td>
+                        }
+                        else
+                        {
+                            <td>Başarısız</td>
+                        }
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Olcum_Birim)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Aciklama)
+                        </td>
+
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                    data-kt-menu-trigger="click"
+                                    data-kt-menu-placement="bottom-start">
+                                İşlemler
+                            </button>
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-100px py-4"
+                                 data-kt-menu="true">
+                                <div class="menu-item px-3">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="menu-link px-3">
+                                        Düzenle
+                                    </a>
+                                </div>  
+                                <div class="menu-item px-3">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="menu-link px-3">
+                                        Detaylar
+                                    </a>
+                                </div>
+                                <div class="menu-item px-3">
+                                    <a onclick="VeriSil(@item.Id,this)" class="menu-link px-3">
+                                        Sil
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    siraNo++;
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card-footer">
+        
+    </div>
+</div>
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script>
+        $("#tblBirim").DataTable({
+            "pageLength": 50,
+            language: {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                 "sInfo": 'Toplam kayıttan _START_  - _END_ arasındaki kayıtlar gösteriliyor.' + "Toplam "+@ViewBag.OrtamOlcum + " kayıt vardır.",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(MAX kayıt içerisinden bulunan)",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada MENU kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            },
+            dom:
+                "<'row'" +
+                "<'col-sm-6 d-flex align-items-center justify-conten-start'>" +
+                "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+                ">" +
+
+                "<'table-responsive'tr>" +
+
+                "<'row'" +
+                "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                ">"
+
+        });
+</script>
+
+
+
+    <script type="text/javascript">
+       function VeriSil(ID, obj) {
+            var btn = $(obj);
+            Swal.fire({
+                title: 'SİLME İŞLEMİ',
+                text: "Silmek istediğinize emin misiniz?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#50cd89',
+                cancelButtonColor: '#f1416c',
+                confirmButtonText: 'Evet Sil!',
+                cancelButtonText: 'Hayır Silme!',
+                showClass: {
+                    popup: 'animate_animated animate_fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate_animated animate_fadeOutUp'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Delete", "Ortam_Olcum")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: ID }
+                    }).done(function (d) {
+                        const result = $.parseJSON(d);
+                        if (result.ResultStatus == 0) {
+                            Swal.fire({
+                                title: 'SİLİNDİ',
+                                icon: 'success',
+                                text: `${result.Message}`,
+                                showClass: {
+                                    popup: 'animate_animated animate_fadeInDown'
+                                },
+                                hideClass: {
+                                    popup: 'animate_animated animate_fadeOutUp'
+                                }
+                            });
+                            btn.parent().parent().parent().parent().fadeOut(1000);
+                        }
+                    }).fail(function () {
+                        Swal.fire({
+                            title: 'HATALI İŞLEM',
+                            text: "Veri silinemedi",
+                            icon: 'error',
+                            showClass: {
+                                popup: 'animate_animated animate_fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate_animated animate_fadeOutUp'
+                            }
+                        })
+                    })
+                }
+            });
+        }
+    </script>
+
+}
+

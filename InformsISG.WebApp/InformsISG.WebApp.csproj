@@ -1,0 +1,77 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Contents\**" />
+    <Content Remove="Contents\**" />
+    <EmbeddedResource Remove="Contents\**" />
+    <None Remove="Contents\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\Dosya\IsgKurulKarar\133b1c02-119a-48e6-8e32-e1444d8235e0.jpg" />
+    <Content Remove="wwwroot\Dosya\IsgKurulKarar\153c0faf-89d3-4a60-98c7-f236e4c092ad.jpeg" />
+    <Content Remove="wwwroot\Dosya\IsgKurulKarar\1ab0ec60-61cb-4a2b-afc3-0021f5cde6b4.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.6" />
+    <PackageReference Include="FastReport.OpenSource" Version="2022.3.10" />
+    <PackageReference Include="FastReport.OpenSource.Data.MsSql" Version="2021.4.0" />
+    <PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2022.3.10" />
+    <PackageReference Include="FastReport.OpenSource.Web" Version="2022.3.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.14" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.8.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="QRCoder" Version="1.4.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InformsISG.Services\InformsISG.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Dosya\Msds\" />
+    <Folder Include="Dosya\Dof\" />
+    <Folder Include="Dosya\Kaza\" />
+    <Folder Include="Dosya\KazaPersonelDisi\" />
+    <Folder Include="Upload\Files\" />
+    <Folder Include="wwwroot\Dosya\Msds\" />
+    <Folder Include="wwwroot\Dosya\BakimFotograf\" />
+    <Folder Include="wwwroot\Dosya\AcilEylemPlani\" />
+    <Folder Include="wwwroot\Dosya\Dof\" />
+    <Folder Include="wwwroot\Dosya\Kaza\" />
+    <Folder Include="wwwroot\Dosya\KazaPersonelDisi\" />
+    <Folder Include="wwwroot\Dosya\Risk\" />
+    <Folder Include="wwwroot\Dosya\RiskAnalizTablo\" />
+    <Folder Include="wwwroot\Dosya\RamakKala\" />
+    <Folder Include="wwwroot\Dosya\Personel\Default\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Dosya\IsgKurulKarar\133b1c02-119a-48e6-8e32-e1444d8235e0.jpg" />
+    <None Include="wwwroot\Dosya\IsgKurulKarar\153c0faf-89d3-4a60-98c7-f236e4c092ad.jpeg" />
+    <None Include="wwwroot\Dosya\IsgKurulKarar\1ab0ec60-61cb-4a2b-afc3-0021f5cde6b4.jpeg" />
+    <None Include="wwwroot\Reports\Risk_Analizi.frx" />
+  </ItemGroup>
+
+</Project>

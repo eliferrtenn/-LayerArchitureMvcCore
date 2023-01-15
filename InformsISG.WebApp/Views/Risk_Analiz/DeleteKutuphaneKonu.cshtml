@@ -1,0 +1,226 @@
+﻿@model InformsISG.Entities.Dtos.Risk_AnalizDTO
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Create";
+    var DENEME = (List<InformsISG.Entities.Dtos.Risk_KonuDTO>)ViewBag.DENEME;
+    var KutuphaneServis = (List<InformsISG.Entities.Dtos.Risk_KutuphaneDTO>)ViewBag.KutuphaneServis;
+    var KutuphaneKonu = (List<InformsISG.Entities.Dtos.Risk_KonuDTO>)ViewBag.KutuphaneKonu;
+    TempData["id"] = TempData["id"];
+}
+
+<form asp-action="EditKutuphaneKonu" enctype="multipart/form-data">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">RİSK DÜZENLEME</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Risk_Analiz")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="Id" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+                    <label asp-for="Analiz_No" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Analiz_No" class="form-control" disabled />
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Risk_Kategori_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Risk_Kategori_Id" class="form-control" asp-items="ViewBag.Risk_Kategori_Id" name="kutuphaneKategori">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Risk_Ust_Grup_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Risk_Ust_Grup_Id" class="form-control" asp-items="ViewBag.Risk_Ust_Grup_Id" name="kutuphaneUstGrup">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Risk_Konu_Grup_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Risk_Konu_Grup_Id" class="form-control" asp-items="ViewBag.Risk_Konu_Grup_Id" name="kutuphaneKonuGrup">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Risk_Konu_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <select asp-for="Risk_Konu_Id" class="form-control js-example-tags" asp-items="ViewBag.Risk_Konu_Id" multiple="multiple" name="kutuphaneKonu">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+    </div>
+</form>
+
+<form asp-action="DeleteKutuphaneKonu" enctype="multipart/form-data">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="row">
+                <table id="tblPersonelBilgi" class="table table-striped table-row-bordered gy-5 gs-7">
+                    <thead>
+                        <tr>
+                            <th>
+                                Konu Adı
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in KutuphaneServis)
+                    {
+                        @foreach (var item2 in KutuphaneKonu)
+                        {
+                            @if (item.Risk_Konu_Id == item2.Id)
+                            {
+
+                                <tbody>
+
+                                    <tr>
+                                        <td>
+                                            @item2.Risk_Konu_Adi
+                                        </td>
+                                        <td>
+                                            <span class="form-check form-check-custom form-check-solid" style="text-align:center" id="MyDiv">
+                                                <input class="form-check-input" type="checkbox" value="@item.Id" name="Ids" />
+                                            </span>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+                        }
+                    }
+                </table>
+                <div class="card-header">
+                    <div class="card-toolbar">
+                        <input type="submit" class="btn btn-success btn-hover-rotate-end" value="Seçilen Konuları Çıkar">&nbsp;
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+    </div>
+</form>
+
+
+
+<body>
+
+    <ul></ul>
+</body>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $("#Risk_Kategori_Id").change(function () {
+            var cid = $("#Risk_Kategori_Id").val();
+            $("#Risk_Ust_Grup_Id option").remove();
+
+                         $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("GetUstGrup", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid }
+                         }).done(function (result) {
+                             $.each(result, function (i, item) {
+                                 $("#Risk_Ust_Grup_Id").append('<option value="' + item.value + '">' + item.text + '</option>');
+                             });
+                             $("#Risk_Ust_Grup_Id").trigger('change');
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#Risk_Ust_Grup_Id").change(function () {
+            var cid = $("#Risk_Ust_Grup_Id").val();
+            $("#Risk_Konu_Grup_Id option").remove();
+
+                         $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("GetKonuGrup", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid }
+                         }).done(function (result) {
+                             $.each(result, function (i, item) {
+                                 $("#Risk_Konu_Grup_Id").append('<option value="' + item.value + '">' + item.text + '</option>');
+                             });
+                             $("#Risk_Konu_Grup_Id").trigger('change');
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+           $("#Risk_Konu_Grup_Id").change(function () {
+               var cid = $("#Risk_Konu_Grup_Id").val();
+               $("#Risk_Konu_Id option").remove();
+
+                             $.ajax({
+                            method: 'POST',
+                            url: '@Url.Action("GetKonu", "Risk_Kutuphane")',
+                            headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                            data: { id: cid }
+                             }).done(function (result) {
+                                 $.each(result, function (i, item) {
+                                     $("#Risk_Konu_Id").append('<option value="' + item.value + '">' + item.text + '</option>');
+                                 });
+                                 $("#Risk_Konu_Id").trigger('change');
+                             })
+             });
+    </script>
+    <script>
+        $(".js-example-tags").select2({
+            tags: true
+        });
+    </script>
+    @*<script type="text/javascript">
+               $("#Risk_Konu_Grup_Id").change(function () {
+                   var cid = $("#Risk_Konu_Grup_Id").val();
+                   $("#Risk_Konu_Id option").remove();
+
+                                 $.ajax({
+                                method: 'POST',
+                                url: '@Url.Action("GetKonu", "Risk_Kutuphane")',
+                                headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                                data: { id: cid }
+                                 }).done(function (result) {
+                                     $.each(result, function (i, item) {
+                                         $('.veriler1').append("<td>" + item.value + "</td><br>");
+                                         $('.veriler1').append("<td>" + item.value + "</td><br>");
+                                         $('.veriler2').append("<td>" + item.text + "</td>");
+                                                 $('#taglist input[value=' + days[day] + ']').prop("checked", true);
+                                         $("#Risk_Konu_Id").append('<input value="' + item.text +"placeholder="+item.text+'>');
+                                         });
+                                         $("#Risk_Konu_Id").trigger('change');
+                         })
+             });
+        </script>*@
+
+}
+

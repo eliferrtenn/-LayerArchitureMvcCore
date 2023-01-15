@@ -1,0 +1,340 @@
+﻿@model InformsISG.Entities.Dtos.Risk_AnalizDTO
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Create";
+    var DENEME = (List<InformsISG.Entities.Dtos.Risk_KonuDTO>)ViewBag.DENEME;
+    int dddd = 1;
+}
+
+<form asp-action="Create" enctype="multipart/form-data">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">RİSK EKLEME</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Risk_Analiz")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <label asp-for="Analiz_No" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Analiz_No" class="form-control" />
+                        <span asp-validation-for="Analiz_No" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-8 mb-5">
+                    <label asp-for="Analiz_Tanim" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Analiz_Tanim" class="form-control" />
+                        <span asp-validation-for="Analiz_Tanim" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Analiz_Tarih" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Analiz_Tarih" class="form-control" />
+                        <span asp-validation-for="Analiz_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Bitis_Tarih" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Bitis_Tarih" class="form-control" />
+                        <span asp-validation-for="Bitis_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Personel_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Personel_Id" class="form-control" asp-items="ViewBag.Personel_Id">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Birim_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Birim_Id" class="form-control" asp-items="ViewBag.Birim_Id">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Tali_Birim_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Tali_Birim_Id" class="form-control" asp-items="ViewBag.Tali_Birim_Id">
+                            <option value="">SEÇİNİZ</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Risk_Yontem_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Risk_Yontem_Id" class="form-control" asp-items="ViewBag.Risk_Yontem_Id">
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Risk_Kategori_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Risk_Kategori_Id" class="form-control" asp-items="ViewBag.Risk_Kategori_Id" name="kutuphaneKategori">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Risk_Ust_Grup_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Risk_Ust_Grup_Id" class="form-control" asp-items="ViewBag.Risk_Ust_Grup_Id" name="kutuphaneUstGrup">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Risk_Konu_Grup_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Risk_Konu_Grup_Id" class="form-control" asp-items="ViewBag.Risk_Konu_Grup_Id" name="kutuphaneKonuGrup">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Risk_Konu_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <select asp-for="Risk_Konu_Id" class="form-control js-example-tags" asp-items="ViewBag.Risk_Konu_Id" multiple="multiple" name="kutuphaneKonu">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Notlar" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Notlar" class="form-control" />
+                        <span asp-validation-for="Notlar" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group mb-5">
+                    <div class="col-md-10">
+                        <p>RİSK ANALİZ DOSYASI EKLEYİN : </p>
+                        <input type="file" name="Dosya" asp-for="Dosya" />
+                        <span asp-validation-for="Dosya" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                @*<div class="veriler"></div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>1.</th>
+                                <th>2.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="veriler1"></td>
+                                <td class="veriler2"></td>
+                                &nbsp;
+                            </tr>
+                        </tbody>
+                    </table>*@
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+    </div>
+</form>
+
+
+
+
+<body>
+
+    <ul></ul>
+</body>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $(function () {
+            $('#jstree').on('changed.jstree', function (e, data) {
+                var i, j;
+                var selectedItems = [];
+                for(i = 0, j = data.selected.length; i < j; i++) {
+
+                    //Fetch the Id.
+                    var id = data.selected[i];
+
+                    //Remove the ParentId.
+                    if(id.indexOf('-') != -1){
+                        id = id.split("-")[1];
+                    }
+
+                    //Add the Node to the JSON Array.
+                    selectedItems.push({
+                        text: data.instance.get_node(data.selected[i]).text,
+                        id: id,
+                        parent: data.node.parents[0]
+                    });
+                }
+
+                //Serialize the JSON Array and save in HiddenField.
+                $('#selectedItems').val(JSON.stringify(selectedItems));
+            }).jstree({
+                "core": {
+                    "themes": {
+                        "variant": "large"
+                    },
+                    "data": @Html.Raw(ViewBag.Json)
+                },
+                "checkbox": {
+                    "keep_selected_style": false
+                },
+                "plugins": ["wholerow", "checkbox"],
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $("#Birim_Id").change(function () {
+            var cid = $("#Birim_Id").val();
+            $("#Tali_Birim_Id option").remove();
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("GetTaliBirim", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid }
+                         }).done(function (result) {
+                             $.each(result, function (i, item) {
+                                 $("#Tali_Birim_Id").append('<option value="' + item.value + '">' + item.text + '</option>');
+                             });
+                             $("#Tali_Birim_Id").trigger('change');
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#Risk_Kategori_Id").change(function () {
+            var cid = $("#Risk_Kategori_Id").val();
+            $("#Risk_Ust_Grup_Id option").remove();
+
+                         $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("GetUstGrup", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid }
+                         }).done(function (result) {
+                             $.each(result, function (i, item) {
+                                 $("#Risk_Ust_Grup_Id").append('<option value="' + item.value + '">' + item.text + '</option>');
+                             });
+                             $("#Risk_Ust_Grup_Id").trigger('change');
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#Risk_Ust_Grup_Id").change(function () {
+            var cid = $("#Risk_Ust_Grup_Id").val();
+            $("#Risk_Konu_Grup_Id option").remove();
+
+                         $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("GetKonuGrup", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid }
+                         }).done(function (result) {
+                             $.each(result, function (i, item) {
+                                 $("#Risk_Konu_Grup_Id").append('<option value="' + item.value + '">' + item.text + '</option>');
+                             });
+                             $("#Risk_Konu_Grup_Id").trigger('change');
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+           $("#Risk_Konu_Grup_Id").change(function () {
+               var cid = $("#Risk_Konu_Grup_Id").val();
+               $("#Risk_Konu_Id option").remove();
+
+                             $.ajax({
+                            method: 'POST',
+                            url: '@Url.Action("GetKonu", "Risk_Kutuphane")',
+                            headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                            data: { id: cid }
+                             }).done(function (result) {
+                                 $.each(result, function (i, item) {
+                                     $("#Risk_Konu_Id").append('<option value="' + item.value + '">' + item.text + '</option>');
+                                 });
+                                 $("#Risk_Konu_Id").trigger('change');
+                             })
+             });
+    </script>
+<script>
+    $(".js-example-tags").select2({
+        tags: true
+    });
+</script>
+    @*<script type="text/javascript">
+               $("#Risk_Konu_Grup_Id").change(function () {
+                   var cid = $("#Risk_Konu_Grup_Id").val();
+                   $("#Risk_Konu_Id option").remove();
+
+                                 $.ajax({
+                                method: 'POST',
+                                url: '@Url.Action("GetKonu", "Risk_Kutuphane")',
+                                headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                                data: { id: cid }
+                                 }).done(function (result) {
+                                     $.each(result, function (i, item) {
+                                         $('.veriler1').append("<td>" + item.value + "</td><br>");
+                                         $('.veriler1').append("<td>" + item.value + "</td><br>");
+                                         $('.veriler2').append("<td>" + item.text + "</td>");
+                                                 $('#taglist input[value=' + days[day] + ']').prop("checked", true);
+                                         $("#Risk_Konu_Id").append('<input value="' + item.text +"placeholder="+item.text+'>');
+                                         });
+                                         $("#Risk_Konu_Id").trigger('change');
+                         })
+             });
+        </script>*@
+
+}
+

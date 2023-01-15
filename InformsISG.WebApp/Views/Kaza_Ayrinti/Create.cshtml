@@ -1,0 +1,670 @@
+﻿@model InformsISG.Entities.Dtos.Kaza_AyrintiDTO
+
+@{
+    ViewData["Title"] = "Create";
+    TempData["kazaId"] = TempData["kazaId"];
+}
+
+
+<form asp-action="Create">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">DOĞRUDAN KAZAYA YOL AÇAN SEBEPLER</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Kaza")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="card-title">Hareketler</h3>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler1" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler1)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler2" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler2)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler3" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler3)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler4" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler4)
+                                </span>
+                            </label>
+
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler5" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler5)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler6" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler6)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler7" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler7)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler8" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler8)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler9" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler9)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler10" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler10)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler11" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler11)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler12" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler12)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler13" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler13)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler14" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler14)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler15" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler15)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler16" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler16)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler17" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler17)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Hareketler18" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Hareketler18)
+                                </span>
+                            </label>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h3 class="card-title">Kişisel Faktörler</h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler1" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler1)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler2" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler2)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler3" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler3)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler4" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler4)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler5" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler5)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler6" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler6)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler7" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler7)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler8" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler8)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler9" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler9)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler10" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler10)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler11" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler11)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler12" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler12)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler13" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler13)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler14" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler14)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler15" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler15)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler16" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler16)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler17" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler17)
+                                </span>
+                            </label>
+                            <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" type="checkbox" asp-for="Kisisel_Faktorler18" />
+                                <span class="form-check-label">
+                                    @Html.DisplayNameFor(model => model.Kisisel_Faktorler18)
+                                </span>
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+                    
+                <div class="col-md-6">
+                    <div class="row">
+                        <h3 class="card-title">Çalışma Koşulları</h3>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari1" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari1)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari2" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari2)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari3" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari3)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari4" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari4)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari5" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari5)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari6" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari6)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari7" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari7)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari8" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari8)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari9" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari9)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari10" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari10)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari11" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari11)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari12" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari12)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari13" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari13)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari14" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari14)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari15" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari15)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari16" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari16)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari17" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari17)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari18" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari18)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Calisma_Kosullari19" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Calisma_Kosullari19)
+                            </span>
+                        </label>
+
+                    </div>
+                </div>
+      
+                
+                <div class="col-md-6">
+                    <div class="row">
+                        <h3 class="card-title">İş Faktörleri</h3>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri1" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri1)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri2" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri2)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri3" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri3)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri4" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri4)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri5" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri5)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri6" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri6)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri7" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri7)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri8" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri8)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri9" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri9)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri10" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri10)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri11" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri11)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri12" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri12)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri13" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri13)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri14" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri14)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri15" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri15)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri16" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri16)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri17" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri17)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri18" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri18)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Is_Faktorleri19" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Is_Faktorleri19)
+                            </span>
+                        </label>
+                    </div>
+                </div>
+  
+               <div class="col-md-6">
+                   <div class="row">
+                       <h3 class="card-title">Kaza Türü</h3>
+                       <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                           <input class="form-check-input" type="checkbox" asp-for="Kaza_Turu1" />
+                           <span class="form-check-label">
+                               @Html.DisplayNameFor(model => model.Kaza_Turu1)
+                           </span>
+                       </label>
+                       <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                           <input class="form-check-input" type="checkbox" asp-for="Kaza_Turu2" />
+                           <span class="form-check-label">
+                               @Html.DisplayNameFor(model => model.Kaza_Turu2)
+                           </span>
+                       </label>
+                       <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                           <input class="form-check-input" type="checkbox" asp-for="Kaza_Turu3" />
+                           <span class="form-check-label">
+                               @Html.DisplayNameFor(model => model.Kaza_Turu3)
+                           </span>
+                       </label>
+                       <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                           <input class="form-check-input" type="checkbox" asp-for="Kaza_Turu4" />
+                           <span class="form-check-label">
+                               @Html.DisplayNameFor(model => model.Kaza_Turu4)
+                           </span>
+                       </label>
+                       <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                           <input class="form-check-input" type="checkbox" asp-for="Kaza_Turu5" />
+                           <span class="form-check-label">
+                               @Html.DisplayNameFor(model => model.Kaza_Turu5)
+                           </span>
+                       </label>
+                       <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                           <input class="form-check-input" type="checkbox" asp-for="Kaza_Turu6" />
+                           <span class="form-check-label">
+                               @Html.DisplayNameFor(model => model.Kaza_Turu6)
+                           </span>
+                       </label>
+                       <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                           <input class="form-check-input" type="checkbox" asp-for="Kaza_Turu7" />
+                           <span class="form-check-label">
+                               @Html.DisplayNameFor(model => model.Kaza_Turu7)
+                           </span>
+                       </label>
+                       <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                           <input class="form-check-input" type="checkbox" asp-for="Kaza_Turu8" />
+                           <span class="form-check-label">
+                               @Html.DisplayNameFor(model => model.Kaza_Turu8)
+                           </span>
+                       </label>
+                       <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                           <input class="form-check-input" type="checkbox" asp-for="Kaza_Turu9" />
+                           <span class="form-check-label">
+                               @Html.DisplayNameFor(model => model.Kaza_Turu9)
+                           </span>
+                       </label>
+                       <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                           <input class="form-check-input" type="checkbox" asp-for="Kaza_Turu10" />
+                           <span class="form-check-label">
+                               @Html.DisplayNameFor(model => model.Kaza_Turu10)
+                           </span>
+                       </label>
+                       <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                           <input class="form-check-input" type="checkbox" asp-for="Kaza_Turu11" />
+                           <span class="form-check-label">
+                               @Html.DisplayNameFor(model => model.Kaza_Turu11)
+                           </span>
+                       </label>
+                       <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                           <input class="form-check-input" type="checkbox" asp-for="Kaza_Turu12" />
+                           <span class="form-check-label">
+                               @Html.DisplayNameFor(model => model.Kaza_Turu12)
+                           </span>
+                       </label>
+
+                   </div>
+         </div>
+
+    
+                <div class="col-md-6">
+                    <div class="row">
+                        <h3 class="card-title">Yaralanan Uzuvlar</h3>
+
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Yaralanan_Uzuvlar1" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Yaralanan_Uzuvlar1)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Yaralanan_Uzuvlar2" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Yaralanan_Uzuvlar2)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Yaralanan_Uzuvlar3" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Yaralanan_Uzuvlar3)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Yaralanan_Uzuvlar4" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Yaralanan_Uzuvlar4)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Yaralanan_Uzuvlar5" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Yaralanan_Uzuvlar5)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Yaralanan_Uzuvlar6" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Yaralanan_Uzuvlar6)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Yaralanan_Uzuvlar7" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Yaralanan_Uzuvlar7)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Yaralanan_Uzuvlar8" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Yaralanan_Uzuvlar8)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Yaralanan_Uzuvlar9" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Yaralanan_Uzuvlar9)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Yaralanan_Uzuvlar10" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Yaralanan_Uzuvlar10)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Yaralanan_Uzuvlar11" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Yaralanan_Uzuvlar11)
+                            </span>
+                        </label>
+                        <label class="form-check form-switch form-check-custom form-check-solid mb-5">
+                            <input class="form-check-input" type="checkbox" asp-for="Yaralanan_Uzuvlar12" />
+                            <span class="form-check-label">
+                                @Html.DisplayNameFor(model => model.Yaralanan_Uzuvlar12)
+                            </span>
+                        </label>
+                    </div>
+             </div>   
+                
+                </div>
+            </div>
+
+        </div>
+
+    <div class="card-footer">
+
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

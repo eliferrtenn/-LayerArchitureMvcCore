@@ -1,0 +1,208 @@
+﻿@model InformsISG.Entities.Dtos.Ramak_KalaDTO
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Details";
+    var PersonelList = (List<InformsISG.Entities.Dtos.Personel_BilgiDTO>)ViewBag.PersonelList;
+    var BirimList = (List<InformsISG.Entities.Dtos.BirimDTO>)ViewBag.BirimList;
+    var TaliBirimList = (List<InformsISG.Entities.Dtos.Tali_BirimDTO>)ViewBag.TaliBirimList;
+    var RamakKalaDosya = (List<InformsISG.Entities.Dtos.Ramak_Kala_DosyaDTO>)ViewBag.RamakKalaDosya;
+    string dosyaYolu = "";
+}
+<div class="">
+    <div class=" flex-column " id="kt_wrapper">
+        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+            <div class="post d-flex flex-column-fluid" id="kt_post">
+                <div id="kt_content_container" class="container-xxl">
+                    <div class="card mb-5 mb-xl-10">
+                        <div class="card-body pt-9 pb-0">
+                            <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
+                            </div>
+                            <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
+                                <li class="nav-item mt-2">
+                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#">Genel Bilgi</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+                        <div class="cursor-pointer">
+                            <div class="card-header">
+                                <h3 class="card-title">RAMAK KALA</h3>
+                                <div class="card-toolbar">
+                                    <a href="@Url.Action("Index","Ramak_Kala")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-9">
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Ramak Kala No</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">
+                                        @Model.Ramak_Kala_No
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Ad Soyad</label>
+                                @foreach (var item in PersonelList)
+                                {
+
+
+                                    @if (item.Id == Model.Personel_Id)
+                                    {
+                                        <div class="col-lg-8">
+                                            <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">@item.Ad_Soyad</a>
+                                        </div>
+                                    }
+                                }
+
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Tarih</span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Saati</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Saat</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">İş Tanımı</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800 me-2">@Model.Is_Tanim</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Görev</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800 me-2">@Model.Gorev</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Olay</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Olay</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Tam Olay Yeri</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Olay_Tam_Yer</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Öneri</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Oneri</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Amir Görüşü</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Amir_Gorus</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">IGU Görüşü</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Igu_Gorus</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">IGU Görüşü Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Igu_Gorus_Tarih</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Termin Süresi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Termin_Sure</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Tamamlanma Durumu</label>
+                                @if (Model.Tamamlandi == false)
+                                {
+
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">Tamamlanmadı</span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">Tamamlandı</span>
+                                    </div>
+                                }
+
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Tamamlanma Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Tamamlandi_Tarih</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Birimi</label>
+                                @foreach (var item in BirimList)
+                                {
+                                    @if (item.Id == Model.Birim_Id)
+                                    {
+                                        <div class="col-lg-8">
+                                            <span class="fw-bold fs-6 text-gray-800">@item.Birim_Ad</span>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Tali Birimi</label>
+                                @foreach (var item in TaliBirimList)
+                                {
+                                    @if (item.Id == Model.Tali_Birim_Id)
+                                    {
+                                        <div class="col-lg-8">
+                                            <span class="fw-bold fs-6 text-gray-800">@item.Tali_Birim_Ad</span>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                            <div class="separator separator-dashed  mb-4 "></div>
+                            <div class="container">
+                                <div class="row">
+                                    @foreach (var item in RamakKalaDosya)
+                                    {
+                                        <div class="col-md-6 mb-5" data-bs-toggle="modal" data-bs-target="#kt_modal_1">
+                                            <div class="col-md-12 mb-5">
+                                                <img id="deneme" src="/@item.Dosya" width="40%" asp-append-version="true"/>
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+
+}

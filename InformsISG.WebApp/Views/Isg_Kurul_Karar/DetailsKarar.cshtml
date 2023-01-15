@@ -1,0 +1,171 @@
+﻿@model InformsISG.Entities.Dtos.Isg_Kurul_KararDTO
+
+@{
+    ViewData["Title"] = "Details";
+    var KurulGundemList = (List<InformsISG.Entities.Dtos.Isg_Kurul_Karar_GundemDTO>)ViewBag.KurulGundemList;
+    var KurulElemanList = (List<InformsISG.Entities.Dtos.Isg_Kurul_ElemanDTO>)ViewBag.KurulElemanList;
+    var PersonelList = (List<InformsISG.Entities.Dtos.Personel_BilgiDTO>)ViewBag.PersonelList;
+    var KurulToplantiListe = (List<InformsISG.Entities.Dtos.Isg_Kurul_Karar2DTO>)ViewBag.KurulToplantiListe;
+    TempData["IsgKararId"] = TempData["IsgKararId"];
+    var IsgKararId = TempData["IsgKararId"];
+    int i = 1;
+    int i2 = 1;
+    int i3 = 1;
+}
+<div class="">
+    <div class=" flex-column " id="kt_wrapper">
+        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+            <div class="post d-flex flex-column-fluid" id="kt_post">
+                <div id="kt_content_container" class="container-xxl">
+                    <div class="card mb-5 mb-xl-10">
+                        <div class="card-body pt-9 pb-0">
+                            <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
+                                <li class="nav-item mt-2">
+                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#">Genel Bilgi</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+                        <div class="card-header cursor-pointer">
+                            <div class="card-title m-0">
+                                <h3 class="fw-bolder m-0">Kurul Toplantı Bigileri</h3>
+                                <h3 class="fw-bolder m-0" style="color:white">Kurul Toplantı Bigileri</h3>
+                                <h3 class="fw-bolder m-0" style="color:white">Kurul Toplantı Bigileri</h3>
+                                <h3 class="fw-bolder m-0" style="color:white">Kurul </h3>
+                            </div>
+                            <a asp-action="ReportGenerate" asp-route-id="@Model.Id" class="btn btn-warning align-self-center">Yazdır</a>
+                            <a asp-action="Index" asp-route-id="@Model.Id" class="btn btn-primary align-self-center">Geri Dön</a>
+                        </div>
+                        <div class="card-body p-9">
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Toplantı No</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Toplanti_No</span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Toplantı Konusu</label>
+                                <div class="col-lg-8 fv-row">
+                                    <span class="fw-bold text-gray-800 fs-6">@Model.Aciklama</span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">
+                                    Tarih
+                                </label>
+                                <div class="col-lg-8 d-flex align-items-center">
+                                    <span class="fw-bolder fs-6 text-gray-800 me-2">@Model.Tarih</span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Saat</label>
+                                <div class="col-lg-8">
+                                    <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">@Model.Saat</a>
+                                </div>
+                            </div>        
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Yer</label>
+                                <div class="col-lg-8">
+                                    <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">@Model.Yer</a>
+                                </div>
+                            </div>      
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Toplantı Başkanı</label>
+                                <div class="col-lg-8">
+                                    <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">@Model.Toplanti_Baskan</a>
+                                </div>
+                            </div>      
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Raportör</label>
+                                <div class="col-lg-8">
+                                    <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">@Model.Raportor</a>
+                                </div>
+                            </div>
+
+                        </div>        
+                        <div class="card-header cursor-pointer">
+                            <div class="card-title m-0">
+                                <h3 class="fw-bolder m-0">Kurul Gündem Başlıkları</h3>
+                            </div>
+   
+                        </div>
+                        <div class="card-body p-9">
+                            @foreach (var item in KurulGundemList)
+                            {
+                                @if (Convert.ToInt64(IsgKararId) == item.Isg_Kurul_Karar_Id)
+                                {
+                                    <div class="row mb-7">
+                                        <label class="col-lg-4 fw-bold text-muted">@i. Gündem Başlığı </label>
+                                        <div class="col-lg-8">
+                                            <span class="fw-bolder fs-6 text-gray-800">@item.Maddeler</span>
+                                        </div>
+                                    </div>
+                                    i++;
+                                }
+
+                            }
+
+
+                        </div> 
+                        <div class="card-header cursor-pointer">
+                            <div class="card-title m-0">
+                                <h3 class="fw-bolder m-0">Personel Listesi</h3>
+                            </div>
+   
+                        </div>
+                        <div class="card-body p-9">
+                            @foreach (var item in KurulElemanList)
+                            {
+                                @foreach (var item2 in PersonelList)
+                                {
+                                    @if (item2.Id == item.Personel_Id)
+                                    {
+                                        <div class="row mb-7">
+                                            <label class="col-lg-4 fw-bold text-muted">@i2. Personel </label>
+                                            <div class="col-lg-8">
+                                                <span class="fw-bolder fs-6 text-gray-800">@item2.Ad_Soyad</span>
+                                            </div>
+                                        </div>
+                                        i2++;
+                                    }
+                                }
+
+
+                            }
+
+
+                        </div>
+                 
+                         <div class="card-header cursor-pointer">
+                            <div class="card-title m-0">
+                                <h3 class="fw-bolder m-0">Toplantı Kararları</h3>
+                            </div>
+   
+                        </div>
+                        <div class="card-body p-9">
+                            @foreach (var item in KurulToplantiListe)
+                            {
+                                    @if (item.Isg_Kurul_Karar_Id == Convert.ToInt64(IsgKararId))
+                                    {
+                                        <div class="row mb-7">
+                                            <label class="col-lg-4 fw-bold text-muted">@item.Karar_No Numaralı Karar </label>
+                                            <div class="col-lg-8">
+                                                <span class="fw-bolder fs-6 text-gray-800">@item.Alinan_Kararlar</span>
+                                            </div>
+                                        </div>
+                           
+                                    }
+
+                            }
+
+
+                        </div>
+                 
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

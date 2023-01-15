@@ -1,0 +1,407 @@
+﻿@model InformsISG.Entities.Dtos.Makine_EkipmanDTO
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Kontrol Listesi";
+    var EkipmanBilgiBaslik = (List<InformsISG.Entities.Dtos.Makine_Ekipman_Bilgi_BaslikDTO>)ViewBag.EkipmanBilgiBaslik;
+    var EkipmanBilgi = (List<InformsISG.Entities.Dtos.Makine_Ekipman_BilgilerDTO>)ViewBag.EkipmanBilgi;
+    var EkipmanKontrolBaslik = (List<InformsISG.Entities.Dtos.Makine_Ekipman_Kontrol_Kriter_BaslikDTO>)ViewBag.EkipmanKontrolBaslik;
+    var EkipmanKontrol = (List<InformsISG.Entities.Dtos.Makine_Ekipman_Kontrol_KriterDTO>)ViewBag.EkipmanKontrol;
+    var EkipmanOlcum = (List<InformsISG.Entities.Dtos.Makine_Ekipman_Olcum_Aleti_BilgilerDTO>)ViewBag.EkipmanOlcum;
+    var EkipmanTest = (List<InformsISG.Entities.Dtos.Makine_Ekipman_Test_DegerleriDTO>)ViewBag.EkipmanTest;
+    TempData["MakineEkipmanId"] = TempData["MakineEkipmanId"];
+    var MakineEkipmanId = ViewBag.MakineEkpmanId;
+    List<bool> KontrolUygun1= new List<bool>(); ;
+}
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h3 class="card-title">KONTROL LİSTESİ</h3>
+        <div class="card-toolbar">
+            <a href="@Url.Action("Index","Makine_Ekipman")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+        </div>
+    </div>
+        <div class="card-body">
+            <form asp-action="KontrolListesi" enctype="multipart/form-data" method="post">
+                @foreach (var item in EkipmanBilgiBaslik)
+                {
+                    <h3>@item.Madde_Ad</h3>
+                    <table id="tblBirim" class="table table-striped table-row-bordered gy-5 gs-7">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Adı
+                                </th>
+                                <th>
+                                    Karşılığı
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item2 in EkipmanBilgi)
+                            {
+
+                                @if (item2.Makine_Ekipman_Bilgi_Baslik_Id == item.Id)
+
+                                {
+                                    <tr>
+                                        <td>
+                                            <input class="form-control" name="BilgiId" type="hidden" asp-for="@item2.Id" />
+                                            <input class="form-control" name="BilgiMadde" asp-for="@item2.Madde_Ad" />
+                                        </td>
+                                        <td>
+                                            <input class="form-control" name="BilgiMaddeKarsilik" asp-for="@item2.Madde_Ad_Karsilik" />
+                                        </td>
+                                    </tr>
+
+
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+
+                }
+
+
+                <br /><br />
+                <h3 class="card-title">TEST DEĞERLERİ</h3>
+                <table id="tblBirim" class="table table-striped table-row-bordered gy-5 gs-7">
+                    <thead>
+                        <tr>
+                            <th>
+                                Adı
+                            </th>
+                            <th>
+                                Değeri
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in EkipmanTest)
+                        {
+                            <tr>
+                                <td>
+                                    <input class="form-control" name="TestId" type="hidden" asp-for="@item.Id" />
+                                    <input class="form-control" name="TestMadde" asp-for="@item.Madde_Ad" />
+                                </td>
+                                <td>
+                                    <input class="form-control" name="TestMaddeKarsilik" asp-for="@item.Madde_Ad_Karsilik" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <br /><br />
+                <h3 class="card-title">ÖLÇÜM ALETİ DEĞERLERİ</h3>
+                <table id="tblBirim" class="table table-striped table-row-bordered gy-5 gs-7">
+                    <thead>
+                        <tr>
+                            <th>
+                                Adı
+                            </th>
+                            <th>
+                                Değeri
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in EkipmanOlcum)
+                        {
+                            <tr>
+                                <td>
+                                    <input class="form-control" name="OlcumId" type="hidden" asp-for="@item.Id" />
+                                    <input class="form-control" name="OlcumMadde" asp-for="@item.Madde_Ad" />
+                                </td>
+                                <td>
+                                    <input class="form-control" name="OlcumMaddeKarsilik" asp-for="@item.Madde_Ad_Karsilik" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+
+                <br /><br />
+                <h3 class="card-title">KONTROL KRİTERLERİ</h3>
+                @foreach (var item in EkipmanKontrolBaslik)
+                {
+                    <h4>@item.Madde_Ad</h4>
+                    <table id="tblBirim" class="table table-striped table-row-bordered gy-5 gs-7">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Adı
+                                </th>
+                                <th>
+                                    Uygunluk Durum
+                                </th>
+                                <th>
+                                    Değerlendirme
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item2 in EkipmanKontrol)
+                            {
+
+                                @if (item2.Makine_Ekipman_Kontrol_Kriter_Baslik_Id == item.Id)
+
+                                {
+                                    <tr>
+                                        <td>
+                                            <input class="form-control" name="KontrolId" type="hidden" asp-for="@item2.Id" />
+                                            <input class="form-control" name="KontrolMadde" asp-for="@item2.Madde_Ad" />
+                                        </td>
+                                        <td>
+                                            <input class="form-check"  name="KontrolUygun" asp-for="@item2.Uygun" value="@(item2.Uygun==true?"checked":"")"/>
+                                        </td>
+                                        @if (item2.Degerlendirme == 0)
+                                        {
+                                            <td>
+                                                <select name="KontrolDegerlendirme" asp-for="@item2.Degerlendirme" class="form-control">
+                                                    <option value="0" selected>UYGUNDUR</option>
+                                                    <option value="1">AĞIR KUSUR</option>
+                                                    <option value="2">HAFİF KUSUR</option>
+                                                </select>
+                                            </td>
+                                        }
+                                        else if (item2.Degerlendirme == 1)
+                                        {
+                                            <td>
+                                                <select name="KontrolDegerlendirme" asp-for="@item2.Degerlendirme" class="form-control">
+                                                    <option value="0">UYGUNDUR</option>
+                                                    <option value="1" selected>AĞIR KUSUR</option>
+                                                    <option value="2">HAFİF KUSUR</option>
+                                                </select>
+                                            </td>
+                                        }
+                                        else if (item2.Degerlendirme == 2)
+                                        {
+                                            <td>
+                                                <select name="KontrolDegerlendirme" asp-for="@item2.Degerlendirme" class="form-control">
+                                                    <option value="0">UYGUNDUR</option>
+                                                    <option value="1">AĞIR KUSUR</option>
+                                                    <option value="2" selected>HAFİF KUSUR</option>
+                                                </select>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <select name="KontrolDegerlendirme" asp-for="@item2.Degerlendirme" class="form-control">
+                                                    <option value="0" selected>UYGUNDUR</option>
+                                                    <option value="1">AĞIR KUSUR</option>
+                                                    <option value="2">HAFİF KUSUR</option>
+                                                </select>
+                                            </td>
+                                        }
+
+                                    </tr>
+
+
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+
+                    <div class="col-md-12 mb-5">
+                        <label asp-for="@item.Notlar" class="control-label"></label>
+                        <div class="input-group form-group">
+                            <span class="input-group-text" id="basic-addon2">
+                                <i class="fa-solid fa-question"></i>
+                            </span>
+                            <textarea rows="3" cols="40" asp-for="@item.Notlar" class="form-control"></textarea>
+                            <span asp-validation-for="@item.Notlar" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                }
+
+                <br /><br />
+                <h3 class="card-title">DİĞER DURUMLAR</h3>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 mb-5">
+                            <input asp-for="Id" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        </div>
+
+                        <div class="col-md-12 mb-5">
+                            <label asp-for="Inceleme_Tespit_Edilen_Diger_Eksiklikler" class="control-label"></label>
+                            <div class="input-group form-group">
+                                <span class="input-group-text" id="basic-addon2">
+                                    <i class="fa-solid fa-question"></i>
+                                </span>
+                                <textarea rows="5" cols="40" asp-for="Inceleme_Tespit_Edilen_Diger_Eksiklikler" class="form-control"></textarea>
+                                <span asp-validation-for="Inceleme_Tespit_Edilen_Diger_Eksiklikler" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-5">
+                            <label asp-for="Onay" class="control-label"></label>
+                            <div class="input-group form-group">
+                                <span class="input-group-text" id="basic-addon2">
+                                    <i class="fa-solid fa-question"></i>
+                                </span>
+                                <textarea rows="5" cols="40" asp-for="Onay" class="form-control"></textarea>
+                                <span asp-validation-for="Onay" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <label asp-for="Periyodik_Kontrol_Gorevlisi_Ad_Soyad" class="control-label"></label>
+                            <div class="input-group form-group">
+                                <span class="input-group-text" id="basic-addon2">
+                                    <i class="fa-solid fa-question"></i>
+                                </span>
+                                <input asp-for="Periyodik_Kontrol_Gorevlisi_Ad_Soyad" class="form-control" />
+                                <span asp-validation-for="Periyodik_Kontrol_Gorevlisi_Ad_Soyad" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <label asp-for="Periyodik_Kontrol_Gorevlisi_Meslek" class="control-label"></label>
+                            <div class="input-group form-group">
+                                <span class="input-group-text" id="basic-addon2">
+                                    <i class="fa-solid fa-question"></i>
+                                </span>
+                                <input asp-for="Periyodik_Kontrol_Gorevlisi_Meslek" class="form-control" />
+                                <span asp-validation-for="Periyodik_Kontrol_Gorevlisi_Meslek" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <label asp-for="Periyodik_Kontrol_Gorevlisi_Diploma_Tarihi_Numarasi" class="control-label"></label>
+                            <div class="input-group form-group">
+                                <span class="input-group-text" id="basic-addon2">
+                                    <i class="fa-solid fa-question"></i>
+                                </span>
+                                <input asp-for="Periyodik_Kontrol_Gorevlisi_Diploma_Tarihi_Numarasi" class="form-control" />
+                                <span asp-validation-for="Periyodik_Kontrol_Gorevlisi_Diploma_Tarihi_Numarasi" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <label asp-for="Periyodik_Kontrol_Gorevlisi_Bakanlik_Numara" class="control-label"></label>
+                            <div class="input-group form-group">
+                                <span class="input-group-text" id="basic-addon2">
+                                    <i class="fa-solid fa-question"></i>
+                                </span>
+                                <input asp-for="Periyodik_Kontrol_Gorevlisi_Bakanlik_Numara" class="form-control" />
+                                <span asp-validation-for="Periyodik_Kontrol_Gorevlisi_Bakanlik_Numara" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <label asp-for="Birim_Sorumlusu_Ad_Soyad" class="control-label"></label>
+                            <div class="input-group form-group">
+                                <span class="input-group-text" id="basic-addon2">
+                                    <i class="fa-solid fa-question"></i>
+                                </span>
+                                <input asp-for="Birim_Sorumlusu_Ad_Soyad" class="form-control" />
+                                <span asp-validation-for="Birim_Sorumlusu_Ad_Soyad" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <label asp-for="Birim_Sorumlusu_Meslek" class="control-label"></label>
+                            <div class="input-group form-group">
+                                <span class="input-group-text" id="basic-addon2">
+                                    <i class="fa-solid fa-question"></i>
+                                </span>
+                                <input asp-for="Birim_Sorumlusu_Meslek" class="form-control" />
+                                <span asp-validation-for="Birim_Sorumlusu_Meslek" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <label asp-for="Birim_Sorumlusu_Diploma_Tarihi_Numarasi" class="control-label"></label>
+                            <div class="input-group form-group">
+                                <span class="input-group-text" id="basic-addon2">
+                                    <i class="fa-solid fa-question"></i>
+                                </span>
+                                <input asp-for="Birim_Sorumlusu_Diploma_Tarihi_Numarasi" class="form-control" />
+                                <span asp-validation-for="Birim_Sorumlusu_Diploma_Tarihi_Numarasi" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <label asp-for="Birim_Sorumlusu_Bakanlik_Numara" class="control-label"></label>
+                            <div class="input-group form-group">
+                                <span class="input-group-text" id="basic-addon2">
+                                    <i class="fa-solid fa-question"></i>
+                                </span>
+                                <input asp-for="Birim_Sorumlusu_Bakanlik_Numara" class="form-control" />
+                                <span asp-validation-for="Birim_Sorumlusu_Bakanlik_Numara" class="text-danger"></span>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-hover-rotate-end">KAYDET</button>
+            </form>
+        </div>
+   
+
+    <div class="card-footer">
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+       function VeriSil(ID, obj) {
+            var btn = $(obj);
+            Swal.fire({
+                title: 'SİLME İŞLEMİ',
+                text: "Silmek istediğinize emin misiniz?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#50cd89',
+                cancelButtonColor: '#f1416c',
+                confirmButtonText: 'Evet Sil!',
+                cancelButtonText: 'Hayır Silme!',
+                showClass: {
+                    popup: 'animate_animated animate_fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate_animated animate_fadeOutUp'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("DeleteKontrol", "Makine_Ekipman")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: ID }
+                    }).done(function (d) {
+                        const result = $.parseJSON(d);
+                        if (result.ResultStatus == 0) {
+                            Swal.fire({
+                                title: 'SİLİNDİ',
+                                icon: 'success',
+                                text: `${result.Message}`,
+                                showClass: {
+                                    popup: 'animate_animated animate_fadeInDown'
+                                },
+                                hideClass: {
+                                    popup: 'animate_animated animate_fadeOutUp'
+                                }
+                            });
+                            btn.parent().parent().fadeOut(1000);
+                        }
+                    }).fail(function () {
+                        Swal.fire({
+                            title: 'HATALI İŞLEM',
+                            text: "Veri silinemedi",
+                            icon: 'error',
+                            showClass: {
+                                popup: 'animate_animated animate_fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate_animated animate_fadeOutUp'
+                            }
+                        })
+                    })
+                }
+            });
+        }
+    </script>
+}

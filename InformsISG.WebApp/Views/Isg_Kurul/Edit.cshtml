@@ -1,0 +1,84 @@
+﻿@model InformsISG.Entities.Dtos.Isg_KurulDTO
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<form asp-action="Edit" asp-controller="Isg_Kurul">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">ISG KURUL DÜZENLEME</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Isg_Kurul")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <input asp-for="Id" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-md-6">
+                    <label asp-for="Kurul_Ad" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Kurul_Ad" class="form-control" />
+                        <span asp-validation-for="Kurul_Ad" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Aciklama" class="control-label"></label>
+
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-question"></i>
+                        </span>
+                        <input asp-for="Aciklama" class="form-control" />
+                        <span asp-validation-for="Aciklama" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6  mb-5">
+                    <label asp-for="Tehlike_Tip" class="form-check-label"> </label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        @if (Model.Tehlike_Tip == 0)
+                        {
+                            <select asp-for="Tehlike_Tip" class="form-control">
+                                <option value="0" selected>Çok Tehlike Sınıf ISG Kurulu</option>
+                                <option value="1"> Tehlike Sınıf ISG Kurulu</option>
+                                <option value="2">Az Tehlike Sınıf ISG Kurulu</option>
+                            </select>
+                        }
+                        else if (Model.Tehlike_Tip == 1)
+                        {
+                            <select asp-for="Tehlike_Tip" class="form-control">
+                                <option value="0">Çok Tehlike Sınıf ISG Kurulu</option>
+                                <option value="1" selected> Tehlike Sınıf ISG Kurulu</option>
+                                <option value="2">Az Tehlike Sınıf ISG Kurulu</option>
+                            </select>
+                        }
+                        else if (Model.Tehlike_Tip == 2)
+                        {
+                            <select asp-for="Tehlike_Tip" class="form-control">
+                                <option value="0">Çok Tehlike Sınıf ISG Kurulu</option>
+                                <option value="1"> Tehlike Sınıf ISG Kurulu</option>
+                                <option value="2" selected>Az Tehlike Sınıf ISG Kurulu</option>
+                            </select>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+
+    </div>
+
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

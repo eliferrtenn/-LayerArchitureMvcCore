@@ -1,0 +1,196 @@
+﻿@model InformsISG.Entities.Dtos.DofDTO
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Create";
+}
+
+
+<form asp-action="Create">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">D/Ö EKLEME</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Dof")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Dof_No" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Dof_No" class="form-control" />
+                        <span asp-validation-for="Dof_No" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Tip" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Tip" class="form-control">
+                            <option value="0" selected>Düzeltici</option>
+                            <option value="1">Önleyici</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Geldigi_Kaynak" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Geldigi_Kaynak" class="form-control">
+                            <option value="0" selected>Risk Değerlendirme</option>
+                            <option value="1">İş Kazası</option>
+                            <option value="2">İç Denetim</option>
+                            <option value="3">Tehlike Bildirimi</option>
+                            <option value="4">Ramak Kala</option>
+                            <option value="5">Dış Denetim</option>
+                            <option value="6">ISG Kurulu</option>
+                            <option value="7">Periyodik Kontrol</option>
+                        </select>
+                    </div>
+                </div> 
+                <div class="col-md-5 mb-5">
+                    <label asp-for="Tali_Birim_Id" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Tali_Birim_Id" class="form-control" asp-items="ViewBag.Tali_Birim_Id"></select>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-5">
+                    <span class="form-check-label">
+                        @Html.DisplayNameFor(model => model.Dof_Acik)
+                    </span>
+                    <label class="form-check form-switch form-check-custom form-check-solid">
+                        <input class="form-check-input" type="checkbox" asp-for="Dof_Acik" />
+                    </label>
+                </div>
+
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Acilis_Tarih" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Acilis_Tarih" class="form-control" />
+                        <span asp-validation-for="Acilis_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Cevap_Sure" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Cevap_Sure" class="form-control" />
+                        <span asp-validation-for="Cevap_Sure" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Cevap_Sonlanma_Tarih" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Cevap_Sonlanma_Tarih" class="form-control" />
+                        <span asp-validation-for="Cevap_Sonlanma_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Sonlanma_Tarih" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Sonlanma_Tarih" class="form-control" />
+                        <span asp-validation-for="Sonlanma_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Uygunsuzluk_Tanim" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <textarea rows="5" cols="30" asp-for="Uygunsuzluk_Tanim" class="form-control"></textarea>
+                        <span asp-validation-for="Uygunsuzluk_Tanim" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Dof_Ad" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <textarea rows="5" cols="30" asp-for="Dof_Ad" class="form-control"></textarea>
+                        <span asp-validation-for="Dof_Ad" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Tespit_Eden" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Tespit_Eden" class="form-control" />
+                        <span asp-validation-for="Tespit_Eden" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Sorumlular" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Sorumlular" class="form-control" />
+                        <span asp-validation-for="Sorumlular" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Isveren_Id" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Isveren_Id" class="form-control" asp-items="ViewBag.Isveren_Id"></select>
+                    </div>
+                </div>  
+
+
+            </div>
+
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+           $("#Birim_Id").change(function () {
+               var cid = $("#Birim_Id").val();
+               $("#Tali_Birim_Id option").remove();
+                             $.ajax({
+                            method: 'POST',
+                            url: '@Url.Action("GetBirim", "Dof")',
+                            headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                            data: { id: cid }
+                             }).done(function (result) {
+                                 $.each(result, function (i, item) {
+                                     $("#Tali_Birim_Id").append('<option value="' + item.value + '">' + item.text + '</option>');
+                                 });
+                    /*             $("#Birim_Id").trigger('change');*/
+                             })
+             });
+    </script>
+}
+

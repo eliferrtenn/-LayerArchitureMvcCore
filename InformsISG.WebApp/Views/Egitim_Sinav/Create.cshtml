@@ -1,0 +1,84 @@
+﻿@model InformsISG.Entities.Dtos.Egitim_SinavDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+<form asp-action="Create">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">EĞİTİM SINAV EKLEME</h3>
+            <div class="card-toolbar">
+
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Egitim_Sinav")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <label asp-for="Sinav_Ad" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Sinav_Ad" class="form-control" />
+                        <span asp-validation-for="Sinav_Ad" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="Sinav_Tarih" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Sinav_Tarih" class="form-control" />
+                        <span asp-validation-for="Sinav_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Sinav_Saat" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Sinav_Saat" class="form-control" />
+                        <span asp-validation-for="Sinav_Saat" class="text-danger"></span>
+                    </div>
+                </div>
+
+    
+                <div class="col-md-4">
+                    <label class="form-check-label">Eğitimin Adı</label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Egitim_Tanimla_Id" class="form-control" asp-items=" ViewBag.EgitimTanim">
+                        </select>
+
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <label asp-for="Isveren_Id" class="form-check-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Isveren_Id" class="form-control" asp-items="ViewBag.Isveren_Id"></select>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

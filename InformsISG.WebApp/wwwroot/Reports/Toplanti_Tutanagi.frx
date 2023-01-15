@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/17/2022 08:59:13" ReportInfo.Modified="10/23/2022 22:11:41" ReportInfo.CreatorVersion="2022.3.0.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="InformsISG" ConnectionString="Server=DESKTOP-411FIHT\SQLEXPRESS;Database=InformsISG;User Id=test;Password=test12345">
+      <TableDataSource Name="isg_kurul_karar" DataType="System.Int32" Enabled="true" TableName="isg_kurul_karar">
+        <Column Name="Id" DataType="System.Int64"/>
+        <Column Name="Toplanti_No" DataType="System.String"/>
+        <Column Name="Tarih" DataType="System.DateTime"/>
+        <Column Name="Saat" DataType="System.String"/>
+        <Column Name="Yer" DataType="System.String"/>
+        <Column Name="Aciklama" DataType="System.String"/>
+        <Column Name="Toplanti_Baskan" DataType="System.String"/>
+        <Column Name="Raportor" DataType="System.String"/>
+        <Column Name="Isg_Kurul_Id" DataType="System.Int64"/>
+        <Column Name="Isveren_Id" DataType="System.Int64"/>
+        <Column Name="Yaratilma_Tarihi" DataType="System.DateTime"/>
+        <Column Name="Degistirilme_Tarihi" DataType="System.DateTime"/>
+        <Column Name="isDeleted" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="isActive" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Kullanici_Id" DataType="System.Int64"/>
+      </TableDataSource>
+      <TableDataSource Name="isg_kurul_karar_gundem" DataType="System.Int32" Enabled="true" TableName="isg_kurul_karar_gundem">
+        <Column Name="Id" DataType="System.Int64"/>
+        <Column Name="Maddeler" DataType="System.String"/>
+        <Column Name="Isg_Kurul_Karar_Id" DataType="System.Int64"/>
+        <Column Name="Yaratilma_Tarihi" DataType="System.DateTime"/>
+        <Column Name="Degistirilme_Tarihi" DataType="System.DateTime"/>
+        <Column Name="isDeleted" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="isActive" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Kullanici_Id" DataType="System.Int64"/>
+      </TableDataSource>
+      <TableDataSource Name="isg_kurul_karar2" DataType="System.Int32" Enabled="true" TableName="isg_kurul_karar2">
+        <Column Name="Id" DataType="System.Int64"/>
+        <Column Name="Karar_No" DataType="System.String"/>
+        <Column Name="Alinan_Kararlar" DataType="System.String"/>
+        <Column Name="Baslangic_Tarih" DataType="System.DateTime"/>
+        <Column Name="Bitis_Tarih" DataType="System.DateTime"/>
+        <Column Name="Isg_Kurul_Karar_Id" DataType="System.Int64"/>
+        <Column Name="Personel_Id" DataType="System.Int64"/>
+        <Column Name="Yaratilma_Tarihi" DataType="System.DateTime"/>
+        <Column Name="Degistirilme_Tarihi" DataType="System.DateTime"/>
+        <Column Name="isDeleted" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="isActive" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Kullanici_Id" DataType="System.Int64"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="ID" DataType="System.String"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="133.3">
+      <TableObject Name="Table1" Top="9.45" Width="718.2" Height="116.71" Border.Lines="All">
+        <TableColumn Name="Column1" Width="143.64"/>
+        <TableColumn Name="Column2" Width="143.64"/>
+        <TableColumn Name="Column3" Width="143.64"/>
+        <TableColumn Name="Column4" Width="143.64"/>
+        <TableColumn Name="Column5" Width="143.64"/>
+        <TableRow Name="Row1" Height="35.42">
+          <TableCell Name="Cell1" Font="Arial, 10pt" RowSpan="3">
+            <PictureObject Name="Picture1" Top="9.45" Width="141.75" Height="103.95" Image=""/>
+          </TableCell>
+          <TableCell Name="Cell2" Border.Lines="All" Font="Arial, 10pt" ColSpan="4">
+            <TextObject Name="Text1" Left="9.45" Width="557.55" Height="37.8" Text="FORMLAR" HorzAlign="Center" VertAlign="Center" Font="Arial, 14pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell3" Font="Arial, 10pt"/>
+          <TableCell Name="Cell4" Font="Arial, 10pt"/>
+          <TableCell Name="Cell5" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row2" Height="25.97">
+          <TableCell Name="Cell6" Font="Arial, 10pt"/>
+          <TableCell Name="Cell7" Border.Lines="All" Font="Arial, 10pt" ColSpan="4">
+            <TextObject Name="Text2" Width="567" Height="28.35" Text="Döküman Adı: Toplantı Tutanağı" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell8" Font="Arial, 10pt"/>
+          <TableCell Name="Cell9" Font="Arial, 10pt"/>
+          <TableCell Name="Cell10" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row3" Height="54.32">
+          <TableCell Name="Cell11" Font="Arial, 10pt"/>
+          <TableCell Name="Cell12" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text3" Width="132.3" Height="47.25" Text="Doküman Kodu: KYS.FR.KYM.14" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell13" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text4" Left="2.05" Width="132.3" Height="47.25" Text="İlk Yayın Tarihi: 21.07.2015" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell14" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text5" Left="4.75" Width="132.3" Height="47.25" Text="Revizyon Tarihi: 21.07.2015" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell15" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text6" Width="132.3" Height="37.8" Text="[Page]/[TotalPages]" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row4" Height="1">
+          <TableCell Name="Cell26" Font="Arial, 10pt"/>
+          <TableCell Name="Cell17" Font="Arial, 10pt"/>
+          <TableCell Name="Cell18" Font="Arial, 10pt"/>
+          <TableCell Name="Cell19" Font="Arial, 10pt"/>
+          <TableCell Name="Cell20" Font="Arial, 10pt"/>
+        </TableRow>
+      </TableObject>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="137.3" Width="718.2" Height="122.85" DataSource="isg_kurul_karar" Filter="[isg_kurul_karar.Id]==[ID]">
+      <TableObject Name="Table2" Left="9.45" Width="698.41" Height="103.95">
+        <TableColumn Name="Column6" Width="132.3"/>
+        <TableColumn Name="Column7" Width="179.55"/>
+        <TableColumn Name="Column8" Width="236.25"/>
+        <TableColumn Name="Column9" Width="75.6"/>
+        <TableColumn Name="Column10" Width="74.71"/>
+        <TableRow Name="Row5" Height="28.35">
+          <TableCell Name="Cell27" Font="Arial, 10pt" ColSpan="5">
+            <TextObject Name="Text7" Width="718.2" Height="28.35" Text="[isg_kurul_karar.Toplanti_No]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell28" Font="Arial, 10pt"/>
+          <TableCell Name="Cell29" Font="Arial, 10pt"/>
+          <TableCell Name="Cell30" Font="Arial, 10pt"/>
+          <TableCell Name="Cell31" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row6">
+          <TableCell Name="Cell32" Text="[isg_kurul_karar.Tarih]" Font="Arial, 10pt"/>
+          <TableCell Name="Cell33" Text="[isg_kurul_karar.Saat]" Font="Arial, 10pt"/>
+          <TableCell Name="Cell34" Text="[isg_kurul_karar.Yer]" Font="Arial, 10pt" ColSpan="3"/>
+          <TableCell Name="Cell35" Font="Arial, 10pt"/>
+          <TableCell Name="Cell36" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row7">
+          <TableCell Name="Cell37" Text="Toplantı Konusu:" Font="Arial, 10pt"/>
+          <TableCell Name="Cell38" Text="[isg_kurul_karar.Aciklama]" Font="Arial, 10pt" ColSpan="4"/>
+          <TableCell Name="Cell39" Font="Arial, 10pt"/>
+          <TableCell Name="Cell40" Font="Arial, 10pt"/>
+          <TableCell Name="Cell41" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row8">
+          <TableCell Name="Cell42" Text="Toplantı Başkanı:" Font="Arial, 10pt"/>
+          <TableCell Name="Cell43" Text="[isg_kurul_karar.Toplanti_Baskan]" Font="Arial, 10pt" ColSpan="4"/>
+          <TableCell Name="Cell44" Font="Arial, 10pt"/>
+          <TableCell Name="Cell45" Font="Arial, 10pt"/>
+          <TableCell Name="Cell46" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row9">
+          <TableCell Name="Cell47" Text="Raportör:" Font="Arial, 10pt"/>
+          <TableCell Name="Cell48" Text="[isg_kurul_karar.Raportor]" Font="Arial, 10pt" ColSpan="4"/>
+          <TableCell Name="Cell49" Font="Arial, 10pt"/>
+          <TableCell Name="Cell50" Font="Arial, 10pt"/>
+          <TableCell Name="Cell51" Font="Arial, 10pt"/>
+        </TableRow>
+      </TableObject>
+      <DataBand Name="Data2" Top="264.15" Width="718.2" Height="37.8" DataSource="isg_kurul_karar2" Filter="[isg_kurul_karar.Id]==[isg_kurul_karar2.Isg_Kurul_Karar_Id]">
+        <TextObject Name="Text11" Left="75.6" Top="9.45" Width="94.5" Height="18.9" Text="[isg_kurul_karar2.Karar_No]" Font="Arial, 10pt"/>
+        <TextObject Name="Text12" Left="245.7" Top="9.45" Width="94.5" Height="18.9" Text="[isg_kurul_karar2.Alinan_Kararlar]" Font="Arial, 10pt"/>
+      </DataBand>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="305.95" Width="718.2" Height="37.8">
+      <TextObject Name="Text10" Left="9.45" Width="699.3" Height="28.35" Border.Lines="All" Text="Bu dökümanın güncelliği, elektronik ortamd MESKİ Döküman Yönetim Sisteminden takip edilmektedir." HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

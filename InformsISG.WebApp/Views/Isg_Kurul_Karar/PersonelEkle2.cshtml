@@ -1,0 +1,156 @@
+﻿@model IEnumerable<InformsISG.Entities.Dtos.Isg_Kurul_ElemanDTO>
+
+@{
+    ViewData["Title"] = "PersonelAta";
+    var egitimTanimId = ViewBag.egitimTanimId;
+    var talibirimId = ViewBag.Tali_Birim_Id;
+    var personelId = ViewBag.Personel_Id;
+    var deneme = ViewBag.deneme;
+    var PersonelList = (List<InformsISG.Entities.Dtos.Personel_BilgiDTO>)ViewBag.PersonelList;
+    int siraNo = 1;
+    TempData["id"] = TempData["id"];
+}
+
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <div>
+            @await Component.InvokeAsync("IsgKurulKararGetir", new { Id = egitimTanimId })
+        </div>
+        <br /> <br /> <br /> <br />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <h3 class="card-title">TOPLANTIYA EKLENEN PERSONEL LİSTESİ</h3>
+                        </div>
+                        <table id="tblPersonelBilgi" class="table table-striped table-row-bordered gy-5 gs-7">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Ad Soyad
+                                    </th>
+                                    <th>
+                                        Sicil No
+                                    </th>
+                                    <th>
+                                        Tc No
+                                    </th>
+                                    <th>
+                                        Birim
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model)
+                            {
+                                @if (item.Isg_Kurul_Karar_Id == egitimTanimId)
+                                {
+                                    @foreach (var item2 in PersonelList)
+                                    {
+                                        @if (item.Personel_Id == item2.Id)
+                                        {
+
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>
+                                                        @item2.Ad_Soyad
+                                                    </td>
+                                                    <td>
+                                                        @item2.Sicil_No
+                                                    </td>
+                                                    <td>
+                                                        @item2.Tc_No
+                                                    </td>
+                                                    <td>
+                                                        @item2.Tali_Birim_Id
+                                                    </td>
+
+                                                    <td>
+                                                        <a asp-action="PersonelCikar" asp-route-id="@item.Id">
+                                                            Çıkar
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        }
+                                    }
+                                }
+                            }
+                        </table>
+
+
+                        <br /> <br /> <br />
+                        <div class="card-header">
+                            <h3 class="card-title">TOPLANTIYA EKLENECEK PERSONEL LİSTESİ</h3>
+                        </div>
+
+                        <div>
+                            @await Component.InvokeAsync("PersonelGetirKurul")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br /><br /><br />
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+@section Scripts{
+    <script>
+        $("#tblBirim").DataTable({
+            "pageLength": 50,
+            language: {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(MAX kayıt içerisinden bulunan)",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada MENU kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            },
+            dom:
+                "<'row'" +
+                "<'col-sm-6 d-flex align-items-center justify-conten-start'>" +
+                "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+                ">" +
+
+                "<'table-responsive'tr>" +
+
+                "<'row'" +
+                "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                ">"
+
+        });
+    </script>
+}
+
+

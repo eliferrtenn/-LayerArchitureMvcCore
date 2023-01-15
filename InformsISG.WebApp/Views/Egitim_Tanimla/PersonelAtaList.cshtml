@@ -1,0 +1,275 @@
+﻿@model IEnumerable<InformsISG.Entities.Dtos.Egitim_Personel_AtamaDTO>
+
+@{
+    ViewData["Title"] = "PersonelAta";
+    var egitimTanimId = ViewBag.egitimTanimId;
+
+    var personelId = ViewBag.talibirimId;
+    var deneme = ViewBag.deneme;
+    var egitimTanimList = (List<InformsISG.Entities.Dtos.Egitim_TanimlaDTO>)ViewBag.egitimTanimList;
+    var PersonelList = (List<InformsISG.Entities.Dtos.Personel_BilgiDTO>)ViewBag.PersonelList;
+    var EgitimVerenPersonelList = (List<InformsISG.Entities.Dtos.Egitim_Veren_PersonelDTO>
+       )ViewBag.EgitimVerenPersonelList;
+    TempData["id"] = TempData["id"];
+    int siraNo = 1;
+    long a234 = 0;
+    }
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <br /> <br /> <br /> <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card-header">
+                                        <h3 class="card-title">EGİTİME EKLENEN PERSONEL LİSTESİ</h3>
+                                    </div>                           
+                                <form asp-action="PersonelCikar">
+
+                                    <table id="tblPersonelBilgi2" class="table table-striped table-row-bordered gy-5 gs-7">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Ad Soyad
+                                                </th>
+                                                <th>
+                                                    Sicil No
+                                                </th>
+                                                <th>
+                                                    Tc No
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var item in Model)
+                                            {
+                                                @if (item.Egitim_Tanimla_Id == egitimTanimId)
+                                                {
+
+                                                    @foreach (var item2 in PersonelList)
+                                                    {
+                                                        @if (item.Personel_Id == item2.Id)
+                                                        {
+                                                            @*
+                                <input type="hidden" name="LocationId" value="@item2.Id" id="LocationId" />*@
+                                            <tr>
+
+                                                <td>
+                                                    @item2.Ad_Soyad
+                                                </td>
+                                                <td>
+                                                    @item2.Sicil_No
+                                                </td>
+                                                <td>
+                                                    @item2.Tc_No
+                                                </td>
+                                                <td>
+                                                    <span class="form-check form-check-custom form-check-solid" style="text-align:center" id="MyDiv">
+                                                        <input class="form-check-input" type="checkbox" value="@item.Id" name="Ids" />
+                                                    </span>
+
+                                                </td>
+                                            </tr>
+
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <input type="submit" class="btn btn-success btn-hover-rotate-end" value="Personel Çıkar">&nbsp;
+
+                                </form>
+                                            }
+
+                                            <br /> <br /> <br />
+                                    </div>
+                                <div class="col-md-6">
+                                    <div class="card-header">
+                                        <h3 class="card-title">EGİTİME EKLENECEK PERSONEL LİSTESİ</h3>
+                                    </div>
+                                    <div>
+                                        @await Component.InvokeAsync("PersonelGetir")
+                                    </div>
+                                    <br /> <br />
+                                    <div class="card-body">
+
+
+                                        <table id="tblPersonelBilgi" class="table table-striped table-row-bordered gy-5 gs-7">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        Ad Soyad
+                                                    </th>
+                                                    <th>
+                                                        Sicil No
+                                                    </th>
+                                                    <th>
+                                                        Tc No
+                                                    </th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            @foreach (var item2 in PersonelList)
+                                            {
+
+                                            if (personelId == item2.Tali_Birim_Id)
+                                            {
+                                            a234 = item2.Id;
+                                            <tbody>
+                                                <tr>
+                                                    <td id="attrName">
+                                                        @item2.Ad_Soyad
+                                                    </td>
+                                                    <td class="attrValue">
+                                                        @item2.Sicil_No
+                                                    </td>
+                                                    <td>
+                                                        @item2.Tc_No
+                                                    </td>
+                                                    <td>
+                                                        <a asp-action="PersonelEkle" asp-route-id="@item2.Id">Ekle</a>
+                                                        @*<button id="addRow" asp-route-id="@item2.Id">
+                                                            Ekle
+                                                        </button>*@
+                                                        @*<input type="button" class="btn btn-danger" value="Ekle" onclick="deleteConfirm('@item2.Id', '@item2.Ad_Soyad', '@item2.Tc_No', '@item2.Tali_Birim_Id')" />*@
+
+
+        
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            siraNo++;
+
+                                            }
+                                            }
+
+
+
+                                        </table>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br /><br /><br />
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+    @section Scripts{
+    <script type="text/javascript">
+
+
+        var deleteConfirm = function (val, val2, val3, val4) {
+            var t = $('#tblPersonelBilgi2').DataTable();
+            /*          document.getElementById('deneme').value = val;*/
+
+            var name = val;
+            var name2 = val2;
+            var name3 = val3;
+            var name4 = val4;
+            t.row.add(
+                [
+                    name,
+                    name2,
+                    name3,
+                    name4,
+                    name4,
+                ]
+            ).draw(false);
+
+
+        };
+
+
+    </script>
+    @*
+    <script>
+        $(document).ready(function () {
+
+            $(function () {
+
+                var t = $('#tblPersonelBilgi2').DataTable();
+
+                var counter = 1;
+                $('#addRow').on('click', function (a, b) {
+
+                    var name = $('#attrName', b).val();
+                    t.row.add(
+                        [
+                            name,
+                            counter + '.2',
+                            counter + '.3',
+                            counter + '.4',
+                            counter + '.5']
+                    ).draw(false);
+
+                    counter++;
+                });
+
+            });
+        });
+
+
+
+
+
+                                    //var t = $('#tblPersonelBilgi2').DataTable();
+                                    //var counter = 1;
+                                    //$('#addRow').on('click', function (a,b) {
+                                    //    var name = $('#attrName', b).text();
+                                    //    t.row.add(
+                                    //        [
+                                    //            name ,
+                                    //            counter + '.2',
+                                    //            counter + '.3',
+                                    //            counter + '.4',
+                                    //            counter + '.5']
+                                    //    ).draw(false);
+
+                                    //    counter++;
+
+
+                                        //var currenntRow = $(this);
+                                        //var deneme = $('#attrName').val($(this));
+                                        //var name = $('#attrName', b).text();
+                                        //var col = currenntRow.find("td:eq(0)").html();
+
+                                        //var value = $('.attrValue', b).text();
+                                        //t.row.add(
+                                        //    [
+                                        //        deneme + '.1',
+                                        //        counter + '.2',
+                                        //        counter + '.3',
+                                        //        counter + '.4',
+                                        //        counter + '.5']
+                                        //).draw(false);
+
+                                        //counter++;
+        /*            });*/
+
+                                    // Automatically add a first row of data
+        /*     $('#addRow').click();*/
+
+    </script>*@
+    }
+
+
+
+

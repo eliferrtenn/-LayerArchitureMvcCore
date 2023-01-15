@@ -1,0 +1,375 @@
+﻿@model InformsISG.Entities.Dtos.Personel_BilgiDTO
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="page d-flex flex-row flex-column-fluid container-fluid" style="margin-top:2rem">   
+            <div class=" flex-column container-fluid " id="kt_wrapper">
+
+                <div class="content flex-column flex-column-fluid container-fluid" id="kt_content">
+                    <div class="post flex-column-fluid" id="kt_post">
+                        <div id="kt_content_container" class="container-fluid">
+
+
+                            <div class=" flex-column flex-root">
+                                <!--begin::Page-->
+                                <div class="page flex-row flex-column-fluid">
+
+                                    <!--end::Aside-->
+                                    <!--begin::Wrapper-->
+                                    <div class=" flex-column flex-row-fluid" id="kt_wrapper">
+                                        <!--begin::Header-->
+          
+                                                    <!--begin::Navbar-->
+                                                    <div class="card mb-5 mb-xl-10">
+                                                        <div class="card-body pt-9 pb-0">
+                                                            <!--begin::Details-->
+                                                            <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
+                                                                <!--begin: Pic-->
+                                                                <div class="me-7 mb-4">
+                                                                    <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                                                        @if (Model.Fotograf == null)
+                                                                        {
+                                                                            <div class="me-7 mb-4">
+                                                                                <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                                                                    <img src="/Dosya/Personel/Default/defaultPerson.jpg" alt="image" />
+                                                                                
+                                                                                </div>
+                                                                            </div>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <div class="me-7 mb-4">
+                                                                                <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                                                                    <img src="/@Model.Fotograf" alt="image" />
+
+                                                                                </div>
+                                                                            </div>
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                                <!--end::Pic-->
+                                                                <!--begin::Info-->
+                                                                <div class="flex-grow-1">
+                                                                    <!--begin::Title-->
+                                                                    <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+                                                                        <!--begin::User-->
+                                                                        <div class="d-flex flex-column">
+                                                                            <div class="d-flex align-items-center mb-2">
+                                                                                <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">@Model.Ad_Soyad</a>
+
+                                                                                <a href="#" class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan"></a>
+                                                                            </div>
+                                                                            <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
+                                                                                <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                                                                                    <span class="svg-icon svg-icon-4 me-1">
+
+                                                                                    </span>
+                                                                                    @Model.Unvan
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--end::User-->
+                                                                        <!--begin::Actions-->
+                                                                        <div class="d-flex my-4">
+                                                                            <a href="@Url.Action("Index","Personel_Bilgi")" class="btn btn-sm btn-primary me-2 btn btn-danger">Geri Dön</a>
+                                                                        </div>
+                                                                        <!--end::Actions-->
+                                                                    </div>
+                                                                    <!--end::Title-->
+                                          
+                                                                </div>
+                                                                <!--end::Info-->
+                                                            </div>
+                                                            <!--end::Details-->
+                                                            <!--begin::Navs-->
+                                                            <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
+                                                                <!--begin::Nav item-->
+                                                                <li class="nav-item mt-2">
+                                                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="@Url.Action("Details","Personel_Bilgi",new {id=Model.Id})">Genel Bilgi</a>
+                                                                </li>
+                                                                <!--end::Nav item-->
+                                                                <!--begin::Nav item-->
+                                                                <li class="nav-item mt-2">
+                                                                    <a class="nav-link text-active-primary ms-0 me-10 py-5" href="@Url.Action("DetailMuayene","Personel_Bilgi", new { id = Model.Id })">Muayene Bilgisi</a>
+                                                                </li>
+                                                                <!--end::Nav item-->
+                                                                <!--begin::Nav item-->
+                                                                <li class="nav-item mt-2">
+                                                                    <a class="nav-link text-active-primary ms-0 me-10 py-5" href="@Url.Action("DetailEgitim","Personel_Bilgi", new { id = Model.Id })">Eğitim Bilgisi</a>
+                                                                </li>
+                                                                <!--end::Nav item-->
+                                                                <!--begin::Nav item-->
+                                                                <li class="nav-item mt-2">
+                                                                    <a class="nav-link text-active-primary ms-0 me-10 py-5" href="@Url.Action("DetailKaza","Personel_Bilgi", new { id = Model.Id })">Kaza Bilgisi</a>
+                                                                </li>
+                                                                <!--end::Nav item-->
+                                                                <!--begin::Nav item-->
+                                                                <li class="nav-item mt-2">
+                                                                    <a class="nav-link text-active-primary ms-0 me-10 py-5" href="@Url.Action("DetailKkd","Personel_Bilgi", new { id = Model.Id })">Kkd Bilgisi</a>
+                                                                </li>                                                                      
+                                                                <!--end::Nav item-->
+                                                            </ul>
+                                                            <!--begin::Navs-->
+                                                        </div>
+                                                    </div>
+                           
+                           
+                                       
+                                        <!--end::Content-->
+                                        <!--begin::Footer-->
+
+                                        <!--end::Footer-->
+                                    </div>
+                                    <!--end::Wrapper-->
+                                </div>
+                                <!--end::Page-->
+                            </div>
+                        
+                            <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+                                <div class="card-header cursor-pointer">
+                                    <div class="card-title m-0">
+                                        <h3 class="fw-bolder m-0">Profil Bigileri</h3>
+                                    </div>
+                                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary align-self-center">Düzenle</a>
+                                </div>
+                                <div class="card-body p-9">
+                                    <div class="row mb-7">
+                                        <label class="col-lg-4 fw-bold text-muted">Ad Soyad</label>
+                                        <div class="col-lg-8">
+                                            <span class="fw-bolder fs-6 text-gray-800">@Model.Ad_Soyad</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-7">
+                                        <label class="col-lg-4 fw-bold text-muted">Ünvanı</label>
+                                        <div class="col-lg-8 fv-row">
+                                            <span class="fw-bold text-gray-800 fs-6">@Model.Unvan</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-7">
+                                        <label class="col-lg-4 fw-bold text-muted">
+                                            Telefon Numarası
+                                        </label>
+                                        <div class="col-lg-8 d-flex align-items-center">
+                                            <span class="fw-bolder fs-6 text-gray-800 me-2">@Model.Telefon1</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-7">
+                                        <label class="col-lg-4 fw-bold text-muted">Kimlik Numarası</label>
+                                        <div class="col-lg-8">
+                                            <a href="#" class="fw-bold fs-6 text-gray-800 text-hover-primary">@Model.Tc_No</a>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-7">
+                                        <label class="col-lg-4 fw-bold text-muted">Isg Uzmanı</label>
+                                        <div class="col-lg-8 fv-row">
+                                            @if (Model.IsgUzmanMi)
+                                            {
+                                                <span class="fw-bold text-gray-800 fs-6">Evet</span>
+
+                                            }
+                                            else if (!Model.IsgUzmanMi)
+                                            {
+                                                <span class="fw-bold text-gray-800 fs-6">Hayır</span>
+
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row mb-7">
+                                        <label class="col-lg-4 fw-bold text-muted">İşyeri Hekimi</label>
+                                        <div class="col-lg-8 fv-row">
+                                            @if (Model.IsYeriHekimi)
+                                            {
+                                                <span class="fw-bold text-gray-800 fs-6">Evet</span>
+
+                                            }
+                                            else if (!Model.IsYeriHekimi)
+                                            {
+                                                <span class="fw-bold text-gray-800 fs-6">Hayır</span>
+
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row mb-7">
+                                        <label class="col-lg-4 fw-bold text-muted">
+                                            Doğum Yeri
+                                        </label>
+                                        <div class="col-lg-8">
+                                            <span class="fw-bolder fs-6 text-gray-800">@Model.Dogum_Yer</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-7">
+                                        <label class="col-lg-4 fw-bold text-muted">Doğum Tarihi</label>
+                                        <div class="col-lg-8">
+                                            <span class="fw-bolder fs-6 text-gray-800">@Model.Dogum_Tarih.Day/@Model.Dogum_Tarih.Month/@Model.Dogum_Tarih.Year</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-7">
+                                        <label class="col-lg-4 fw-bold text-muted">Adres</label>
+                                        <div class="col-lg-8">
+                                            <span class="fw-bolder fs-6 text-gray-800">@Model.Adres</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-10">
+                                        <label class="col-lg-4 fw-bold text-muted">İşe Giriş Tarihi</label>
+                                        <div class="col-lg-8">
+                                            <span class="fw-bold fs-6 text-gray-800">@Model.Is_Giris_Tarih</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-10">
+                                        <label class="col-lg-4 fw-bold text-muted">İşten Çıkış Tarihi</label>
+                                        <div class="col-lg-8">
+                                            <span class="fw-bold fs-6 text-gray-800">@Model.Is_Cikis_Tarih</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-10">
+                                        <label class="col-lg-4 fw-bold text-muted">Medeni Durumu</label>
+                                        <div class="col-lg-8">
+                                            @if (Model.Medeni_Durum == 0)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Bekar</span>
+                                            }
+                                            else if (Model.Medeni_Durum == 1)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Evli</span>
+
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row mb-10">
+                                        <label class="col-lg-4 fw-bold text-muted">Eğitim Durumu</label>
+                                        <div class="col-lg-8">
+                                            @if (Model.Egitim == 0)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Okumamış</span>
+                                            }
+                                            else if (Model.Egitim == 1)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">İlkokul</span>
+
+                                            }
+                                            else if (Model.Egitim == 2)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Ortaokul</span>
+
+                                            }
+                                            else if (Model.Egitim == 3)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Lise</span>
+
+                                            }
+                                            else if (Model.Egitim == 4)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Ön Lisans</span>
+
+                                            }
+                                            else if (Model.Egitim == 5)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Lisans</span>
+
+                                            }
+                                            else if (Model.Egitim == 6)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Yüksek Lisans</span>
+
+                                            }
+                                            else if (Model.Egitim == 7)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Doktora</span>
+
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row mb-10">
+                                        <label class="col-lg-4 fw-bold text-muted">Mesleki Eğitim Durumu</label>
+                                        <div class="col-lg-8">
+                                            @if (Model.Egitim_Meslek == 0)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Okumamış</span>
+                                            }
+                                            else if (Model.Egitim_Meslek == 1)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">İlkokul</span>
+
+                                            }
+                                            else if (Model.Egitim_Meslek == 2)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Ortaokul</span>
+
+                                            }
+                                            else if (Model.Egitim_Meslek == 3)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Lise</span>
+
+                                            }
+                                            else if (Model.Egitim_Meslek == 4)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Ön Lisans</span>
+
+                                            }
+                                            else if (Model.Egitim_Meslek == 5)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Lisans</span>
+
+                                            }
+                                            else if (Model.Egitim_Meslek == 6)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Yüksek Lisans</span>
+
+                                            }
+                                            else if (Model.Egitim_Meslek == 7)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Doktora</span>
+
+                                            }
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-10">
+                                        <label class="col-lg-4 fw-bold text-muted">Kadro Durumu</label>
+                                        <div class="col-lg-8">
+                                            @if (Model.Kadro_Durumu == true)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Atanmış</span>
+                                            }
+                                            else if (Model.Kadro_Durumu == false)
+                                            {
+                                                <span class="fw-bold fs-6 text-gray-800">Atanmamış</span>
+
+                                            }
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-7">
+                                        <label class="col-lg-4 fw-bold text-muted">SGK No</label>
+                                        <div class="col-lg-8">
+                                            <span class="fw-bolder fs-6 text-gray-800">@Model.Sgk_No</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-7">
+                                        <label class="col-lg-4 fw-bold text-muted">Sicil No</label>
+                                        <div class="col-lg-8">
+                                            <span class="fw-bolder fs-6 text-gray-800">@Model.Sicil_No </span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-7">
+                                        <label class="col-lg-4 fw-bold text-muted">Sertifika No</label>
+                                        <div class="col-lg-8">
+                                            <span class="fw-bolder fs-6 text-gray-800">@Model.SertifikaNo</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-7">
+                                        <label class="col-lg-4 fw-bold text-muted">Personel Bilgisi</label>
+                                        <div class="col-lg-8">
+                                            <span class="fw-bolder fs-6 text-gray-800">@Model.Notlar</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

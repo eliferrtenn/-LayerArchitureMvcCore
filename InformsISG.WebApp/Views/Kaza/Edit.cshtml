@@ -1,0 +1,581 @@
+﻿@model InformsISG.Entities.Dtos.KazaDTO
+
+@{
+    ViewData["Title"] = "Edit";
+    var KazaAyrintiList = (List<InformsISG.Entities.Dtos.Kaza_AyrintiDTO>)ViewBag.KazaAyrintiList;
+    var KazaDosyaList = (List<InformsISG.Entities.Dtos.Kaza_DosyaDTO>)ViewBag.KazaDosyaList;
+    var KazaId = ViewBag.KazaId;
+    TempData["KazaId"] = TempData["KazaId"];
+}
+
+
+<form asp-action="Edit">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">KAZA DÜZENLEME</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Kaza")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <input asp-for="Id" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Kaza_No" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Kaza_No" class="form-control" />
+                        <span asp-validation-for="Kaza_No" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-8 mb-5">
+                    <label asp-for="Tali_Birim_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Tali_Birim_Id" class="form-control" asp-items="ViewBag.Tali_Birim_Id"></select>
+                    </div>
+                </div>
+                <div class="col-md-8 mb-5">
+                    <label asp-for="Kaza_Yer" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Kaza_Yer" class="form-control" />
+                        <span asp-validation-for="Kaza_Yer" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Kaza_Tarih" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Kaza_Tarih" class="form-control" />
+                        <span asp-validation-for="Kaza_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Kaza_Saat" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Kaza_Saat" class="form-control" />
+                        <span asp-validation-for="Kaza_Saat" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Ise_Baslama_Saat" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Ise_Baslama_Saat" class="form-control" />
+                        <span asp-validation-for="Ise_Baslama_Saat" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Bildirim_Tarih" class="control-label"></label>
+
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Bildirim_Tarih" class="form-control" />
+                        <span asp-validation-for="Bildirim_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Kaza_Hasar_Tipi" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Kaza_Hasar_Tipi" class="form-control">
+                            <option value="0" selected>Yaralanma/Hastalık</option>
+                            <option value="1">Yaralanma Yok</option>
+                            <option value="2">Maddi Hasar</option>
+                            <option value="3">Dökülme/Çevresel/Toplumsal Hasar</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Personel_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Personel_Id" class="form-control" asp-items="ViewBag.Personel_Id"></select>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Yaralanan_Vucut_Bolgesi_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Yaralanan_Vucut_Bolgesi_Id" class="form-control" asp-items="ViewBag.Yaralanan_Vucut_Bolgesi_Id"></select>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Yaralanma_Sekli_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Yaralanma_Sekli_Id" class="form-control" asp-items="ViewBag.Yaralanma_Sekli_Id"></select>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Kaza_Anindaki_Faaliyet" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Kaza_Anindaki_Faaliyet" class="form-control" />
+                        <span asp-validation-for="Kaza_Anindaki_Faaliyet" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Yaralanmaya_Neden_Olan_Olay" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Yaralanmaya_Neden_Olan_Olay" class="form-control" />
+                        <span asp-validation-for="Yaralanmaya_Neden_Olan_Olay" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Yaralanmaya_Neden_Olan_Arac" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Yaralanmaya_Neden_Olan_Arac" class="form-control" />
+                        <span asp-validation-for="Yaralanmaya_Neden_Olan_Arac" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-5">
+                    <div class="input-group form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Tibbi_Mudahele" /> @Html.DisplayNameFor(model => model.Tibbi_Mudahele)
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-10 mb-5">
+                    <label asp-for="Tibbi_Mudahele_Aciklama" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Tibbi_Mudahele_Aciklama" class="form-control" />
+                        <span asp-validation-for="Tibbi_Mudahele_Aciklama" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Is_Gorememezlik" /> @Html.DisplayNameFor(model => model.Is_Gorememezlik)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-10 mb-5">
+                    <label asp-for="Is_Gorememezlik_Gun_Sayi" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Is_Gorememezlik_Gun_Sayi" class="form-control" />
+                        <span asp-validation-for="Is_Gorememezlik_Gun_Sayi" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Kaza_Sonrasi_Calisan_Ne_Yapti" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Kaza_Sonrasi_Calisan_Ne_Yapti" class="form-control" />
+                        <span asp-validation-for="Kaza_Sonrasi_Calisan_Ne_Yapti" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Mesleki_Egitim" /> @Html.DisplayNameFor(model => model.Mesleki_Egitim)
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Isg_Egitim" /> @Html.DisplayNameFor(model => model.Isg_Egitim)
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Hasar_Buyuklugu" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Hasar_Buyuklugu" class="form-control">
+                            <option value="0" selected>Dikkate Alınmalı</option>
+                            <option value="1">Önemli</option>
+                            <option value="2">Ciddi</option>
+                            <option value="3">Çok Ciddi</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Tekrarlanma_Olasiligi" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Tekrarlanma_Olasiligi" class="form-control">
+                            <option value="0" selected>Pratil Olarak İmkansız</option>
+                            <option value="1">Zayıf İhtimal</option>
+                            <option value="2">Oldukça Düşük İhtimal</option>
+                            <option value="3">Nadir, Fakat Olabilir</option>
+                            <option value="4">Kuvvetle İhtimal</option>
+                            <option value="5">Çok Kuvvetli İhtimal</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Gerceklesme_Frekansi" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Gerceklesme_Frekansi" class="form-control">
+                            <option value="0" selected>Çok Nadir</option>
+                            <option value="1">Oldukça Nadir</option>
+                            <option value="2">Nadir</option>
+                            <option value="3">Ara Sıra</option>
+                            <option value="4">Sıklıkla</option>
+                            <option value="5">Sürekli</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Maruz_Kalan_Calisanin_Ifadesi" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-question"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Maruz_Kalan_Calisanin_Ifadesi" class="form-control"></textarea>
+                        <span asp-validation-for="Maruz_Kalan_Calisanin_Ifadesi" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Gorgu_Ifadesi" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-question"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Gorgu_Ifadesi" class="form-control"></textarea>
+                        <span asp-validation-for="Gorgu_Ifadesi" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Kaza_Yol_Acan_Sebepler" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-question"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Kaza_Yol_Acan_Sebepler" class="form-control"></textarea>
+                        <span asp-validation-for="Kaza_Yol_Acan_Sebepler" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Varolmasinda_Temel_Nedenler" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-question"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Varolmasinda_Temel_Nedenler" class="form-control"></textarea>
+                        <span asp-validation-for="Varolmasinda_Temel_Nedenler" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Birim_Sorumlu_Gorus_Oneri" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-question"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Birim_Sorumlu_Gorus_Oneri" class="form-control"></textarea>
+                        <span asp-validation-for="Birim_Sorumlu_Gorus_Oneri" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Isg_Uzmani_Degerlendirme" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-question"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Isg_Uzmani_Degerlendirme" class="form-control"></textarea>
+                        <span asp-validation-for="Isg_Uzmani_Degerlendirme" class="text-danger"></span>
+                    </div>
+                </div>
+                <h3 class="card-title">1. Tanık Bilgileri</h3>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Tanik_Tcno1" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Tanik_Tcno1" class="form-control" />
+                        <span asp-validation-for="Tanik_Tcno1" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Tanik_Ad_Soyad1" class="control-label"></label>
+                    <div class="input-group  form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Tanik_Ad_Soyad1" class="form-control" />
+                        <span asp-validation-for="Tanik_Ad_Soyad1" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Tanik_Eposta1" class="control-label"></label>
+                    <div class="input-group  form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-envelope"></i>
+                        </span>
+                        <input asp-for="Tanik_Eposta1" class="form-control" />
+                        <span asp-validation-for="Tanik_Eposta1" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Tanik_Telefon1" class="control-label"></label>
+                    <div class="input-group  form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-phone"></i>
+                        </span>
+                        <input asp-for="Tanik_Telefon1" class="form-control" />
+                        <span asp-validation-for="Tanik_Telefon1" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Tanik_Adres1" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </span>
+                        <input asp-for="Tanik_Adres1" class="form-control" />
+                        <span asp-validation-for="Tanik_Adres1" class="text-danger"></span>
+                    </div>
+                </div>
+                <h3 class="card-title">2. Tanık Bilgileri</h3>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Tanik_Tcno2" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Tanik_Tcno2" class="form-control" />
+                        <span asp-validation-for="Tanik_Tcno2" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Tanik_Ad_Soyad2" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Tanik_Ad_Soyad2" class="form-control" />
+                        <span asp-validation-for="Tanik_Ad_Soyad2" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Tanik_Eposta2" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-envelope"></i>
+                        </span>
+                        <input asp-for="Tanik_Eposta2" class="form-control" />
+                        <span asp-validation-for="Tanik_Eposta2" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Tanik_Telefon2" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-phone"></i>
+                        </span>
+                        <input asp-for="Tanik_Telefon2" class="form-control" />
+                        <span asp-validation-for="Tanik_Telefon2" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Tanik_Adres2" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </span>
+                        <input asp-for="Tanik_Adres2" class="form-control" />
+                        <span asp-validation-for="Tanik_Adres2" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <h3 class="card-title">Düzeltici Ve Önleyici Faaliyet</h3>
+                <hr />
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Dof1" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <textarea rows="2" cols="30" asp-for="Dof1" class="form-control"></textarea>
+                        <span asp-validation-for="Dof1" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Sorumlu1" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <input asp-for="Sorumlu1" class="form-control" />
+                        <span asp-validation-for="Sorumlu1" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Acilis_Tarih1" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-calendar"></i>
+                        </span>
+                        <input asp-for="Acilis_Tarih1" class="form-control" />
+                        <span asp-validation-for="Acilis_Tarih1" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Kapanis_Tarih1" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-calendar"></i>
+                        </span>
+                        <input asp-for="Kapanis_Tarih1" class="form-control" />
+                        <span asp-validation-for="Kapanis_Tarih1" class="text-danger"></span>
+                    </div>
+                </div>
+                <hr style="margin-top:1rem" />
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Dof2" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <textarea rows="2" cols="30" asp-for="Dof2" class="form-control"></textarea>
+                        <span asp-validation-for="Dof2" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Sorumlu2" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <input asp-for="Sorumlu2" class="form-control" />
+                        <span asp-validation-for="Sorumlu2" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Acilis_Tarih2" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-calendar"></i>
+                        </span>
+                        <input asp-for="Acilis_Tarih2" class="form-control" />
+                        <span asp-validation-for="Acilis_Tarih2" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Kapanis_Tarih2" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-calendar"></i>
+                        </span>
+                        <input asp-for="Kapanis_Tarih2" class="form-control" />
+                        <span asp-validation-for="Kapanis_Tarih2" class="text-danger"></span>
+                    </div>
+                </div>
+                <hr style="margin-top:1rem" />
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Dof3" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <textarea rows="2" cols="30" asp-for="Dof3" class="form-control"></textarea>
+                        <span asp-validation-for="Dof3" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Sorumlu3" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <input asp-for="Sorumlu3" class="form-control" />
+                        <span asp-validation-for="Sorumlu3" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Acilis_Tarih3" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-calendar"></i>
+                        </span>
+                        <input asp-for="Acilis_Tarih3" class="form-control" />
+                        <span asp-validation-for="Acilis_Tarih3" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Kapanis_Tarih3" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-calendar"></i>
+                        </span>
+                        <input asp-for="Kapanis_Tarih3" class="form-control" />
+                        <span asp-validation-for="Kapanis_Tarih3" class="text-danger"></span>
+                    </div>
+                </div>
+                <hr style="margin-top:1rem" />
+
+                <div class="form-group">
+                    <label asp-for="Isveren_Id" class="control-label"></label>
+                    <select asp-for="Isveren_Id" class="form-control" asp-items="ViewBag.Isveren_Id"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+
+    </div>
+</form>
+
+<div>
+    @await Component.InvokeAsync("KazaAyrinti", new { Id = KazaId })
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

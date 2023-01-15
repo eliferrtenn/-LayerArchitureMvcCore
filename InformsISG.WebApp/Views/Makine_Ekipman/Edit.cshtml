@@ -1,0 +1,177 @@
+﻿@model InformsISG.Entities.Dtos.Makine_EkipmanDTO
+
+@{
+    ViewData["Title"] = "Edit";
+
+}
+<form asp-action="Edit">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">MAKİNE EKİPMAN DÜZENLE</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Makine_Ekipman")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 mb-5">
+                    <input asp-for="Id" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Tali_Birim_Id" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Tali_Birim_Id" class="form-control" asp-items="ViewBag.Tali_Birim_Id" selected></select>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Ekipman_Kodu" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Ekipman_Kodu" class="form-control" />
+                        <span asp-validation-for="Ekipman_Kodu" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Firma_Adi" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Firma_Adi" class="form-control" />
+                        <span asp-validation-for="Firma_Adi" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Makine_Id" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Makine_Id" class="form-control" asp-items="ViewBag.Makine_Id" selected></select>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Periyodik_Kontrol_Tarih" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Periyodik_Kontrol_Tarih" class="form-control" />
+                        <span asp-validation-for="Periyodik_Kontrol_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Tekrar_Periyodik_Kontrol_Tarih" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Tekrar_Periyodik_Kontrol_Tarih" class="form-control" />
+                        <span asp-validation-for="Tekrar_Periyodik_Kontrol_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Periyodik_Kontrol_Adres" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Periyodik_Kontrol_Adres" class="form-control" />
+                        <span asp-validation-for="Periyodik_Kontrol_Adres" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Telefon_No" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Telefon_No" class="form-control" />
+                        <span asp-validation-for="Telefon_No" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label asp-for="E_Posta" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="E_Posta" class="form-control" />
+                        <span asp-validation-for="E_Posta " class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Takip_Kontrol_Tarih" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Takip_Kontrol_Tarih" class="form-control" />
+                        <span asp-validation-for="Takip_Kontrol_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Rapor_Tarih" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Rapor_Tarih" class="form-control" />
+                        <span asp-validation-for="Rapor_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Periyodik_Kontrol_Method" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-question"></i>
+                        </span>
+                        <input asp-for="Periyodik_Kontrol_Method" class="form-control" />
+
+                        <span asp-validation-for="Periyodik_Kontrol_Method" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Kimlik_Rapor_No" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-question"></i>
+                        </span>
+                        <input asp-for="Kimlik_Rapor_No" class="form-control" />
+
+                        <span asp-validation-for="Kimlik_Rapor_No" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Kapsam" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-question"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Kapsam" class="form-control"></textarea>
+                        <span asp-validation-for="Kapsam" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

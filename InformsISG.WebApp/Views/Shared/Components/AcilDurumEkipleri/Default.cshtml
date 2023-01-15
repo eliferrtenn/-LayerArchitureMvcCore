@@ -1,0 +1,24 @@
+﻿@model InformsISG.Entities.Dtos.Acil_Durum_EkipleriDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Ekip_Ad" class="control-label"></label>
+                        <input asp-for="Ekip_Ad" class="form-control" disabled/>
+                        <span asp-validation-for="Ekip_Ad" class="text-danger" ></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

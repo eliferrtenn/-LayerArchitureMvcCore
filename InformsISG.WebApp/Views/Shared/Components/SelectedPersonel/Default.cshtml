@@ -1,0 +1,73 @@
+﻿@model InformsISG.Entities.Dtos.Personel_BilgiDTO
+
+@{
+    ViewData["Title"] = "View";
+}
+
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h3 class="card-title">Personel Bilgisi</h3>
+                <div class="card-toolbar">
+                    <a href="@Url.Action("Create","Saglik")" class="btn btn-success btn-hover-rotate-end">
+                        YENİ MUAYENE EKLE
+                    </a>   &nbsp;
+                    <a href="@Url.Action("Index","Saglik")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="col-md-6 mb-5">
+
+                        <div class="col-md-10 mb-5">
+                            <div class="form-group">
+                                <label asp-for="Ad_Soyad" class="control-label"></label>
+                                <input asp-for="Ad_Soyad" class="form-control" disabled />
+                                <span asp-validation-for="Ad_Soyad" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-10 mb-5">
+                            <div class="form-group">
+                                <label asp-for="Sicil_No" class="control-label"></label>
+                                <input asp-for="Sicil_No" class="form-control" disabled />
+                                <span asp-validation-for="Sicil_No" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-10 mb-5">
+                            <div class="form-group">
+                                <label asp-for="Sgk_No" class="control-label"></label>
+                                <input asp-for="Sgk_No" class="form-control" disabled />
+                                <span asp-validation-for="Sgk_No" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-10 mb-5">
+                            <div class="form-group">
+                                <label asp-for="Tc_No" class="control-label"></label>
+                                <input asp-for="Tc_No" class="form-control" disabled />
+                                <span asp-validation-for="Tc_No" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-6 mb-5">
+
+                        <div class="col-md-12 mb-5">
+                            <label asp-for="Fotograf" class="control-label"></label><br />
+                            <img src="/@Model.Fotograf" width="30%" asp-append-version="true" />
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                </div>
+        </div>
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

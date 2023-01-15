@@ -1,0 +1,150 @@
+﻿@model InformsISG.Entities.Dtos.KkdDTO
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Create";
+}
+
+<form asp-action="Create">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">KKD EKLEME</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Kkd")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <label asp-for="Kkd_No" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Kkd_No" class="form-control" />
+                        <span asp-validation-for="Kkd_No" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-8 mb-5">
+                    <label asp-for="Kkd_Tanim" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Kkd_Tanim" class="form-control" />
+                        <span asp-validation-for="Kkd_Tanim" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Uretici" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Uretici" class="form-control" />
+                        <span asp-validation-for="Uretici" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Parca_No" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Parca_No" class="form-control" />
+                        <span asp-validation-for="Parca_No" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Standart" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Standart" class="form-control" />
+                        <span asp-validation-for="Standart" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Notlar" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Notlar" class="form-control" />
+                        <span asp-validation-for="Notlar" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-5">
+                    <span class="form-check-label">
+                        @Html.DisplayNameFor(model => model.Kullanilma_Durumu)
+                    </span>
+                    <label class="form-check form-switch form-check-custom form-check-solid">
+                        <input class="form-check-input" type="checkbox" asp-for="Kullanilma_Durumu" />
+                    </label>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Kkd_Tur_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Kkd_Tur_Id" class="form-control" asp-items="ViewBag.Kkd_Tur_Id">
+                            <option value="">** SEÇİNİZ  **</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Kkd_Tur_Alt_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Kkd_Tur_Alt_Id" class="form-control" asp-items="ViewBag.Kkd_Tur_Alt_Id">
+                            <option value="">Seçiniz</option>
+                        </select>
+                    </div>
+                </div>
+
+  
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Isveren_Id" class="control-label"></label>
+                    <div class="form-group">
+                        <select asp-for="Isveren_Id" class="form-control" asp-items="ViewBag.Isveren_Id"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer">
+
+    </div>
+
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+         $("#Kkd_Tur_Id").change(function () {
+             var cid = $("#Kkd_Tur_Id").val();
+             $("#Kkd_Tur_Alt_Id option").remove();
+                         $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("GetKkdTurAlt", "Kkd")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid }
+                         }).done(function (result) {
+                             $.each(result, function (i, item) {
+                                 $("#Kkd_Tur_Alt_Id").append('<option value="' + item.value + '">' + item.text + '</option>');
+                             });
+                             $("#Kkd_Tur_Alt_Id").trigger('change');
+                         })
+         });
+    </script>
+}
+

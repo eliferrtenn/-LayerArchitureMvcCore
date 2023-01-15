@@ -1,0 +1,30 @@
+﻿@model InformsISG.Entities.Dtos.Egitim_Sinav_NotDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group mb-5">
+                        <label asp-for="Sinav_Not" class="control-label"></label>
+                        <input asp-for="Sinav_Not" class="form-control" />
+                        <span asp-validation-for="Sinav_Not" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-5">
+                        <label asp-for="Aciklama" class="control-label"></label>
+                        <input asp-for="Aciklama" class="form-control" />
+                        <span asp-validation-for="Aciklama" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

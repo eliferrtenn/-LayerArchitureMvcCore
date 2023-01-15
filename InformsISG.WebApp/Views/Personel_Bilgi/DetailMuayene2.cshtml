@@ -1,0 +1,905 @@
+﻿@model InformsISG.Entities.Dtos.Personel_BilgiDTO
+
+@{
+    ViewData["Title"] = "Details";
+    TempData["muayeneId"] = TempData["muayeneId"];
+    var MuayeneDetay = (InformsISG.Entities.Dtos.MuayeneDTO)ViewBag.MuayeneDetay;
+
+}
+<div class="page d-flex flex-row flex-column-fluid container-fluid" style="margin-top:2rem">
+    <div class=" flex-column container-fluid " id="kt_wrapper">
+
+        <div class="content flex-column flex-column-fluid container-fluid" id="kt_content">
+            <div class="post flex-column-fluid" id="kt_post">
+                <div id="kt_content_container" class="container-fluid">
+
+
+                    <div class=" flex-column flex-root">
+                        <!--begin::Page-->
+                        <div class="page flex-row flex-column-fluid">
+
+                            <!--end::Aside-->
+                            <!--begin::Wrapper-->
+                            <div class=" flex-column flex-row-fluid" id="kt_wrapper">
+                                <!--begin::Header-->
+                                <!--begin::Navbar-->
+                                <!--begin::Navbar-->
+                                <div class="card mb-5 mb-xl-10">
+                                    <div class="card-body pt-9 pb-0">
+                                        <!--begin::Details-->
+                                        <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
+                                            <!--begin: Pic-->
+                                            <div class="me-7 mb-4">
+                                                <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                                    @if (Model.Fotograf == null)
+                                                    {
+                                                        <div class="me-7 mb-4">
+                                                            <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                                                <img src="/Dosya/Personel/Default/defaultPerson.jpg" alt="image" />
+
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="me-7 mb-4">
+                                                            <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                                                <img src="/@Model.Fotograf" alt="image" />
+
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <!--end::Pic-->
+                                            <!--begin::Info-->
+                                            <div class="flex-grow-1">
+                                                <!--begin::Title-->
+                                                <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+                                                    <!--begin::User-->
+                                                    <div class="d-flex flex-column">
+                                                        <div class="d-flex align-items-center mb-2">
+                                                            <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">@Model.Ad_Soyad</a>
+
+                                                            <a href="#" class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan"></a>
+                                                        </div>
+                                                        <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
+                                                            <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                                                                <span class="svg-icon svg-icon-4 me-1">
+
+                                                                </span>
+                                                                @Model.Unvan
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::User-->
+                                                    <!--begin::Actions-->
+                                                    <div class="d-flex my-4">
+                                                        <a href="@Url.Action("Index","Personel_Bilgi")" class="btn btn-sm btn-primary me-2 btn btn-danger">Geri Dön</a>
+                                                    </div>
+                                                    <!--end::Actions-->
+                                                </div>
+                                                <!--end::Title-->
+
+                                            </div>
+                                            <!--end::Info-->
+                                        </div>
+                                        <!--end::Details-->
+                                        <!--begin::Navs-->
+                                        <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
+                                            <!--begin::Nav item-->
+                                            <li class="nav-item mt-2">
+                                                <a class="nav-link text-active-primary ms-0 me-10 py-5" href="@Url.Action("Details","Personel_Bilgi",new {id=Model.Id})">Genel Bilgi</a>
+                                            </li>
+                                            <!--end::Nav item-->
+                                            <!--begin::Nav item-->
+                                            <li class="nav-item mt-2">
+                                                <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="@Url.Action("DetailMuayene","Personel_Bilgi", new { id = Model.Id })">Muayene Bilgisi</a>
+                                            </li>
+                                            <!--end::Nav item-->
+                                            <!--begin::Nav item-->
+                                            <li class="nav-item mt-2">
+                                                <a class="nav-link text-active-primary ms-0 me-10 py-5" href="@Url.Action("DetailEgitim","Personel_Bilgi", new { id = Model.Id })">Eğitim Bilgisi</a>
+                                            </li>
+                                            <!--end::Nav item-->
+                                            <!--begin::Nav item-->
+                                            <li class="nav-item mt-2">
+                                                <a class="nav-link text-active-primary ms-0 me-10 py-5" href="@Url.Action("DetailKaza","Personel_Bilgi", new { id = Model.Id })">Kaza Bilgisi</a>
+                                            </li>
+                                            <!--end::Nav item-->
+                                            <!--begin::Nav item-->
+                                            <li class="nav-item mt-2">
+                                                <a class="nav-link text-active-primary ms-0 me-10 py-5" href="@Url.Action("DetailKkd","Personel_Bilgi", new { id = Model.Id })">Kkd Bilgisi</a>
+                                            </li>
+                                            <!--end::Nav item-->
+                                        </ul>
+                                        <!--begin::Navs-->
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                                <!--end::Content-->
+                                <!--begin::Footer-->
+                                <!--end::Footer-->
+                            </div>
+                            <!--end::Wrapper-->
+                        </div>
+                        <!--end::Page-->
+                    </div>
+
+
+
+                    <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+                        <div class="card-body p-9">
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Muayene Türü</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Muayene_Tur == 0)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">İşe Giriş Muayenesi</span>
+                                    }
+                                    else if (MuayeneDetay.Muayene_Tur == 1)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Periyodik Muayene</span>
+
+                                    }
+                                    else if (MuayeneDetay.Muayene_Tur == 2)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">İşe Dönüş</span>
+
+                                    }
+                                    else if (MuayeneDetay.Muayene_Tur == 3)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">İş Değişikliği</span>
+
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Muayene Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">Muayene Tarihi</span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">
+                                    Kan Grubu
+                                </label>
+                                <div class="col-lg-8 d-flex align-items-center">
+                                    <span class="fw-bolder fs-6 text-gray-800 me-2">@MuayeneDetay.Kan_Grup</span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">
+                                    El Kullanımı
+                                </label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.El_Kullanim == 0)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Sağ El</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Sol El</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">
+                                    Kilo
+                                </label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Kilo</span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Boy</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@MuayeneDetay.Boy</span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Kitle Endeksi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@MuayeneDetay.Kitle_Endeks</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Kronik Hastalık</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800 me-2">@MuayeneDetay.Kronik_Hastalik</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">İş Kolu 1</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Is_Kolu1</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Yaptığı İş 1</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Yaptigi_Is1</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">İş Kolu 2</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Is_Kolu2</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Yaptığı İş 2</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Yaptigi_Is2</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">İş Kolu 3</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Is_Kolu3</span>
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Yaptığı İş 2</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Yaptigi_Is3</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-header cursor-pointer">
+                            <div class="card-title m-0">
+                                <h3 class="fw-bolder m-0">Bağışıklama</h3>
+                            </div>
+
+                        </div>
+                        <div class="card-body p-9">
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Bağışıklık Tetanoz</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Bagisiklik_Tetanoz == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Bağışıklık Hepatit</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Bagisiklik_Hepatit == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Diğer Bağışıklık</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Bagisiklik_Diger</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header cursor-pointer">
+                            <div class="card-title m-0">
+                                <h3 class="fw-bolder m-0">Soy Geçmişi</h3>
+                            </div>
+
+                        </div>
+                        <div class="card-body p-9">
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Annesi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Soygecmis_Anne</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-9">
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Babası</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Soygecmis_Baba</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-9">
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Kardeşi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Kardes</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-9">
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Çocuğu</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Cocuk</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="card-header cursor-pointer">
+                            <div class="card-title m-0">
+                                <h3 class="fw-bolder m-0">Anamnez / Mesleki Anamnez</h3>
+                            </div>
+
+                        </div>
+                        <div class="card-body p-9">
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Nefes Darlığı</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Nefes_Darligi == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Balgamlı Öksürük</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Balgamli_Oksuruk == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Balgamlı Öksürük</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Balgamli_Oksuruk == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Göğüs Ağrısı</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Gogus_Agrisi == false)
+                                    {
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Çarpıntı</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Carpinti == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Sırt Ağrısı</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Sirt_Agrisi == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">İshal Kabızlık</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Ishal_Kabizlik == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Eklem Ağrısı</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Eklem_Agri == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Kalp Hastalığı</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Kalp_Hastalik == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Böbrek Rahatsızlığı</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Bobrek_Rahatsizlik == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Sarılık</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Sarilik == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Mide Ülseri</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Mide_Ulser == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">İşitme Kaybı</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Isitme_Kayip == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Görmede Bozukluk</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Gorme_Bozukluk == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Sinir Sistemi</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Sinir_Sistemi == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Deri Hastalığı</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Deri_Hastalik == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Besin Zehirlenmesi</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Besin_Zehirlenme == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Kas İskelet</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Kas_Iskelet == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Akciğer Solunumu</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Akciger_Solunum == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-10">
+                                <label class="col-lg-4 fw-bold text-muted">Şeker Hastalığı</label>
+                                <div class="col-lg-8">
+                                    @if (MuayeneDetay.Seker_Hastalik == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="card-header cursor-pointer">
+                                <div class="card-title m-0">
+                                    <h3 class="fw-bolder m-0"></h3>
+                                </div>
+
+                            </div>
+                            <div class="card-body p-9">
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Hastanede Yatıldı Mı?</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Hastane_Yatis</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Ameliyat Olundu Mu?</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Ameliyat</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">İş Kazası Geçirildi Mi?</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Is_Kazasi</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Meslek hastalıkları şüphesiyle ilgili tetkik/muayeneye tabi tutuldu mu?</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Meslek_Hastalik</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Maluliyet(engellilik) alındı mı?</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Maluliyet</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Şuanda Herhangi Bir Tedavi Görülüyor Mu?</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Guncel_Tedavi</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Sigara Alışkanlığı</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Aliskanlik_Sigara</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Alkol Alışkanlığı</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Aliskanlik_Alkol   </span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Uyuşturucu Alışkanlığı</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Aliskanlik_Uyusturucu</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="card-header cursor-pointer">
+                                <div class="card-title m-0">
+                                    <h3 class="fw-bolder m-0">Fizik muayene sonuçları</h3>
+                                </div>
+
+                            </div>
+                            <div class="card-body p-9">
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Göz</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Fizik_Goz</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Kulak Burun Boğaz</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Fizik_Kbb</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Deri</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Deri_Hastalik</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Kardiyovasküler Sistem Muayenesi</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Fizik_Kardiyovaskuler</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Solunum Sistemi Muayenesi</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Fizik_Solunum_Sistemi</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Sindirim Sistemi Muayenesi</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Fizik_Sindirim_Sistemi</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Urogenital Sistem Muayenesi</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Fizik_Urogenital</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Kas-İskelet Muayenesi</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Fizik_Kas_Iskelet  </span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Nörolojik Muayenesi</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Fizik_Norolojik</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Tansiyon</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Tansiyon</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Nabız</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Nabiz</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-header cursor-pointer">
+                                <div class="card-title m-0">
+                                    <h3 class="fw-bolder m-0">Laboratuvar sonuçları</h3>
+                                </div>
+
+                            </div>
+                            <div class="card-body p-9">
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Kan</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Lab_Biyolojik_Kan</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">İdrar</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Lab_Biyolojik_Idrar</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Radyolojil Bulgular</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Lab_Radyolojik</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Odyometre</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Lab_Fizyolojik_Odyometre</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">SFT</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Lab_Fizyolojik_Sft</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Psikolojik</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Lab_Psikolojik</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-header cursor-pointer">
+                                <div class="card-title m-0">
+                                    <h3 class="fw-bolder m-0">Kanaat Ve Sonuç</h3>
+                                </div>
+
+                            </div>
+                            <div class="card-body p-9">
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Kanaat ve Sonuç 1</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Kanaat1</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Kanaat ve Sonuç 2</label>
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800">@MuayeneDetay.Kanaat2</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Yüksekte Çalışma</label>
+                                    <div class="col-lg-8">
+                                        @if (MuayeneDetay.Yuksekte_Calisma == false)
+                                        {
+                                            <span class="fw-bold fs-6 text-gray-800">Uygun Değil</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="fw-bold fs-6 text-gray-800">Uygun</span>
+                                        }
+                                    </div>
+                                </div>                   
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Vardiyalı Çalışma</label>
+                                    <div class="col-lg-8">
+                                        @if (MuayeneDetay.Yuksekte_Calisma == false)
+                                        {
+                                            <span class="fw-bold fs-6 text-gray-800">Uygun Değil</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="fw-bold fs-6 text-gray-800">Uygun</span>
+                                        }
+                                    </div>
+                                </div>           
+                                <div class="row mb-10">
+                                    <label class="col-lg-4 fw-bold text-muted">Konsültasyon Sonuç Durumu</label>
+                                    <div class="col-lg-8">
+                                        @if (MuayeneDetay.Yuksekte_Calisma == false)
+                                        {
+                                            <span class="fw-bold fs-6 text-gray-800">Sonuçlanmadı</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="fw-bold fs-6 text-gray-800">Sonuçlandı</span>
+                                        }
+                                    </div>
+                                </div>
+              
+          
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,172 @@
+﻿@model IEnumerable<InformsISG.Entities.Dtos.Isg_Kurul_Karar2DTO>
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "KurulKarar";
+    var PersonelListe = (List<InformsISG.Entities.Dtos.Personel_BilgiDTO>)ViewBag.PersonelListe;
+    int siraNo = 1;
+    TempData["IsgKurulKararId"] = TempData["IsgKurulKararId"];
+    var IsgKurulKararId_ = ViewBag.IsgKurulKararId_;
+    long deneme = 0;
+}
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h3 class="card-title">KURUL TOPLANTILARI</h3>
+        <div class="card-toolbar">
+            <a href="@Url.Action("Index","Home")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <table id="tblBirim" class="table table-striped table-row-bordered gy-5 gs-7">
+                <thead>
+                    <tr>
+                        <th>
+                            Sıra  No
+                        </th>
+                        <th>
+                            Karar No
+                        </th>
+                        <th>
+                            Alınan Kararlar
+                        </th>
+                        <th>
+                            Sorumlu Kişi
+                        </th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        deneme = item.Id;
+                    <tr>
+                        <td>
+                            @siraNo
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Karar_No)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Alinan_Kararlar)
+                        </td>
+                        @foreach (var item2 in PersonelListe)
+                        {
+
+
+                            @if (item.Personel_Id == item2.Id)
+                            {
+                                <td>
+                                    @item2.Ad_Soyad
+                                </td>
+                            }
+                        }
+
+                        <td style="text-align:end">
+                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                    data-kt-menu-trigger="click"
+                                    data-kt-menu-placement="bottom-start">
+                                İşlemler
+                            </button>
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-100px py-4"
+                                 data-kt-menu="true">
+                                <div class="menu-item px-3">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="menu-link px-3">
+                                        Düzenle
+                                    </a>
+                                </div>
+                                <div class="menu-item px-3">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="menu-link px-3">
+                                        Detaylar
+                                    </a>
+                                </div>
+                                <div class="menu-item px-3">
+                                    <a onclick="VeriSil(@item.Id,this)" class="menu-link px-3">
+                                        Sil
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                        siraNo++;
+
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card-footer">
+
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+       function VeriSil(ID, obj) {
+            var btn = $(obj);
+            Swal.fire({
+                title: 'SİLME İŞLEMİ',
+                text: "Silmek istediğinize emin misiniz?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#50cd89',
+                cancelButtonColor: '#f1416c',
+                confirmButtonText: 'Evet Sil!',
+                cancelButtonText: 'Hayır Silme!',
+                showClass: {
+                    popup: 'animate_animated animate_fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate_animated animate_fadeOutUp'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("KurulKararCikar", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: ID }
+                    }).done(function (d) {
+                        const result = $.parseJSON(d);
+                        if (result.ResultStatus == 0) {
+                            Swal.fire({
+                                title: 'SİLİNDİ',
+                                icon: 'success',
+                                text: `${result.Message}`,
+                                showClass: {
+                                    popup: 'animate_animated animate_fadeInDown'
+                                },
+                                hideClass: {
+                                    popup: 'animate_animated animate_fadeOutUp'
+                                }
+                            });
+                            btn.parent().parent().parent().fadeOut(1000);
+                        }
+                    }).fail(function () {
+                        Swal.fire({
+                            title: 'HATALI İŞLEM',
+                            text: "Veri silinemedi",
+                            icon: 'error',
+                            showClass: {
+                                popup: 'animate_animated animate_fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate_animated animate_fadeOutUp'
+                            }
+                        })
+                    })
+                }
+            });
+        }
+    </script>
+}

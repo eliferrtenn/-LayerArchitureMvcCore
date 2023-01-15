@@ -1,0 +1,530 @@
+﻿@model InformsISG.Entities.Dtos.Personel_BilgiDTO
+
+@{
+    ViewData["Title"] = "Details";
+    TempData["kazaId"] = TempData["kazaId"];
+    var Kaza = (InformsISG.Entities.Dtos.KazaDTO)ViewBag.Kaza;
+    var KazaAyrinti = (InformsISG.Entities.Dtos.Kaza_AyrintiDTO)ViewBag.KazaAyrinti;
+}
+<div class="page d-flex flex-row flex-column-fluid container-fluid" style="margin-top:2rem">
+    <div class=" flex-column container-fluid " id="kt_wrapper">
+
+        <div class="content flex-column flex-column-fluid container-fluid" id="kt_content">
+            <div class="post flex-column-fluid" id="kt_post">
+                <div id="kt_content_container" class="container-fluid">
+
+
+                    <div class=" flex-column flex-root">
+                        <!--begin::Page-->
+                        <div class="page flex-row flex-column-fluid">
+
+                            <!--end::Aside-->
+                            <!--begin::Wrapper-->
+                            <div class=" flex-column flex-row-fluid" id="kt_wrapper">
+                                <!--begin::Header-->
+                                <!--begin::Navbar-->
+                                <!--begin::Navbar-->
+                                <div class="card mb-5 mb-xl-10">
+                                    <div class="card-body pt-9 pb-0">
+                                        <!--begin::Details-->
+                                        <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
+                                            <!--begin: Pic-->
+                                            <div class="me-7 mb-4">
+                                                <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                                    @if (Model.Fotograf == null)
+                                                    {
+                                                        <div class="me-7 mb-4">
+                                                            <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                                                <img src="/Dosya/Personel/Default/defaultPerson.jpg" alt="image" />
+
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="me-7 mb-4">
+                                                            <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                                                <img src="/@Model.Fotograf" alt="image" />
+
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <!--end::Pic-->
+                                            <!--begin::Info-->
+                                            <div class="flex-grow-1">
+                                                <!--begin::Title-->
+                                                <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+                                                    <!--begin::User-->
+                                                    <div class="d-flex flex-column">
+                                                        <div class="d-flex align-items-center mb-2">
+                                                            <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">@Model.Ad_Soyad</a>
+
+                                                            <a href="#" class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan"></a>
+                                                        </div>
+                                                        <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
+                                                            <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                                                                <span class="svg-icon svg-icon-4 me-1">
+
+                                                                </span>
+                                                                @Model.Unvan
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::User-->
+                                                    <!--begin::Actions-->
+                                                    <div class="d-flex my-4">
+                                                        <a href="@Url.Action("Index","Personel_Bilgi")" class="btn btn-sm btn-primary me-2 btn btn-danger">Geri Dön</a>
+                                                    </div>
+                                                    <!--end::Actions-->
+                                                </div>
+                                                <!--end::Title-->
+
+                                            </div>
+                                            <!--end::Info-->
+                                        </div>
+                                        <!--end::Details-->
+                                        <!--begin::Navs-->
+                                        <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
+                                            <!--begin::Nav item-->
+                                            <li class="nav-item mt-2">
+                                                <a class="nav-link text-active-primary ms-0 me-10 py-5" href="@Url.Action("Details","Personel_Bilgi",new {id=Model.Id})">Genel Bilgi</a>
+                                            </li>
+                                            <!--end::Nav item-->
+                                            <!--begin::Nav item-->
+                                            <li class="nav-item mt-2">
+                                                <a class="nav-link text-active-primary ms-0 me-10 py-5" href="@Url.Action("DetailMuayene","Personel_Bilgi", new { id = Model.Id })">Muayene Bilgisi</a>
+                                            </li>
+                                            <!--end::Nav item-->
+                                            <!--begin::Nav item-->
+                                            <li class="nav-item mt-2">
+                                                <a class="nav-link text-active-primary ms-0 me-10 py-5 " href="@Url.Action("DetailEgitim","Personel_Bilgi", new { id = Model.Id })">Eğitim Bilgisi</a>
+                                            </li>
+                                            <!--end::Nav item-->
+                                            <!--begin::Nav item-->
+                                            <li class="nav-item mt-2">
+                                                <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="@Url.Action("DetailKaza","Personel_Bilgi", new { id = Model.Id })">Kaza Bilgisi</a>
+                                            </li>
+                                            <!--end::Nav item-->
+                                            <!--begin::Nav item-->
+                                            <li class="nav-item mt-2">
+                                                <a class="nav-link text-active-primary ms-0 me-10 py-5" href="@Url.Action("DetailKkd","Personel_Bilgi", new { id = Model.Id })">Kkd Bilgisi</a>
+                                            </li>
+                                            <!--end::Nav item-->
+                                        </ul>
+                                        <!--begin::Navs-->
+                                    </div>
+                                </div>
+
+
+
+
+                                <!--end::Content-->
+                                <!--begin::Footer-->
+                                <!--end::Footer-->
+                            </div>
+                            <!--end::Wrapper-->
+                        </div>
+                        <!--end::Page-->
+                    </div>
+
+
+
+                    <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+                        <div class="card-body p-9">
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Kaza/Olay No</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Kaza.Kaza_No</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Kaza Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Kaza.Kaza_Tarih</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">
+                                   Kaza Saati
+                                </label>
+                                <div class="col-lg-8 d-flex align-items-center">
+                                    <span class="fw-bolder fs-6 text-gray-800 me-2">@Kaza.Kaza_Saat</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">
+                                   Kaza Bildirim Tarihi
+                                </label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800 me-2">@Kaza.Bildirim_Tarih</span>
+                              </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">İşe Başlama Saati</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Kaza.Ise_Baslama_Saat</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Kaza Hasar Tipi</label>
+                                <div class="col-lg-8">
+                                    @if (Kaza.Kaza_Hasar_Tipi == 0)
+                                    {
+                                        <span class="fw-bolder fs-6 text-gray-800">Yaralanma/Hastalık</span>
+                                    }
+                                    else if (Kaza.Kaza_Hasar_Tipi == 1)
+                                    {
+                                        <span class="fw-bolder fs-6 text-gray-800">Yaralanma Yok</span>
+                                    }else if (Kaza.Kaza_Hasar_Tipi == 2)
+                                    {
+                                        <span class="fw-bolder fs-6 text-gray-800">Maddi Hasar</span>
+                                    }else if (Kaza.Kaza_Hasar_Tipi == 3)
+                                    {
+                                <span class="fw-bolder fs-6 text-gray-800">Dökülme/Çevresel/Toplumsal Hasar</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Kaza Anındaki Faaliyet</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800 me-2">@Kaza.Kaza_Anindaki_Faaliyet</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Kaza Yeri</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Kaza_Yer</span>
+                                </div>
+                            </div> 
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Yaralanmaya Neden Olan Olay</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Yaralanmaya_Neden_Olan_Olay</span>
+                                </div>
+                            </div>        
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Yaralanmaya Neden Olan Araç</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Yaralanmaya_Neden_Olan_Arac</span>
+                                </div>
+                            </div>        
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Tıbbi Müdahale</label>
+                                <div class="col-lg-8">
+                                    @if (Kaza.Tibbi_Mudahele == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>        
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Tıbbi Müdahale Açıklama</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Tibbi_Mudahele_Aciklama</span>
+                                </div>
+                            </div>    
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">İş Görememeezlik</label>
+                                <div class="col-lg-8">
+                                    @if (Kaza.Is_Gorememezlik == false)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>   
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">İş Görememezlik Gün Sayısı</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Is_Gorememezlik_Gun_Sayi</span>
+                                </div>
+                            </div>     
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Kaza Sonrasında Çalışan Yaptıkları</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Kaza_Sonrasi_Calisan_Ne_Yapti</span>
+                                </div>
+                            </div>     
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Mesleki Eğitim</label>
+                                <div class="col-lg-8">
+                                    @if (Kaza.Mesleki_Egitim == false)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>    
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Isg Eğitimi</label>
+                                <div class="col-lg-8">
+                                    @if (Kaza.Isg_Egitim == false)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>    
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Hasar Büyüklüğü</label>
+                                <div class="col-lg-8">
+                                    @if (Kaza.Hasar_Buyuklugu == 0)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Dikkate Alınmalı</span>
+                                    }
+                                    else if (Kaza.Hasar_Buyuklugu == 1)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Önemli</span>
+                                    }
+                                    else if (Kaza.Hasar_Buyuklugu == 2)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Ciddi</span>
+                                    } else if (Kaza.Hasar_Buyuklugu == 3)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Çok Ciddi</span>
+                                    }
+                                </div>
+                            </div>            
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Tekrarlanma Olasılığı</label>
+                                <div class="col-lg-8">
+                                    @if (Kaza.Tekrarlanma_Olasiligi == 0)
+                                    {
+                                    <span class="fw-bold fs-6 text-gray-800">Pratik Olarak İmkansız</span>
+                                    }
+                                    else if (Kaza.Tekrarlanma_Olasiligi == 1)
+                                    {
+                                <span class="fw-bold fs-6 text-gray-800">Zayıf İhtimal</span>
+                                    }
+                                    else if (Kaza.Tekrarlanma_Olasiligi == 2)
+                                    {
+                                <span class="fw-bold fs-6 text-gray-800">Oldukça Düşük İhtimal</span>
+                                    }
+                                    else if (Kaza.Tekrarlanma_Olasiligi == 3)
+                                    {
+                                <span class="fw-bold fs-6 text-gray-800">Nadir, Fakat Olabilir</span>
+                                    }
+                                    else if (Kaza.Tekrarlanma_Olasiligi == 4)
+                                    {
+                                <span class="fw-bold fs-6 text-gray-800">Kuvvetle İhtima</span>
+                                    }
+                                    else if (Kaza.Tekrarlanma_Olasiligi == 5)
+                                    {
+                                <span class="fw-bold fs-6 text-gray-800">Çok Kuvvetli İhtimal</span>
+                                    }
+                                </div>
+                            </div>         
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Gerçekleşme Frekansı</label>
+                                <div class="col-lg-8">
+                                    @if (Kaza.Gerceklesme_Frekansi == 0)
+                                    {
+                                    <span class="fw-bold fs-6 text-gray-800">Çok Nadir</span>
+                                    }
+                                    else if (Kaza.Gerceklesme_Frekansi == 1)
+                                    {
+                                <span class="fw-bold fs-6 text-gray-800">Oldukça Nadir</span>
+                                    }
+                                    else if (Kaza.Gerceklesme_Frekansi == 2)
+                                    {
+                                <span class="fw-bold fs-6 text-gray-800">Nadir</span>
+                                    }
+                                    else if (Kaza.Gerceklesme_Frekansi == 3)
+                                    {
+                                <span class="fw-bold fs-6 text-gray-800">Arasıra</span>
+                                    }
+                                    else if (Kaza.Gerceklesme_Frekansi == 4)
+                                    {
+                                <span class="fw-bold fs-6 text-gray-800">Sıklıkla</span>
+                                    }
+                                    else if (Kaza.Gerceklesme_Frekansi == 5)
+                                    {
+                                <span class="fw-bold fs-6 text-gray-800">Sürekli</span>
+                                    }
+                                </div>
+                            </div>                                    
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Maruz Kalan Çalışanın İfadesi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Maruz_Kalan_Calisanin_Ifadesi</span>
+                                </div>
+                            </div>   
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Görgü Tanığının İfadesi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Gorgu_Ifadesi</span>
+                                </div>
+                            </div>     
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Kazaya Yol Açan Sebepler</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Kaza_Yol_Acan_Sebepler</span>
+                                </div>
+                            </div>   
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Var Olmasındaki Temel Seebepler</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Varolmasinda_Temel_Nedenler</span>
+                                </div>
+                            </div>    
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Birim Sorumlusunun Önerisi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Birim_Sorumlu_Gorus_Oneri</span>
+                                </div>
+                            </div>   
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Isg Uzmanı Değerlendirmesi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Isg_Uzmani_Degerlendirme</span>
+                                </div>
+                            </div>      
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Maruz Kalan Çalışanın İfadesi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Maruz_Kalan_Calisanin_Ifadesi</span>
+                                </div>
+                            </div>    
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">1.Tanık Kimlik No</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Tanik_Tcno1</span>
+                                </div>
+                            </div>    
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">1.Tanık Adı Soyadı</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Tanik_Ad_Soyad1</span>
+                                </div>
+                            </div>        
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">1.Tanık Telefon</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Tanik_Telefon1</span>
+                                </div>
+                            </div>    
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">1.Tanık Adresi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Tanik_Adres1</span>
+                                </div>
+                            </div>                 
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">2.Tanık Kimlik No</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Tanik_Tcno2</span>
+                                </div>
+                            </div>    
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">2.Tanık Adı Soyadı</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Tanik_Ad_Soyad2</span>
+                                </div>
+                            </div>        
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">2.Tanık Telefon</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Tanik_Telefon2</span>
+                                </div>
+                            </div>    
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">2.Tanık Adresi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Tanik_Adres2</span>
+                                </div>
+                            </div>    
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">1.Dof</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Dof1</span>
+                                </div>
+                            </div>         <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">1.Dof Sorumlusu</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Sorumlu1</span>
+                                </div>
+                            </div>         <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">1.Dof Açılış Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Acilis_Tarih1</span>
+                                </div>
+                            </div>     
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">1.Dof Kapanış Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Kapanis_Tarih1</span>
+                                </div>
+                            </div>        
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">2.Dof</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Dof2</span>
+                                </div>
+                            </div>         <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">2.Dof Sorumlusu</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Sorumlu2</span>
+                                </div>
+                            </div>         <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">2.Dof Açılış Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Acilis_Tarih2</span>
+                                </div>
+                            </div>     
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">2.Dof Kapanış Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Kapanis_Tarih2</span>
+                                </div>
+                            </div>    
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">3.Dof</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Dof3</span>
+                                </div>
+                            </div>         <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">3.Dof Sorumlusu</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Sorumlu3</span>
+                                </div>
+                            </div>         <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">3.Dof Açılış Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Acilis_Tarih3</span>
+                                </div>
+                            </div>     
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">3.Dof Kapanış Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Kaza.Kapanis_Tarih3</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

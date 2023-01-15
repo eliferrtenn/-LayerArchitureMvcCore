@@ -1,0 +1,58 @@
+﻿@model InformsISG.Entities.Dtos.Egitim_Konu_Alt_BaslikDTO
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<form asp-action="Edit">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">EGİTİM ALT BAŞLIK DÜZENLEME</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="DÜZENLE">&nbsp;
+                <a href="@Url.Action("Index","Egitim_Konu")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group mb-5">
+                        <label asp-for="Alt_Baslik_No" class="control-label"></label>
+                        <input asp-for="Alt_Baslik_No" class="form-control" />
+                        <span asp-validation-for="Alt_Baslik_No" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-5">
+                        <label asp-for="Alt_Baslik_Ad" class="control-label"></label>
+                        <input asp-for="Alt_Baslik_Ad" class="form-control" />
+                        <span asp-validation-for="Alt_Baslik_Ad" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-5">
+                        <label asp-for="Tehlike_Tip" class="control-label"></label>
+                        <input asp-for="Tehlike_Tip" class="form-control" />
+                        <span asp-validation-for="Tehlike_Tip" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-5">
+                        <label asp-for="Sure" class="control-label"></label>
+                        <input asp-for="Sure" class="form-control" />
+                        <span asp-validation-for="Sure" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-5">
+                        <label asp-for="Egitim_Konu_Id" class="control-label"></label>
+                        <select asp-for="Egitim_Konu_Id" class="form-control" asp-items="ViewBag.Egitim_Konu_Id"></select>
+                        <span asp-validation-for="Egitim_Konu_Id" class="text-danger"></span>
+                    </div>
+                    <input type="hidden" asp-for="Id" />
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

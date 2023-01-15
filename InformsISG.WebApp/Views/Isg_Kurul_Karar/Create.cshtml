@@ -1,0 +1,119 @@
+﻿@model InformsISG.Entities.Dtos.Isg_Kurul_KararDTO
+
+@{
+    ViewData["Title"] = "Create";
+    var PersonelList = (List<InformsISG.Entities.Dtos.Personel_BilgiDTO>)ViewBag.PersonelList;
+}
+
+<form asp-action="Create">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">KURUL TOPLANTISI EKLEME</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Isg_Kurul_Karar")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <label asp-for="Toplanti_No" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Toplanti_No" type="text" class="form-control" aria-describedby="basic-addon1" />
+                        <span asp-validation-for="Toplanti_No" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Tarih" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Tarih" class="form-control" aria-describedby="basic-addon2" />
+                        <span asp-validation-for="Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Saat" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-clock"></i>
+                        </span>
+                        <input asp-for="Saat" class="form-control" />
+                        <span asp-validation-for="Saat" class="text-danger"></span>
+                    </div>
+                </div>      
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Yer" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-clock"></i>
+                        </span>
+                        <input asp-for="Yer" class="form-control" />
+                        <span asp-validation-for="Yer" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Aciklama" class="control-label"></label>
+
+                    <div class="input-group  form-group mb-5">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-question"></i>
+                        </span>
+                 
+                        <input asp-for="Aciklama" class="form-control" />
+                        <span asp-validation-for="Aciklama" class="text-danger"></span>
+                    </div>
+                </div>           
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Toplanti_Baskan" class="control-label"></label>
+                    <div class="input-group  form-group mb-5">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-question"></i>
+                        </span>                
+                        <input asp-for="Toplanti_Baskan" class="form-control" />
+                        <span asp-validation-for="Toplanti_Baskan" class="text-danger"></span>
+                    </div>
+                </div>     
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Raportor" class="control-label"></label>
+                    <div class="input-group  form-group mb-5">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-question"></i>
+                        </span>                
+                        <input asp-for="Raportor" class="form-control" />
+                        <span asp-validation-for="Raportor" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <label asp-for="Isveren_Id" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Isveren_Id" class="form-control" asp-items="ViewBag.Isveren_Id"></select>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+        </div>
+    </div>
+
+    <br /> <br /> <br />
+
+</form>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

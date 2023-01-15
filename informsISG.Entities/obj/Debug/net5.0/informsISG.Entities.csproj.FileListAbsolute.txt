@@ -1,0 +1,15 @@
+C:\Users\Elif\Desktop\Projeler\InformsISG\informsISG.Entities\bin\Debug\net5.0\InformsISG.Entities.deps.json
+C:\Users\Elif\Desktop\Projeler\InformsISG\informsISG.Entities\bin\Debug\net5.0\InformsISG.Entities.dll
+C:\Users\Elif\Desktop\Projeler\InformsISG\informsISG.Entities\bin\Debug\net5.0\ref\InformsISG.Entities.dll
+C:\Users\Elif\Desktop\Projeler\InformsISG\informsISG.Entities\bin\Debug\net5.0\InformsISG.Entities.pdb
+C:\Users\Elif\Desktop\Projeler\InformsISG\informsISG.Entities\bin\Debug\net5.0\InformsISG.Core.dll
+C:\Users\Elif\Desktop\Projeler\InformsISG\informsISG.Entities\bin\Debug\net5.0\InformsISG.Core.pdb
+C:\Users\Elif\Desktop\Projeler\InformsISG\informsISG.Entities\obj\Debug\net5.0\InformsISG.Entities.csproj.AssemblyReference.cache
+C:\Users\Elif\Desktop\Projeler\InformsISG\informsISG.Entities\obj\Debug\net5.0\InformsISG.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Elif\Desktop\Projeler\InformsISG\informsISG.Entities\obj\Debug\net5.0\InformsISG.Entities.AssemblyInfoInputs.cache
+C:\Users\Elif\Desktop\Projeler\InformsISG\informsISG.Entities\obj\Debug\net5.0\InformsISG.Entities.AssemblyInfo.cs
+C:\Users\Elif\Desktop\Projeler\InformsISG\informsISG.Entities\obj\Debug\net5.0\InformsISG.Entities.csproj.CoreCompileInputs.cache
+C:\Users\Elif\Desktop\Projeler\InformsISG\informsISG.Entities\obj\Debug\net5.0\InformsISG.Entities.csproj.CopyComplete
+C:\Users\Elif\Desktop\Projeler\InformsISG\informsISG.Entities\obj\Debug\net5.0\InformsISG.Entities.dll
+C:\Users\Elif\Desktop\Projeler\InformsISG\informsISG.Entities\obj\Debug\net5.0\ref\InformsISG.Entities.dll
+C:\Users\Elif\Desktop\Projeler\InformsISG\informsISG.Entities\obj\Debug\net5.0\InformsISG.Entities.pdb

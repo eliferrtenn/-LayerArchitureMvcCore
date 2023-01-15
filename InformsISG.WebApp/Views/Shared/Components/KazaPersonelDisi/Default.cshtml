@@ -1,0 +1,94 @@
+﻿@model InformsISG.Entities.Dtos.Kaza_Personel_DisiDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Kaza_No" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Kaza_No" class="form-control" disabled/>
+                        <span asp-validation-for="Kaza_No" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Kaza_Kategori" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Kaza_Kategori" class="form-control" disabled>
+                            <option value="0" selected>Yaralanma</option>
+                            <option value="1">Ciddi maddi hasarlı kaza</option>
+                            <option value="2">Maddi kasarlı kaza</option>
+                            <option value="3">Ölümlü kaza</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Kaza_Tarih" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Kaza_Tarih" class="form-control" disabled/>
+                        <span asp-validation-for="Kaza_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <label asp-for="Kaza_Saat" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Kaza_Saat" class="form-control" disabled/>
+                        <span asp-validation-for="Kaza_Saat" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Personel_Disi_Tc_No" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Personel_Disi_Tc_No" class="form-control" disabled/>
+                        <span asp-validation-for="Personel_Disi_Tc_No" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Personel_Disi_Ad_Soyad" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Personel_Disi_Ad_Soyad" class="form-control" disabled/>
+                        <span asp-validation-for="Personel_Disi_Ad_Soyad" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Kaza_Yer" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Kaza_Yer" class="form-control" disabled/>
+                        <span asp-validation-for="Kaza_Yer" class="text-danger"></span>
+                    </div>
+                </div>
+                <hr style="margin-top:1rem" />
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+
+    </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

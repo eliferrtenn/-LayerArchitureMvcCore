@@ -1,0 +1,1502 @@
+﻿@model InformsISG.Entities.Dtos.Risk_Analiz_TabloDTO
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Edit";
+    var RiskAnalizId = ViewBag.RiskAnalizId;
+    TempData["RiskAnalizId"] = TempData["RiskAnalizId"];
+    TempData["RiskAnalizIdd"] = TempData["RiskAnalizId"];
+    var RiskAnalizTabloList = (List<InformsISG.Entities.Dtos.Risk_Analiz_TabloDTO>)ViewBag.RiskAnalizTabloList;
+    var TehlikeList = (List<InformsISG.Entities.Dtos.Tehlike_TanimDTO>)ViewBag.TehlikeList;
+    var RiskAnalizList = (List<InformsISG.Entities.Dtos.Risk_Analiz_RiskDTO>)ViewBag.RiskAnalizList;
+    var PersonelList = (List<InformsISG.Entities.Dtos.Personel_BilgiDTO>)ViewBag.PersonelList;
+    int siraNo = 1;
+    var RiskAnalizYontem = ViewBag.RiskAnalizSelect;
+
+}
+<form asp-action="EditFile" enctype="multipart/form-data">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">RİSK ANALİZ TABLOSU</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Risk_Analiz")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <input asp-for="Id" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Birim_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Birim_Id" class="form-control" asp-items="ViewBag.Birim_Id">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Tali_Birim_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Tali_Birim_Id" class="form-control" asp-items="ViewBag.Tali_Birim_Id">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <label asp-for="Faaliyet" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Faaliyet" class="form-control"></textarea>
+                        <span asp-validation-for="Faaliyet" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Tehlike" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Tehlike" class="form-control"></textarea>
+                        <span asp-validation-for="Tehlike" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Risk" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Risk" class="form-control"></textarea>
+                        <span asp-validation-for="Risk" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Yasal_Dayanak" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Yasal_Dayanak" class="form-control"></textarea>
+                        <span asp-validation-for="Yasal_Dayanak" class="text-danger"></span>
+                    </div>
+                </div>
+                @if (RiskAnalizYontem == 1)
+                {
+                    @if (Model.Olasilik1 == 0)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Olasilik1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeyOlasilik1" asp-for="Olasilik1" class="form-control">
+                                    <option value="0" selected>** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Beklenmez (0,2)</option>
+                                    <option value="2">Beklenmez Fakat Mümkün (0,5)</option>
+                                    <option value="3">Mümkün Fakat Düşük (1)</option>
+                                    <option value="4">Olası (1)</option>
+                                    <option value="5">Oldukça Mümkün/Yüksek (6)</option>
+                                    <option value="6">Beklenir, Kesin(10)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Olasilik1 == 0.2)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Olasilik1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeyOlasilik1" asp-for="Olasilik1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1" selected>Beklenmez (0,2)</option>
+                                    <option value="2">Beklenmez Fakat Mümkün (0,5)</option>
+                                    <option value="3">Mümkün Fakat Düşük (1)</option>
+                                    <option value="4">Olası (1)</option>
+                                    <option value="5">Oldukça Mümkün/Yüksek (6)</option>
+                                    <option value="6">Beklenir, Kesin(10)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Olasilik1 == 0.5)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Olasilik1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeyOlasilik1" asp-for="Olasilik1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Beklenmez (0,2)</option>
+                                    <option value="2" selected>Beklenmez Fakat Mümkün (0,5)</option>
+                                    <option value="3">Mümkün Fakat Düşük (1)</option>
+                                    <option value="4">Olası (1)</option>
+                                    <option value="5">Oldukça Mümkün/Yüksek (6)</option>
+                                    <option value="6">Beklenir, Kesin(10)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Olasilik1 == 1)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Olasilik1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeyOlasilik1" asp-for="Olasilik1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Beklenmez (0,2)</option>
+                                    <option value="2">Beklenmez Fakat Mümkün (0,5)</option>
+                                    <option value="3" selected>Mümkün Fakat Düşük (1)</option>
+                                    <option value="4">Olası (1)</option>
+                                    <option value="5">Oldukça Mümkün/Yüksek (6)</option>
+                                    <option value="6">Beklenir, Kesin(10)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Olasilik1 == 3)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Olasilik1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeyOlasilik1" asp-for="Olasilik1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Beklenmez (0,2)</option>
+                                    <option value="2">Beklenmez Fakat Mümkün (0,5)</option>
+                                    <option value="3">Mümkün Fakat Düşük (1)</option>
+                                    <option value="4" selected>Olası (1)</option>
+                                    <option value="5">Oldukça Mümkün/Yüksek (6)</option>
+                                    <option value="6">Beklenir, Kesin(10)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Olasilik1 == 6)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Olasilik1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeyOlasilik1" asp-for="Olasilik1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Beklenmez (0,2)</option>
+                                    <option value="2">Beklenmez Fakat Mümkün (0,5)</option>
+                                    <option value="3">Mümkün Fakat Düşük (1)</option>
+                                    <option value="4">Olası (1)</option>
+                                    <option value="5" selected>Oldukça Mümkün/Yüksek (6)</option>
+                                    <option value="6">Beklenir, Kesin(10)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Olasilik1 == 10)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Olasilik1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeyOlasilik1" asp-for="Olasilik1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Beklenmez (0,2)</option>
+                                    <option value="2">Beklenmez Fakat Mümkün (0,5)</option>
+                                    <option value="3">Mümkün Fakat Düşük (1)</option>
+                                    <option value="4">Olası (1)</option>
+                                    <option value="5">Oldukça Mümkün/Yüksek (6)</option>
+                                    <option value="6" selected>Beklenir, Kesin(10)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Frekans1 == 0)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Frekans1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeyFrekans1" asp-for="Frekans1" class="form-control">
+                                    <option value="0" selected>** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Çok Seyrek (Yılda bir veya daha seyrek) (0,5)</option>
+                                    <option value="2">Seyrek (Yılda birkaç defa) (1)</option>
+                                    <option value="3">Sık Değil (Ayda bir veya birkaç defa) (2)</option>
+                                    <option value="4">Ara Sıra (Haftada bir veya birkaç defa) (3)</option>
+                                    <option value="5">Sık (Günde bir veya birkaç defa) (6)</option>
+                                    <option value="6">Hemen Hemen Sürekli (Bir saatte birkaç defa) (10)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Frekans1 == 0.5)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Frekans1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeyFrekans1" asp-for="Frekans1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1" selected>Çok Seyrek (Yılda bir veya daha seyrek) (0,5)</option>
+                                    <option value="2">Seyrek (Yılda birkaç defa) (1)</option>
+                                    <option value="3">Sık Değil (Ayda bir veya birkaç defa) (2)</option>
+                                    <option value="4">Ara Sıra (Haftada bir veya birkaç defa) (3)</option>
+                                    <option value="5">Sık (Günde bir veya birkaç defa) (6)</option>
+                                    <option value="6">Hemen Hemen Sürekli (Bir saatte birkaç defa) (10)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Frekans1 == 1)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Frekans1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeyFrekans1" asp-for="Frekans1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Çok Seyrek (Yılda bir veya daha seyrek) (0,5)</option>
+                                    <option value="2" selected>Seyrek (Yılda birkaç defa) (1)</option>
+                                    <option value="3">Sık Değil (Ayda bir veya birkaç defa) (2)</option>
+                                    <option value="4">Ara Sıra (Haftada bir veya birkaç defa) (3)</option>
+                                    <option value="5">Sık (Günde bir veya birkaç defa) (6)</option>
+                                    <option value="6">Hemen Hemen Sürekli (Bir saatte birkaç defa) (10)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Frekans1 == 2)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Frekans1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeyFrekans1" asp-for="Frekans1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Çok Seyrek (Yılda bir veya daha seyrek) (0,5)</option>
+                                    <option value="2">Seyrek (Yılda birkaç defa) (1)</option>
+                                    <option value="3" selected>Sık Değil (Ayda bir veya birkaç defa) (2)</option>
+                                    <option value="4">Ara Sıra (Haftada bir veya birkaç defa) (3)</option>
+                                    <option value="5">Sık (Günde bir veya birkaç defa) (6)</option>
+                                    <option value="6">Hemen Hemen Sürekli (Bir saatte birkaç defa) (10)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Frekans1 == 3)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Frekans1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeyFrekans1" asp-for="Frekans1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Çok Seyrek (Yılda bir veya daha seyrek) (0,5)</option>
+                                    <option value="2">Seyrek (Yılda birkaç defa) (1)</option>
+                                    <option value="3">Sık Değil (Ayda bir veya birkaç defa) (2)</option>
+                                    <option value="4" selected>Ara Sıra (Haftada bir veya birkaç defa) (3)</option>
+                                    <option value="5">Sık (Günde bir veya birkaç defa) (6)</option>
+                                    <option value="6">Hemen Hemen Sürekli (Bir saatte birkaç defa) (10)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Frekans1 == 6)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Frekans1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeyFrekans1" asp-for="Frekans1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Çok Seyrek (Yılda bir veya daha seyrek) (0,5)</option>
+                                    <option value="2">Seyrek (Yılda birkaç defa) (1)</option>
+                                    <option value="3">Sık Değil (Ayda bir veya birkaç defa) (2)</option>
+                                    <option value="4">Ara Sıra (Haftada bir veya birkaç defa) (3)</option>
+                                    <option value="5" selected>Sık (Günde bir veya birkaç defa) (6)</option>
+                                    <option value="6">Hemen Hemen Sürekli (Bir saatte birkaç defa) (10)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Frekans1 == 10)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Frekans1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeyFrekans1" asp-for="Frekans1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Çok Seyrek (Yılda bir veya daha seyrek) (0,5)</option>
+                                    <option value="2">Seyrek (Yılda birkaç defa) (1)</option>
+                                    <option value="3">Sık Değil (Ayda bir veya birkaç defa) (2)</option>
+                                    <option value="4">Ara Sıra (Haftada bir veya birkaç defa) (3)</option>
+                                    <option value="5">Sık (Günde bir veya birkaç defa) (6)</option>
+                                    <option value="6" selected>Hemen Hemen Sürekli (Bir saatte birkaç defa) (10)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Siddet1 == 0)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Siddet1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeySiddet1" asp-for="Siddet1" class="form-control">
+                                    <option value="0" selected>** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Ucuz Atlatma/Çevresel Zarar Yok (1)</option>
+                                    <option value="2">Küçük Hasar/Yaralanma, Dahili İlk Yardım/Arazi İçinde Sınırlı Çevresel Zarar (3)</option>
+                                    <option value="3">Önemli Hasar/Yaralanma, Dış İlk Yardım İhtiyacı/Arazi Sınırları Dışında Çevresel Zarar (7)</option>
+                                    <option value="4">Kalıcı Hasar/Yaralanma, İş Kaybı/Çevresel Engel Oluşturma, Yakın Çevreden Şikayet (15)</option>
+                                    <option value="5">Öldürücü Kaza / Ciddi Çevresel Zarar (40)</option>
+                                    <option value="6">Birden Fazla Ölümlü Kaza / Çevresel Felaket (100)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Siddet1 == 1)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Siddet1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeySiddet1" asp-for="Siddet1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1" selected>Ucuz Atlatma/Çevresel Zarar Yok (1)</option>
+                                    <option value="2">Küçük Hasar/Yaralanma, Dahili İlk Yardım/Arazi İçinde Sınırlı Çevresel Zarar (3)</option>
+                                    <option value="3">Önemli Hasar/Yaralanma, Dış İlk Yardım İhtiyacı/Arazi Sınırları Dışında Çevresel Zarar (7)</option>
+                                    <option value="4">Kalıcı Hasar/Yaralanma, İş Kaybı/Çevresel Engel Oluşturma, Yakın Çevreden Şikayet (15)</option>
+                                    <option value="5">Öldürücü Kaza / Ciddi Çevresel Zarar (40)</option>
+                                    <option value="6">Birden Fazla Ölümlü Kaza / Çevresel Felaket (100)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Siddet1 == 3)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Siddet1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeySiddet1" asp-for="Siddet1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Ucuz Atlatma/Çevresel Zarar Yok (1)</option>
+                                    <option value="2" selected>Küçük Hasar/Yaralanma, Dahili İlk Yardım/Arazi İçinde Sınırlı Çevresel Zarar (3)</option>
+                                    <option value="3">Önemli Hasar/Yaralanma, Dış İlk Yardım İhtiyacı/Arazi Sınırları Dışında Çevresel Zarar (7)</option>
+                                    <option value="4">Kalıcı Hasar/Yaralanma, İş Kaybı/Çevresel Engel Oluşturma, Yakın Çevreden Şikayet (15)</option>
+                                    <option value="5">Öldürücü Kaza / Ciddi Çevresel Zarar (40)</option>
+                                    <option value="6">Birden Fazla Ölümlü Kaza / Çevresel Felaket (100)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Siddet1 == 7)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Siddet1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeySiddet1" asp-for="Siddet1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Ucuz Atlatma/Çevresel Zarar Yok (1)</option>
+                                    <option value="2">Küçük Hasar/Yaralanma, Dahili İlk Yardım/Arazi İçinde Sınırlı Çevresel Zarar (3)</option>
+                                    <option value="3" selected>Önemli Hasar/Yaralanma, Dış İlk Yardım İhtiyacı/Arazi Sınırları Dışında Çevresel Zarar (7)</option>
+                                    <option value="4">Kalıcı Hasar/Yaralanma, İş Kaybı/Çevresel Engel Oluşturma, Yakın Çevreden Şikayet (15)</option>
+                                    <option value="5">Öldürücü Kaza / Ciddi Çevresel Zarar (40)</option>
+                                    <option value="6">Birden Fazla Ölümlü Kaza / Çevresel Felaket (100)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Siddet1 == 15)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Siddet1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeySiddet1" asp-for="Siddet1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Ucuz Atlatma/Çevresel Zarar Yok (1)</option>
+                                    <option value="2">Küçük Hasar/Yaralanma, Dahili İlk Yardım/Arazi İçinde Sınırlı Çevresel Zarar (3)</option>
+                                    <option value="3">Önemli Hasar/Yaralanma, Dış İlk Yardım İhtiyacı/Arazi Sınırları Dışında Çevresel Zarar (7)</option>
+                                    <option value="4" selected>Kalıcı Hasar/Yaralanma, İş Kaybı/Çevresel Engel Oluşturma, Yakın Çevreden Şikayet (15)</option>
+                                    <option value="5">Öldürücü Kaza / Ciddi Çevresel Zarar (40)</option>
+                                    <option value="6">Birden Fazla Ölümlü Kaza / Çevresel Felaket (100)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Siddet1 == 40)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Siddet1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeySiddet1" asp-for="Siddet1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Ucuz Atlatma/Çevresel Zarar Yok (1)</option>
+                                    <option value="2">Küçük Hasar/Yaralanma, Dahili İlk Yardım/Arazi İçinde Sınırlı Çevresel Zarar (3)</option>
+                                    <option value="3">Önemli Hasar/Yaralanma, Dış İlk Yardım İhtiyacı/Arazi Sınırları Dışında Çevresel Zarar (7)</option>
+                                    <option value="4">Kalıcı Hasar/Yaralanma, İş Kaybı/Çevresel Engel Oluşturma, Yakın Çevreden Şikayet (15)</option>
+                                    <option value="5" selected>Öldürücü Kaza / Ciddi Çevresel Zarar (40)</option>
+                                    <option value="6">Birden Fazla Ölümlü Kaza / Çevresel Felaket (100)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Siddet1 == 100)
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Siddet1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="FinneKeySiddet1" asp-for="Siddet1" class="form-control">
+                                    <option value="0">** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Ucuz Atlatma/Çevresel Zarar Yok (1)</option>
+                                    <option value="2">Küçük Hasar/Yaralanma, Dahili İlk Yardım/Arazi İçinde Sınırlı Çevresel Zarar (3)</option>
+                                    <option value="3">Önemli Hasar/Yaralanma, Dış İlk Yardım İhtiyacı/Arazi Sınırları Dışında Çevresel Zarar (7)</option>
+                                    <option value="4">Kalıcı Hasar/Yaralanma, İş Kaybı/Çevresel Engel Oluşturma, Yakın Çevreden Şikayet (15)</option>
+                                    <option value="5">Öldürücü Kaza / Ciddi Çevresel Zarar (40)</option>
+                                    <option value="6" selected>Birden Fazla Ölümlü Kaza / Çevresel Felaket (100)</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+
+
+
+                    <div class="col-md-3 mb-5">
+                        <label asp-for="Risk_Puan1" class="control-label"></label>
+                        <div class="input-group form-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-align-justify"></i>
+                            </span>
+                            <input asp-for="Risk_Puan1" class="form-control" disabled />
+                            <span asp-validation-for="Risk_Puan1" class="text-danger"></span>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-3 mb-5">
+                        <label asp-for="Olasilik2" class="control-label"></label>
+                        <div class="input-group form-group mb-5">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-check-double"></i>
+                            </span>
+                            <select id="matrisOlasilik2" asp-for="Olasilik2" class="form-control">
+                                <option value="0" selected>** SEÇİM YAPINIZ **</option>
+                                <option value="1">Çok Düşük (1)</option>
+                                <option value="2">Düşük (2)</option>
+                                <option value="3">Orta (3)</option>
+                                <option value="4">Yüksek (4)</option>
+                                <option value="5">Çok Yüksek (5)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-5">
+                        <label asp-for="Siddet2" class="control-label"></label>
+                        <div class="input-group form-group mb-5">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-check-double"></i>
+                            </span>
+                            <select id="matrisSiddet2" asp-for="Siddet2" class="form-control">
+                                <option value="0" selected>** SEÇİM YAPINIZ **</option>
+                                <option value="1">Çok Düşük (1)</option>
+                                <option value="2">Düşük (2)</option>
+                                <option value="3">Orta (3)</option>
+                                <option value="4">Yüksek (4)</option>
+                                <option value="5">Çok Yüksek (5)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-5">
+                        <label asp-for="Risk_Puan2" class="control-label"></label>
+                        <div class="input-group form-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-align-justify"></i>
+                            </span>
+                            <input asp-for="Risk_Puan2" class="form-control" disabled />
+                            <span asp-validation-for="Risk_Puan2" class="text-danger"></span>
+                        </div>
+                    </div>
+                }
+
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Rutin_Durum" class="form-check-label"> </label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Rutin_Durum" class="form-control">
+                            <option value="" selected>**SEÇİM YAPINIZ**</option>
+                            <option value="0">Rutin</option>
+                            <option value="1">Rutin Olmayan</option>
+                        </select>
+                        <span asp-validation-for="Rutin_Durum" class="text-danger"></span>
+
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <span class="form-check-label">
+                        @Html.DisplayNameFor(model => model.Uygun_Durum)
+                    </span>
+                    <label class="form-check form-switch form-check-custom form-check-solid">
+                        <input class="form-check-input" type="checkbox" asp-for="Uygun_Durum" />
+                    </label>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Personel_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Personel_Id" class="form-control" asp-items="ViewBag.Personel_Id">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Duzeltici_Faaliyet" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Duzeltici_Faaliyet" class="form-control"></textarea>
+                        <span asp-validation-for="Duzeltici_Faaliyet" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Termin_Tarih" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Termin_Tarih" class="form-control" />
+                        <span asp-validation-for="Termin_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Sorumlular" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Sorumlular" class="form-control" />
+                        <span asp-validation-for="Sorumlular" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @if (Convert.ToBoolean(TempData["Dof"]) == false)
+                {
+                    <div class="card-header" style="border:none">
+                        <h3 class="card-title" style="border:none">Düzeltici/Önleyici Faaliyet Sonrası Riskin Değerlendirilmesi</h3>
+                    </div>
+                    if (RiskAnalizYontem == 1)
+                    {
+                        @if (Model.Olasilik2 == 0)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Olasilik2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeyOlasilik2" asp-for="Olasilik2" class="form-control">
+                                        <option value="0" selected>** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Beklenmez (0,2)</option>
+                                        <option value="2">Beklenmez Fakat Mümkün (0,5)</option>
+                                        <option value="3">Mümkün Fakat Düşük (1)</option>
+                                        <option value="4">Olası (1)</option>
+                                        <option value="5">Oldukça Mümkün/Yüksek (6)</option>
+                                        <option value="6">Beklenir, Kesin(10)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Olasilik2 == 0.2)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Olasilik2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeyOlasilik2" asp-for="Olasilik2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1" selected>Beklenmez (0,2)</option>
+                                        <option value="2">Beklenmez Fakat Mümkün (0,5)</option>
+                                        <option value="3">Mümkün Fakat Düşük (1)</option>
+                                        <option value="4">Olası (1)</option>
+                                        <option value="5">Oldukça Mümkün/Yüksek (6)</option>
+                                        <option value="6">Beklenir, Kesin(10)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Olasilik2 == 0.5)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Olasilik2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeyOlasilik2" asp-for="Olasilik2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Beklenmez (0,2)</option>
+                                        <option value="2" selected>Beklenmez Fakat Mümkün (0,5)</option>
+                                        <option value="3">Mümkün Fakat Düşük (1)</option>
+                                        <option value="4">Olası (1)</option>
+                                        <option value="5">Oldukça Mümkün/Yüksek (6)</option>
+                                        <option value="6">Beklenir, Kesin(10)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Olasilik2 == 1)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Olasilik2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeyOlasilik2" asp-for="Olasilik2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Beklenmez (0,2)</option>
+                                        <option value="2">Beklenmez Fakat Mümkün (0,5)</option>
+                                        <option value="3" selected>Mümkün Fakat Düşük (1)</option>
+                                        <option value="4">Olası (1)</option>
+                                        <option value="5">Oldukça Mümkün/Yüksek (6)</option>
+                                        <option value="6">Beklenir, Kesin(10)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Olasilik2 == 3)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Olasilik2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeyOlasilik2" asp-for="Olasilik2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Beklenmez (0,2)</option>
+                                        <option value="2">Beklenmez Fakat Mümkün (0,5)</option>
+                                        <option value="3">Mümkün Fakat Düşük (1)</option>
+                                        <option value="4" selected>Olası (1)</option>
+                                        <option value="5">Oldukça Mümkün/Yüksek (6)</option>
+                                        <option value="6">Beklenir, Kesin(10)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Olasilik2 == 6)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Olasilik2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeyOlasilik2" asp-for="Olasilik2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Beklenmez (0,2)</option>
+                                        <option value="2">Beklenmez Fakat Mümkün (0,5)</option>
+                                        <option value="3">Mümkün Fakat Düşük (1)</option>
+                                        <option value="4">Olası (1)</option>
+                                        <option value="5" selected>Oldukça Mümkün/Yüksek (6)</option>
+                                        <option value="6">Beklenir, Kesin(10)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Olasilik2 == 10)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Olasilik2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeyOlasilik2" asp-for="Olasilik2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Beklenmez (0,2)</option>
+                                        <option value="2">Beklenmez Fakat Mümkün (0,5)</option>
+                                        <option value="3">Mümkün Fakat Düşük (1)</option>
+                                        <option value="4">Olası (1)</option>
+                                        <option value="5">Oldukça Mümkün/Yüksek (6)</option>
+                                        <option value="6" selected>Beklenir, Kesin(10)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        @if (Model.Frekans2 == 0)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Frekans2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeyFrekans2" asp-for="Frekans2" class="form-control">
+                                        <option value="0" selected>** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Çok Seyrek (Yılda bir veya daha seyrek) (0,5)</option>
+                                        <option value="2">Seyrek (Yılda birkaç defa) (1)</option>
+                                        <option value="3">Sık Değil (Ayda bir veya birkaç defa) (2)</option>
+                                        <option value="4">Ara Sıra (Haftada bir veya birkaç defa) (3)</option>
+                                        <option value="5">Sık (Günde bir veya birkaç defa) (6)</option>
+                                        <option value="6">Hemen Hemen Sürekli (Bir saatte birkaç defa) (10)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Frekans2 == 0.5)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Frekans2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeyFrekans2" asp-for="Frekans2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1" selected>Çok Seyrek (Yılda bir veya daha seyrek) (0,5)</option>
+                                        <option value="2">Seyrek (Yılda birkaç defa) (1)</option>
+                                        <option value="3">Sık Değil (Ayda bir veya birkaç defa) (2)</option>
+                                        <option value="4">Ara Sıra (Haftada bir veya birkaç defa) (3)</option>
+                                        <option value="5">Sık (Günde bir veya birkaç defa) (6)</option>
+                                        <option value="6">Hemen Hemen Sürekli (Bir saatte birkaç defa) (10)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Frekans2 == 1)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Frekans2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeyFrekans2" asp-for="Frekans2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Çok Seyrek (Yılda bir veya daha seyrek) (0,5)</option>
+                                        <option value="2" selected>Seyrek (Yılda birkaç defa) (1)</option>
+                                        <option value="3">Sık Değil (Ayda bir veya birkaç defa) (2)</option>
+                                        <option value="4">Ara Sıra (Haftada bir veya birkaç defa) (3)</option>
+                                        <option value="5">Sık (Günde bir veya birkaç defa) (6)</option>
+                                        <option value="6">Hemen Hemen Sürekli (Bir saatte birkaç defa) (10)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Frekans2 == 2)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Frekans2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeyFrekans2" asp-for="Frekans2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Çok Seyrek (Yılda bir veya daha seyrek) (0,5)</option>
+                                        <option value="2">Seyrek (Yılda birkaç defa) (1)</option>
+                                        <option value="3" selected>Sık Değil (Ayda bir veya birkaç defa) (2)</option>
+                                        <option value="4">Ara Sıra (Haftada bir veya birkaç defa) (3)</option>
+                                        <option value="5">Sık (Günde bir veya birkaç defa) (6)</option>
+                                        <option value="6">Hemen Hemen Sürekli (Bir saatte birkaç defa) (10)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Frekans2 == 3)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Frekans2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeyFrekans2" asp-for="Frekans2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Çok Seyrek (Yılda bir veya daha seyrek) (0,5)</option>
+                                        <option value="2">Seyrek (Yılda birkaç defa) (1)</option>
+                                        <option value="3">Sık Değil (Ayda bir veya birkaç defa) (2)</option>
+                                        <option value="4" selected>Ara Sıra (Haftada bir veya birkaç defa) (3)</option>
+                                        <option value="5">Sık (Günde bir veya birkaç defa) (6)</option>
+                                        <option value="6">Hemen Hemen Sürekli (Bir saatte birkaç defa) (10)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Frekans2 == 6)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Frekans2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeyFrekans2" asp-for="Frekans2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Çok Seyrek (Yılda bir veya daha seyrek) (0,5)</option>
+                                        <option value="2">Seyrek (Yılda birkaç defa) (1)</option>
+                                        <option value="3">Sık Değil (Ayda bir veya birkaç defa) (2)</option>
+                                        <option value="4">Ara Sıra (Haftada bir veya birkaç defa) (3)</option>
+                                        <option value="5" selected>Sık (Günde bir veya birkaç defa) (6)</option>
+                                        <option value="6">Hemen Hemen Sürekli (Bir saatte birkaç defa) (10)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Frekans2 == 10)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Frekans2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeyFrekans2" asp-for="Frekans2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Çok Seyrek (Yılda bir veya daha seyrek) (0,5)</option>
+                                        <option value="2">Seyrek (Yılda birkaç defa) (1)</option>
+                                        <option value="3">Sık Değil (Ayda bir veya birkaç defa) (2)</option>
+                                        <option value="4">Ara Sıra (Haftada bir veya birkaç defa) (3)</option>
+                                        <option value="5">Sık (Günde bir veya birkaç defa) (6)</option>
+                                        <option value="6" selected>Hemen Hemen Sürekli (Bir saatte birkaç defa) (10)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        @if (Model.Siddet2 == 0)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Siddet2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeySiddet2" asp-for="Siddet2" class="form-control">
+                                        <option value="0" selected>** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Ucuz Atlatma/Çevresel Zarar Yok (1)</option>
+                                        <option value="2">Küçük Hasar/Yaralanma, Dahili İlk Yardım/Arazi İçinde Sınırlı Çevresel Zarar (3)</option>
+                                        <option value="3">Önemli Hasar/Yaralanma, Dış İlk Yardım İhtiyacı/Arazi Sınırları Dışında Çevresel Zarar (7)</option>
+                                        <option value="4">Kalıcı Hasar/Yaralanma, İş Kaybı/Çevresel Engel Oluşturma, Yakın Çevreden Şikayet (15)</option>
+                                        <option value="5">Öldürücü Kaza / Ciddi Çevresel Zarar (40)</option>
+                                        <option value="6">Birden Fazla Ölümlü Kaza / Çevresel Felaket (100)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Siddet2 == 1)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Siddet2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeySiddet2" asp-for="Siddet2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1" selected>Ucuz Atlatma/Çevresel Zarar Yok (1)</option>
+                                        <option value="2">Küçük Hasar/Yaralanma, Dahili İlk Yardım/Arazi İçinde Sınırlı Çevresel Zarar (3)</option>
+                                        <option value="3">Önemli Hasar/Yaralanma, Dış İlk Yardım İhtiyacı/Arazi Sınırları Dışında Çevresel Zarar (7)</option>
+                                        <option value="4">Kalıcı Hasar/Yaralanma, İş Kaybı/Çevresel Engel Oluşturma, Yakın Çevreden Şikayet (15)</option>
+                                        <option value="5">Öldürücü Kaza / Ciddi Çevresel Zarar (40)</option>
+                                        <option value="6">Birden Fazla Ölümlü Kaza / Çevresel Felaket (100)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Siddet2 == 3)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Siddet2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeySiddet2" asp-for="Siddet2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Ucuz Atlatma/Çevresel Zarar Yok (1)</option>
+                                        <option value="2" selected>Küçük Hasar/Yaralanma, Dahili İlk Yardım/Arazi İçinde Sınırlı Çevresel Zarar (3)</option>
+                                        <option value="3">Önemli Hasar/Yaralanma, Dış İlk Yardım İhtiyacı/Arazi Sınırları Dışında Çevresel Zarar (7)</option>
+                                        <option value="4">Kalıcı Hasar/Yaralanma, İş Kaybı/Çevresel Engel Oluşturma, Yakın Çevreden Şikayet (15)</option>
+                                        <option value="5">Öldürücü Kaza / Ciddi Çevresel Zarar (40)</option>
+                                        <option value="6">Birden Fazla Ölümlü Kaza / Çevresel Felaket (100)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Siddet2 == 7)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Siddet2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeySiddet2" asp-for="Siddet2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Ucuz Atlatma/Çevresel Zarar Yok (1)</option>
+                                        <option value="2">Küçük Hasar/Yaralanma, Dahili İlk Yardım/Arazi İçinde Sınırlı Çevresel Zarar (3)</option>
+                                        <option value="3" selected>Önemli Hasar/Yaralanma, Dış İlk Yardım İhtiyacı/Arazi Sınırları Dışında Çevresel Zarar (7)</option>
+                                        <option value="4">Kalıcı Hasar/Yaralanma, İş Kaybı/Çevresel Engel Oluşturma, Yakın Çevreden Şikayet (15)</option>
+                                        <option value="5">Öldürücü Kaza / Ciddi Çevresel Zarar (40)</option>
+                                        <option value="6">Birden Fazla Ölümlü Kaza / Çevresel Felaket (100)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Siddet2 == 15)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Siddet2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeySiddet2" asp-for="Siddet2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Ucuz Atlatma/Çevresel Zarar Yok (1)</option>
+                                        <option value="2">Küçük Hasar/Yaralanma, Dahili İlk Yardım/Arazi İçinde Sınırlı Çevresel Zarar (3)</option>
+                                        <option value="3">Önemli Hasar/Yaralanma, Dış İlk Yardım İhtiyacı/Arazi Sınırları Dışında Çevresel Zarar (7)</option>
+                                        <option value="4" selected>Kalıcı Hasar/Yaralanma, İş Kaybı/Çevresel Engel Oluşturma, Yakın Çevreden Şikayet (15)</option>
+                                        <option value="5">Öldürücü Kaza / Ciddi Çevresel Zarar (40)</option>
+                                        <option value="6">Birden Fazla Ölümlü Kaza / Çevresel Felaket (100)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Siddet2 == 40)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Siddet2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeySiddet2" asp-for="Siddet2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Ucuz Atlatma/Çevresel Zarar Yok (1)</option>
+                                        <option value="2">Küçük Hasar/Yaralanma, Dahili İlk Yardım/Arazi İçinde Sınırlı Çevresel Zarar (3)</option>
+                                        <option value="3">Önemli Hasar/Yaralanma, Dış İlk Yardım İhtiyacı/Arazi Sınırları Dışında Çevresel Zarar (7)</option>
+                                        <option value="4">Kalıcı Hasar/Yaralanma, İş Kaybı/Çevresel Engel Oluşturma, Yakın Çevreden Şikayet (15)</option>
+                                        <option value="5" selected>Öldürücü Kaza / Ciddi Çevresel Zarar (40)</option>
+                                        <option value="6">Birden Fazla Ölümlü Kaza / Çevresel Felaket (100)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Siddet2 == 100)
+                        {
+                            <div class="col-md-3 mb-5">
+                                <label asp-for="Siddet2" class="control-label"></label>
+                                <div class="input-group form-group mb-5">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                    <select id="FinneKeySiddet2" asp-for="Siddet2" class="form-control">
+                                        <option value="0">** SEÇİM YAPINIZ **</option>
+                                        <option value="1">Ucuz Atlatma/Çevresel Zarar Yok (1)</option>
+                                        <option value="2">Küçük Hasar/Yaralanma, Dahili İlk Yardım/Arazi İçinde Sınırlı Çevresel Zarar (3)</option>
+                                        <option value="3">Önemli Hasar/Yaralanma, Dış İlk Yardım İhtiyacı/Arazi Sınırları Dışında Çevresel Zarar (7)</option>
+                                        <option value="4">Kalıcı Hasar/Yaralanma, İş Kaybı/Çevresel Engel Oluşturma, Yakın Çevreden Şikayet (15)</option>
+                                        <option value="5">Öldürücü Kaza / Ciddi Çevresel Zarar (40)</option>
+                                        <option value="6" selected>Birden Fazla Ölümlü Kaza / Çevresel Felaket (100)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        }
+
+
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Risk_Puan2" class="control-label"></label>
+                            <div class="input-group form-group">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-align-justify"></i>
+                                </span>
+                                <input asp-for="Risk_Puan2" class="form-control" disabled />
+                                <span asp-validation-for="Risk_Puan2" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Olasilik1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="matrisOlasilik1" asp-for="Olasilik1" class="form-control">
+                                    <option value="0" selected>** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Çok Düşük (1)</option>
+                                    <option value="2">Düşük (2)</option>
+                                    <option value="3">Orta (3)</option>
+                                    <option value="4">Yüksek (4)</option>
+                                    <option value="5">Çok Yüksek (5)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Siddet1" class="control-label"></label>
+                            <div class="input-group form-group mb-5">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </span>
+                                <select id="matrisSiddet1" asp-for="Siddet1" class="form-control">
+                                    <option value="0" selected>** SEÇİM YAPINIZ **</option>
+                                    <option value="1">Çok Düşük (1)</option>
+                                    <option value="2">Düşük (2)</option>
+                                    <option value="3">Orta (3)</option>
+                                    <option value="4">Yüksek (4)</option>
+                                    <option value="5">Çok Yüksek (5)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-5">
+                            <label asp-for="Risk_Puan1" class="control-label"></label>
+                            <div class="input-group form-group">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-align-justify"></i>
+                                </span>
+                                <input asp-for="Risk_Puan1" class="form-control" disabled />
+                                <span asp-validation-for="Risk_Puan1" class="text-danger"></span>
+                            </div>
+                        </div>
+                    }
+
+
+                    <div class="col-md-6 mb-5">
+                        <label asp-for="Kontrol_Degerlendirme" class="control-label"></label>
+                        <div class="input-group form-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-align-justify"></i>
+                            </span>
+                            <textarea rows="5" cols="40" asp-for="Kontrol_Degerlendirme" class="form-control"></textarea>
+                            <span asp-validation-for="Kontrol_Degerlendirme" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-5">
+                        <label asp-for="Etkinlik_Kontrol_Tarih" class="control-label"></label>
+                        <div class="input-group form-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-align-justify"></i>
+                            </span>
+                            <input asp-for="Etkinlik_Kontrol_Tarih" class="form-control" />
+                            <span asp-validation-for="Etkinlik_Kontrol_Tarih" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                }
+                else
+                {
+
+
+                    @if (RiskAnalizYontem == 1)
+                    {
+                        <input type="hidden" value="0" asp-for="Olasilik2">
+
+                        <input type="hidden" value="0" asp-for="Siddet2">
+
+                        <input type="hidden" value="0" asp-for="Frekans2">
+                    }
+                    else
+                    {
+                        <input type="hidden" value="0" asp-for="Olasilik1">
+
+                        <input type="hidden" value="0" asp-for="Siddet1">
+
+                        <input type="hidden" value="0" asp-for="Frekans1">
+                    }
+
+                }
+                <div class="form-group mb-5">
+                    <div class="col-md-10">
+                        <p>RİSK ANALİZ FOTOĞRAF EKLEYİN : </p>
+                        <input type="file" name="Resim" asp-for="Resim" />
+
+                        <span asp-validation-for="Resim" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer">
+    </div>
+</form>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+         $("#Siddet1").change(function () {
+             var cid = $("#Siddet1").val();
+             var cid2 = $("#Olasilik1").val();
+             var cid3 = $("#Frekans1").val();
+
+
+          $.ajax({
+            method: 'GET',
+              url: "@Url.Action("Hesap","Risk_Analiz")/" + cid + cid2 + cid3,
+              				success: function (i,item) {   // success callback function
+                                    $("#Risk_Puan1").val(i);
+
+              },
+         })
+
+         });
+    </script>
+
+    <script type="text/javascript">
+       function VeriSil(ID, obj) {
+            var btn = $(obj);
+            Swal.fire({
+                title: 'SİLME İŞLEMİ',
+                text: "Silmek istediğinize emin misiniz?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#50cd89',
+                cancelButtonColor: '#f1416c',
+                confirmButtonText: 'Evet Sil!',
+                cancelButtonText: 'Hayır Silme!',
+                showClass: {
+                    popup: 'animate_animated animate_fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate_animated animate_fadeOutUp'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("DeleteTablo", "Risk_Analiz")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: ID }
+                    }).done(function (d) {
+                        const result = $.parseJSON(d);
+                        if (result.ResultStatus == 0) {
+                            Swal.fire({
+                                title: 'SİLİNDİ',
+                                icon: 'success',
+                                text: `${result.Message}`,
+                                showClass: {
+                                    popup: 'animate_animated animate_fadeInDown'
+                                },
+                                hideClass: {
+                                    popup: 'animate_animated animate_fadeOutUp'
+                                }
+                            });
+                            btn.parent().parent().parent().parent().fadeOut(1000);
+                        }
+                    }).fail(function () {
+                        Swal.fire({
+                            title: 'HATALI İŞLEM',
+                            text: "Veri silinemedi",
+                            icon: 'error',
+                            showClass: {
+                                popup: 'animate_animated animate_fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate_animated animate_fadeOutUp'
+                            }
+                        })
+                    })
+                }
+            });
+        }
+    </script>
+
+    <script type="text/javascript">
+        $("#FinneKeyOlasilik2").change(function () {
+            var cid = $("#FinneKeyOlasilik2").val();
+            var cid2 = $("#FinneKeySiddet2").val();
+            var cid3 = $("#FinneKeyFrekans2").val();
+            var cid4 = cid + cid2 + cid3;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan2").val(result);
+
+
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#FinneKeySiddet2").change(function () {
+            var cid = $("#FinneKeyOlasilik2").val();
+            var cid2 = $("#FinneKeySiddet2").val();
+            var cid3 = $("#FinneKeyFrekans2").val();
+            var cid4 = cid + cid2 + cid3;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan2").val(result);
+
+
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#FinneKeyFrekans2").change(function () {
+         var cid = $("#FinneKeyOlasilik2").val();
+         var cid2 = $("#FinneKeySiddet2").val();
+         var cid3 = $("#FinneKeyFrekans2").val();
+            var cid4 = cid + cid2 + cid3;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan2").val(result);
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#FinneKeyOlasilik1").change(function () {
+            var cid = $("#FinneKeyOlasilik1").val();
+            var cid2 = $("#FinneKeySiddet1").val();
+            var cid3 = $("#FinneKeyFrekans1").val();
+            var cid4 = cid + cid2 + cid3;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan1").val(result);
+
+
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#FinneKeySiddet1").change(function () {
+            var cid = $("#FinneKeyOlasilik1").val();
+            var cid2 = $("#FinneKeySiddet1").val();
+            var cid3 = $("#FinneKeyFrekans1").val();
+            var cid4 = cid + cid2 + cid3;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan1").val(result);
+
+
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#FinneKeyFrekans1").change(function () {
+         var cid = $("#FinneKeyOlasilik1").val();
+         var cid2 = $("#FinneKeySiddet1").val();
+         var cid3 = $("#FinneKeyFrekans1").val();
+            var cid4 = cid + cid2 + cid3;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan1").val(result);
+                         })
+         });
+    </script>
+
+
+
+    <script type="text/javascript">
+        $("#matrisOlasilik2").change(function () {
+            var cid = $("#matrisOlasilik2").val();
+            var cid2 = $("#matrisSiddet2").val();
+            var cid4 = cid + cid2 ;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap2", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan2").val(result);
+
+
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#matrisSiddet2").change(function () {
+            var cid = $("#matrisOlasilik2").val();
+            var cid2 = $("#matrisSiddet2").val();
+            var cid4 = cid + cid2 ;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap2", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan2").val(result);
+
+
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#matrisOlasilik1").change(function () {
+            var cid = $("#matrisOlasilik1").val();
+            var cid2 = $("#matrisSiddet1").val();
+            var cid4 = cid + cid2 ;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap2", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan1").val(result);
+
+
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#matrisSiddet1").change(function () {
+            var cid = $("#matrisSiddet1").val();
+            var cid2 = $("#matrisOlasilik1").val();
+            var cid4 = cid + cid2 ;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap2", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan1").val(result);
+
+
+                         })
+         });
+    </script>
+
+
+
+    <script>
+        $("#tblBirim").DataTable({
+            "pageLength": 50,
+            language: {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                 "sInfo": 'Toplam kayıttan _START_  - _END_ arasındaki kayıtlar gösteriliyor.',
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(MAX kayıt içerisinden bulunan)",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada MENU kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            },
+            dom:
+                "<'row'" +
+                "<'col-sm-6 d-flex align-items-center justify-conten-start'>" +
+                "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+                ">" +
+
+                "<'table-responsive'tr>" +
+
+                "<'row'" +
+                "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                ">"
+
+        });
+    </script>
+}

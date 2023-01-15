@@ -1,0 +1,81 @@
+﻿@model IEnumerable<InformsISG.Entities.Dtos.Makine_Kontrol_Kriter_BaslikDTO>
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Index";
+    var KontrolKriteri = (List<InformsISG.Entities.Dtos.Makine_Kontrol_KriterDTO>)ViewBag.KontrolKriteri;
+    int siraNo = 1;
+    int i3 = 1;
+}
+<div class="">
+    <div class=" flex-column " id="kt_wrapper">
+        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+            <div class="post d-flex flex-column-fluid" id="kt_post">
+                <div id="kt_content_container" class="container-xxl">
+                    <div class="card mb-5 mb-xl-10">
+                        <div class="card-body pt-9 pb-0">
+
+                            <div class="cursor-pointer">
+                                <div class="card-header">
+                                    <h3 class="card-title"></h3>
+                                    <div class="card-toolbar">
+                                        <a href="@Url.Action("Index","Makine")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
+                                <li class="nav-item mt-2">
+                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#">Genel Bilgi</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="card-header cursor-pointer">
+                                <div class="card-title m-0">
+                                    <h3 class="fw-bolder m-0">@item.Baslik_Ad.</h3>
+                                </div>
+                                <div class="cursor-pointer">
+                                    <div class="card-header">
+                                        <h3 class="card-title"></h3>
+                                        <div class="card-toolbar">
+                                            <a asp-action="EditKontrolKriteri" asp-route-id="@item.Id" class="btn btn-success align-self-center">DÜZENLE</a>&nbsp;
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="card-body p-9">
+                                @foreach (var item2 in KontrolKriteri)
+                                {
+                                    @if (item2.Makine_Kontrol_Kriter_Baslik_Id == item.Id)
+                                    {
+                                        <div class="row mb-7">
+                                            <label class="col-lg-4 fw-bold text-muted">@i3. Kontrol Kriter  Adı :</label>
+                                            <div class="col-lg-8">
+                                                <span class="fw-bolder fs-6">@item2.Madde_Ad</span>
+                                            </div>
+                                        </div>
+                                        i3++;
+                                    }
+
+
+                                }
+                            </div>
+                        }
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

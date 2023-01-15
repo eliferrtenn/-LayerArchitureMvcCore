@@ -1,0 +1,51 @@
+﻿@model InformsISG.Entities.Dtos.Makine_EkipmanDTO
+
+@{
+    ViewData["Title"] = "View";
+}
+
+    <div class="card-body">
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-md-12 mb-5">
+                <div class="row">
+                    <div class="col-md-6 mb-5">
+                        <label asp-for="Ekipman_Kodu" class="control-label"></label>
+                        <div class="input-group form-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-align-justify"></i>
+                            </span>
+                            <input asp-for="Ekipman_Kodu" class="form-control" disabled />
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-5">
+                        <label asp-for="Firma_Adi" class="control-label"></label>
+                        <div class="input-group form-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-align-justify"></i>
+                            </span>
+                            <input asp-for="Firma_Adi" class="form-control" disabled />
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-5">
+                        <label asp-for="Periyodik_Kontrol_Tarih" class="control-label"></label>
+                        <div class="input-group form-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-align-justify"></i>
+                            </span>
+                            <input asp-for="Periyodik_Kontrol_Tarih" class="form-control" disabled />
+           
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

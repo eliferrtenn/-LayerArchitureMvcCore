@@ -1,0 +1,125 @@
+﻿@model IEnumerable<InformsISG.Entities.Dtos.Makine_Ekipman_Bakim_PlanlariDTO>
+
+@{
+    ViewData["Title"] = "CreateBakim";
+    var id = TempData["Makine_Ekipman_Id"];
+    int siraNo = 1;
+}
+<div class="card shadow-sm">
+    <div>
+        @await Component.InvokeAsync("MakineEkipman", new { Id = id })
+    </div>
+    <div class="card-body">
+        <table id="tblPersonelBilgi" class="table table-striped table-row-bordered gy-5 gs-7">
+            <thead>
+                <tr>
+                    <th>
+                        Sıra No
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Servis_Tarih)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Yapilan_Islem)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Diger_Servis_Tarih)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Bakim_Tip)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Durum)
+                    </th> 
+                    <th>
+                       Onay Durumu
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @siraNo
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Servis_Tarih)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Yapilan_Islem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Diger_Servis_Tarih)
+                    </td>
+                    @if (item.Bakim_Tip == 0)
+                    {
+                        <td>
+                            Periyodik Planlı Bakım
+                        </td>
+                    }
+                    else if (item.Bakim_Tip == 1)
+                    {
+                        <td>
+                            Arıza Tamiri
+                        </td>
+                    }
+                    else if (item.Bakim_Tip == 2)
+                    {
+                        <td>
+                            Periyodik Kontrol
+                        </td>
+                    }
+                    @if (item.Durum == 0)
+                    {
+                        <td>
+                            Uygun
+                        </td>
+                    }
+                    else if (item.Durum == 1)
+                    {
+                        <td>
+                            Kusurlu
+                        </td>
+                    }
+                    else if (item.Durum == 2)
+                    {
+                        <td>
+                            Ağır Kusurlu
+                        </td>
+                    }
+                    @if (item.OnayBirimSorumlu == 1 && item.OnayIsgUzman==1)
+                    {
+                        <td>
+                            Onaylandı
+                        </td>
+                    }
+                    else if (item.OnayIsgUzman == 2 && item.OnayBirimSorumlu==2)
+                    {
+                        <td>
+                            Reddedildi
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            Beklemede
+                        </td>
+                    }
+
+
+                </tr>
+                    siraNo++;
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

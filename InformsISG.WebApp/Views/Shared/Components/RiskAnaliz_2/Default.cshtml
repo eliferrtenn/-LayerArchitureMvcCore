@@ -1,0 +1,112 @@
+﻿@model InformsISG.Entities.Dtos.Risk_AnalizDTO
+
+@{
+    ViewData["Title"] = "Default";
+}
+
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">RİSK ANALİZ</h3>
+            <div class="card-toolbar">
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="Id" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+                    <label asp-for="Analiz_No" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Analiz_No" class="form-control" disabled/>
+                    </div>
+                </div>
+                <div class="col-md-8 mb-5">
+                    <label asp-for="Analiz_Tanim" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Analiz_Tanim" class="form-control" disabled/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer">
+
+    </div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+         $("#Birim_Id").change(function () {
+             var cid = $("#Birim_Id").val();
+             $("#Tali_Birim_Id option").remove();
+
+
+          $.ajax({
+            method: 'GET',
+            url: "@Url.Action("GetTaliBirim","Risk_Analiz")/" + cid
+         }).done(function (result) {
+             $.each(result, function (i, item) {
+                 $("#Tali_Birim_Id").append('<option value="' + item.value + '">' + item.text + '</option>');
+             });
+             $("#Tali_Birim_Id").trigger('change');
+         })
+
+         });
+    </script>
+
+    <script>
+        $("#tblBirim2").DataTable({
+            "pageLength": 50,
+            language: {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(MAX kayıt içerisinden bulunan)",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada MENU kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            },
+            dom:
+                "<'row'" +
+                "<'col-sm-6 d-flex align-items-center justify-conten-start'>" +
+                "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+                ">" +
+
+                "<'table-responsive'tr>" +
+
+                "<'row'" +
+                "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                ">"
+
+        });
+
+    </script>
+}
+

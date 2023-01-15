@@ -1,0 +1,44 @@
+﻿@model InformsISG.Entities.Dtos.Isg_Kurul_KararDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <label asp-for="Toplanti_No" class="control-label"></label>
+                <div class="input-group form-group mb-5">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="fa-solid fa-check-double"></i>
+                    </span>
+                    <input asp-for="Toplanti_No" class="form-control" disabled="disabled" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Aciklama" class="control-label"></label>
+                <div class="input-group form-group mb-5">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="fa-solid fa-check-double"></i>
+                    </span>
+                    <input asp-for="Aciklama" class="form-control" disabled="disabled" />
+                </div>
+            </div><div class="col-md-4">
+                <label asp-for="Saat" class="control-label"></label>
+                <div class="input-group form-group mb-5">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="fa-solid fa-check-double"></i>
+                    </span>
+                    <input asp-for="Saat" class="form-control" disabled="disabled" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

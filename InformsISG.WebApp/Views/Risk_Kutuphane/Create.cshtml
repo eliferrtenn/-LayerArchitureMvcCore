@@ -1,0 +1,74 @@
+﻿@model InformsISG.Entities.Dtos.Risk_KutuphaneDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form asp-action="Create">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">KKD EKLEME</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Kkd")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Risk_Kategori_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Risk_Kategori_Id" class="form-control" asp-items="ViewBag.Risk_Kategori_Id">
+                            <option value="">Seçiniz</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+            <label asp-for="Risk_Ust_Grup_Id" class="control-label"></label>
+            <div class="input-group form-group">
+                <span class="input-group-text" id="basic-addon1">
+                    <i class="fa-solid fa-check-double"></i>
+                </span>
+                <select asp-for="Risk_Ust_Grup_Id" class="form-control" asp-items="ViewBag.Risk_Ust_Grup_Id">
+                </select>
+            </div>
+        </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer">
+
+    </div>
+
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $("#Risk_Kategori_Id").change(function () {
+            var cid = $("#Risk_Kategori_Id").val();
+            $("#Risk_Ust_Grup_Id option").remove();
+
+
+          $.ajax({
+            method: 'GET',
+            url: "@Url.Action("GetUstGrup", "Risk_Kutuphane")/" + cid
+         }).done(function (result) {
+             $.each(result, function (i, item) {
+             
+           /*      $("#Risk_Ust_Grup_Id").append('<option value="' + item.value + '">' + item.text + '</option>');*/
+             });
+             $("#Risk_Ust_Grup_Id").trigger('change');
+         })
+
+         });
+
+
+    </script>
+}
+

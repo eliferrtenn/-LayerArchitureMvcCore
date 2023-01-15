@@ -1,0 +1,43 @@
+﻿@model InformsISG.Entities.Dtos.Makine_Ekipman_Bakim_PlanlariDTO
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    TempData["Ramak_Kala_Id"] = TempData["Ramak_Kala_Id"];
+
+}
+<div class="card shadow-sm">
+
+    
+    <form asp-action="CreateDosya" enctype="multipart/form-data">
+
+        <div class="card-header">
+            <h3 class="card-title">RAMAK KALA DOSYA</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Ramak_Kala")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 mb-5">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                </div>
+                <div class="form-group mb-5">
+                    <div class="col-md-10">
+                        <p>RAMAK KALA FOTOĞRAFI EKLEYİN : </p>
+                        <input type="file" name="file" multiple>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+        </div>
+
+    </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+ 
+}

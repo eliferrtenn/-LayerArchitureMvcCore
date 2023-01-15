@@ -1,0 +1,134 @@
+﻿@model IEnumerable<InformsISG.Entities.Dtos.Egitim_Konu_Alt_BaslikDTO>
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h3 class="card-title">EĞİTİM KONU LİSTESİ</h3>
+        <div class="card-toolbar">
+
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="tblBirim" class="table table-striped table-row-bordered gy-5 gs-7">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Alt_Baslik_No)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Alt_Baslik_Ad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Sure)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Alt_Baslik_No)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Alt_Baslik_Ad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sure)
+                        </td>
+                        <td style="text-align:end">
+                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                    data-kt-menu-trigger="click"
+                                    data-kt-menu-placement="bottom-start">
+                                İşlemler
+                            </button>
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-100px py-4"
+                                 data-kt-menu="true">
+                                <div class="menu-item px-3">
+                                    <a asp-action="KalanEgitim2" asp-route-id="@item.Id" class="menu-link px-3">
+                                        Eğitim Düzenle
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card-footer">
+
+    </div>
+</div>
+@section Scripts{
+
+    <script type="text/javascript">
+       function VeriSil(ID, obj) {
+            var btn = $(obj);
+            Swal.fire({
+                title: 'SİLME İŞLEMİ',
+                text: "Silmek istediğinize emin misiniz?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#50cd89',
+                cancelButtonColor: '#f1416c',
+                confirmButtonText: 'Evet Sil!',
+                cancelButtonText: 'Hayır Silme!',
+                showClass: {
+                    popup: 'animate_animated animate_fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate_animated animate_fadeOutUp'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method: 'GET',
+                      url: "@Url.Action("Delete", "Egitim_Konu_Alt_Baslik")/" + ID
+                    }).done(function (d) {
+                         btn.parent().parent().fadeOut(1000);
+                            Swal.fire({
+                            title: 'BAŞARILI İŞLEM',
+                            text: "Silme işlemi başarı ile gerçekleşti",
+                            icon: 'success',
+                            showClass: {
+                                popup: 'animate_animated animate_fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate_animated animate_fadeOutUp'
+                            }
+                        })
+                    }).fail(function () {
+                        Swal.fire({
+                            title: 'HATALI İŞLEM',
+                            text: "Veri silinemedi",
+                            icon: 'error',
+                            showClass: {
+                                popup: 'animate_animated animate_fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate_animated animate_fadeOutUp'
+                            }
+                        })
+                    })
+                }
+            });
+        }
+    </script>
+
+
+}
+
+
+
+
+
+

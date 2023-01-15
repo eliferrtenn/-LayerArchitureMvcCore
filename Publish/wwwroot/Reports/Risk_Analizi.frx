@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/24/2022 01:22:26" ReportInfo.Modified="10/24/2022 01:27:52" ReportInfo.CreatorVersion="2022.3.0.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="InformsISG" ConnectionString="Server=DESKTOP-411FIHT\SQLEXPRESS;Database=InformsISG;User Id=test;Password=test12345">
+      <TableDataSource Name="yaralanma_sekli" DataType="System.Int32" Enabled="true" TableName="yaralanma_sekli">
+        <Column Name="Id" DataType="System.Int64"/>
+        <Column Name="Yaralanma_Sekli_Ad" DataType="System.String"/>
+        <Column Name="Yaratilma_Tarihi" DataType="System.DateTime"/>
+        <Column Name="Degistirilme_Tarihi" DataType="System.DateTime"/>
+        <Column Name="isDeleted" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="isActive" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Kullanici_Id" DataType="System.Int64"/>
+      </TableDataSource>
+      <TableDataSource Name="personel_bilgi" DataType="System.Int32" Enabled="true" TableName="personel_bilgi">
+        <Column Name="Id" DataType="System.Int64"/>
+        <Column Name="IsgUzmanMi" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="IsYeriHekimi" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="SertifikaNo" DataType="System.String"/>
+        <Column Name="Fotograf" DataType="System.String"/>
+        <Column Name="Unvan" DataType="System.String"/>
+        <Column Name="Ad_Soyad" DataType="System.String"/>
+        <Column Name="Sicil_No" DataType="System.String"/>
+        <Column Name="Sgk_No" DataType="System.String"/>
+        <Column Name="Tc_No" DataType="System.String"/>
+        <Column Name="Dogum_Tarih" DataType="System.DateTime"/>
+        <Column Name="Dogum_Yer" DataType="System.String"/>
+        <Column Name="Cinsiyet" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Is_Giris_Tarih" DataType="System.DateTime"/>
+        <Column Name="Medeni_Durum" DataType="System.Int32"/>
+        <Column Name="Telefon1" DataType="System.String"/>
+        <Column Name="Telefon2" DataType="System.String"/>
+        <Column Name="Adres" DataType="System.String"/>
+        <Column Name="Egitim" DataType="System.Int32"/>
+        <Column Name="Egitim_Meslek" DataType="System.Int32"/>
+        <Column Name="Eposta" DataType="System.String"/>
+        <Column Name="Is_Cikis_Tarih" DataType="System.DateTime"/>
+        <Column Name="Kadro_Durumu" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Notlar" DataType="System.String"/>
+        <Column Name="yerdegistiMi" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Sgk_Meslek_Id" DataType="System.Int64"/>
+        <Column Name="Tali_Birim_Id" DataType="System.Int64"/>
+        <Column Name="Birim_Id" DataType="System.Int64"/>
+        <Column Name="Yaratilma_Tarihi" DataType="System.DateTime"/>
+        <Column Name="Degistirilme_Tarihi" DataType="System.DateTime"/>
+        <Column Name="isDeleted" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="isActive" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Kullanici_Id" DataType="System.Int64"/>
+      </TableDataSource>
+      <TableDataSource Name="risk_analiz" DataType="System.Int32" Enabled="true" TableName="risk_analiz">
+        <Column Name="Id" DataType="System.Int64"/>
+        <Column Name="Analiz_No" DataType="System.String"/>
+        <Column Name="Analiz_Tanim" DataType="System.String"/>
+        <Column Name="Analiz_Tarih" DataType="System.DateTime"/>
+        <Column Name="Bitis_Tarih" DataType="System.DateTime"/>
+        <Column Name="Notlar" DataType="System.String"/>
+        <Column Name="Dosya" DataType="System.String"/>
+        <Column Name="Birim_Id" DataType="System.Int64"/>
+        <Column Name="Tali_Birim_Id" DataType="System.Int64"/>
+        <Column Name="Isg_Kurul_Id" DataType="System.Int64"/>
+        <Column Name="Personel_Id" DataType="System.Int64"/>
+        <Column Name="Risk_Yontem_Id" DataType="System.Int64"/>
+        <Column Name="Risk_Konu_Id" DataType="System.Int64"/>
+        <Column Name="Risk_Konu_Grup_Id" DataType="System.Int64"/>
+        <Column Name="Risk_Ust_Grup_Id" DataType="System.Int64"/>
+        <Column Name="Risk_Kategori_Id" DataType="System.Int64"/>
+        <Column Name="Yaratilma_Tarihi" DataType="System.DateTime"/>
+        <Column Name="Degistirilme_Tarihi" DataType="System.DateTime"/>
+        <Column Name="isDeleted" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="isActive" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Kullanici_Id" DataType="System.Int64"/>
+      </TableDataSource>
+      <TableDataSource Name="risk_analiz_risk" DataType="System.Int32" Enabled="true" TableName="risk_analiz_risk">
+        <Column Name="Id" DataType="System.Int64"/>
+        <Column Name="Risk" DataType="System.String"/>
+        <Column Name="Aktif" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Yaratilma_Tarihi" DataType="System.DateTime"/>
+        <Column Name="Degistirilme_Tarihi" DataType="System.DateTime"/>
+        <Column Name="isDeleted" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="isActive" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Kullanici_Id" DataType="System.Int64"/>
+      </TableDataSource>
+      <TableDataSource Name="risk_analiz_tablo" DataType="System.Int32" Enabled="true" TableName="risk_analiz_tablo" SelectCommand="SELECT R.Id, R.Faaliyet, R.Rutin_Durum, R.Tehlike, R.Risk, R.Uygun_Durum, R.Yasal_Dayanak, R.Duzeltici_Faaliyet, R.Kontrol_Degerlendirme, R.Sorumlular, R.Termin_Tarih, R.Etkinlik_Kontrol_Tarih, R.Olasilik1, R.Frekans1, R.Siddet1, R.Risk_Puan1, R.Risk_Seviye1, R.Olasilik2, R.Frekans2, R.Siddet2, R.Risk_Puan2, R.Risk_Seviye2, R.Resim, R.Risk_Id, R.Risk_Analiz_Id, R.Yaratilma_Tarihi, R.Degistirilme_Tarihi, R.isDeleted, R.isActive, R.Kullanici_Id, T.Tali_Birim_Ad, B.Birim_Ad, t1.Tehlike_Tanim_Ad, P.Ad_Soyad, P.Tc_No&#13;&#10;FROM (((&quot;risk_analiz_tablo&quot; R INNER JOIN &quot;tali_birim&quot; T ON R.Tali_Birim_Id = T.Id &#13;&#10;) INNER JOIN &quot;birim&quot; B ON R.Birim_Id = B.Id &#13;&#10;) INNER JOIN &quot;tehlike_tanim&quot; t1 ON R.Tehlike_Tanim_Id = t1.Id &#13;&#10;) INNER JOIN &quot;personel_bilgi&quot; P ON R.Personel_Id = P.Id &#13;&#10;&#13;&#10;">
+        <Column Name="Id" DataType="System.Int64"/>
+        <Column Name="Faaliyet" DataType="System.String"/>
+        <Column Name="Rutin_Durum" DataType="System.Int32"/>
+        <Column Name="Tehlike" DataType="System.String"/>
+        <Column Name="Risk" DataType="System.String"/>
+        <Column Name="Uygun_Durum" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Yasal_Dayanak" DataType="System.String"/>
+        <Column Name="Duzeltici_Faaliyet" DataType="System.String"/>
+        <Column Name="Kontrol_Degerlendirme" DataType="System.String"/>
+        <Column Name="Sorumlular" DataType="System.String"/>
+        <Column Name="Termin_Tarih" DataType="System.DateTime"/>
+        <Column Name="Etkinlik_Kontrol_Tarih" DataType="System.DateTime"/>
+        <Column Name="Olasilik1" DataType="System.Single"/>
+        <Column Name="Frekans1" DataType="System.Single"/>
+        <Column Name="Siddet1" DataType="System.Single"/>
+        <Column Name="Risk_Puan1" DataType="System.Single"/>
+        <Column Name="Risk_Seviye1" DataType="System.String"/>
+        <Column Name="Olasilik2" DataType="System.Single"/>
+        <Column Name="Frekans2" DataType="System.Single"/>
+        <Column Name="Siddet2" DataType="System.Single"/>
+        <Column Name="Risk_Puan2" DataType="System.Single"/>
+        <Column Name="Risk_Seviye2" DataType="System.String"/>
+        <Column Name="Resim" DataType="System.String"/>
+        <Column Name="Risk_Id" DataType="System.Int64"/>
+        <Column Name="Risk_Analiz_Id" DataType="System.Int64"/>
+        <Column Name="Yaratilma_Tarihi" DataType="System.DateTime"/>
+        <Column Name="Degistirilme_Tarihi" DataType="System.DateTime"/>
+        <Column Name="isDeleted" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="isActive" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Kullanici_Id" DataType="System.Int64"/>
+        <Column Name="Tali_Birim_Ad" DataType="System.String"/>
+        <Column Name="Birim_Ad" DataType="System.String"/>
+        <Column Name="Tehlike_Tanim_Ad" DataType="System.String"/>
+        <Column Name="Ad_Soyad" DataType="System.String"/>
+        <Column Name="Tc_No" DataType="System.String"/>
+      </TableDataSource>
+      <TableDataSource Name="risk_analiz_tehlike" DataType="System.Int32" Enabled="true" TableName="risk_analiz_tehlike">
+        <Column Name="Id" DataType="System.Int64"/>
+        <Column Name="Tehlike" DataType="System.String"/>
+        <Column Name="Aktif" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Yaratilma_Tarihi" DataType="System.DateTime"/>
+        <Column Name="Degistirilme_Tarihi" DataType="System.DateTime"/>
+        <Column Name="isDeleted" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="isActive" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Kullanici_Id" DataType="System.Int64"/>
+      </TableDataSource>
+      <TableDataSource Name="risk_gerceklesen" DataType="System.Int32" Enabled="true" TableName="risk_gerceklesen">
+        <Column Name="Id" DataType="System.Int64"/>
+        <Column Name="Risk_Gerceklesen_Ad" DataType="System.String"/>
+        <Column Name="Yaratilma_Tarihi" DataType="System.DateTime"/>
+        <Column Name="Degistirilme_Tarihi" DataType="System.DateTime"/>
+        <Column Name="isDeleted" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="isActive" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Kullanici_Id" DataType="System.Int64"/>
+      </TableDataSource>
+      <TableDataSource Name="risk_kutuphane" DataType="System.Int32" Enabled="true" TableName="risk_kutuphane">
+        <Column Name="Id" DataType="System.Int64"/>
+        <Column Name="Risk_Analiz_Id" DataType="System.Int64"/>
+        <Column Name="Risk_Kategori_Id" DataType="System.Int64"/>
+        <Column Name="Risk_Ust_Grup_Id" DataType="System.Int64"/>
+        <Column Name="Risk_Konu_Grup_Id" DataType="System.Int64"/>
+        <Column Name="Risk_Konu_Id" DataType="System.Int64"/>
+        <Column Name="Yaratilma_Tarihi" DataType="System.DateTime"/>
+        <Column Name="Degistirilme_Tarihi" DataType="System.DateTime"/>
+        <Column Name="isDeleted" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="isActive" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Kullanici_Id" DataType="System.Int64"/>
+      </TableDataSource>
+      <TableDataSource Name="risk_yontem" DataType="System.Int32" Enabled="true" TableName="risk_yontem">
+        <Column Name="Id" DataType="System.Int64"/>
+        <Column Name="Risk_Yontem_Ad" DataType="System.String"/>
+        <Column Name="Yaratilma_Tarihi" DataType="System.DateTime"/>
+        <Column Name="Degistirilme_Tarihi" DataType="System.DateTime"/>
+        <Column Name="isDeleted" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="isActive" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Kullanici_Id" DataType="System.Int64"/>
+      </TableDataSource>
+      <TableDataSource Name="birim" DataType="System.Int32" Enabled="true" TableName="birim">
+        <Column Name="Id" DataType="System.Int64"/>
+        <Column Name="Birim_Ad" DataType="System.String"/>
+        <Column Name="Nace_Kod" DataType="System.String"/>
+        <Column Name="Sgk_No" DataType="System.String"/>
+        <Column Name="Aciklama" DataType="System.String"/>
+        <Column Name="Isg_Kurul_Id" DataType="System.Int64"/>
+        <Column Name="Isveren_Id" DataType="System.Int64"/>
+        <Column Name="Alt_IsverenId" DataType="System.Int64"/>
+        <Column Name="Yaratilma_Tarihi" DataType="System.DateTime"/>
+        <Column Name="Degistirilme_Tarihi" DataType="System.DateTime"/>
+        <Column Name="isDeleted" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="isActive" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Kullanici_Id" DataType="System.Int64"/>
+      </TableDataSource>
+      <TableDataSource Name="tali_birim" DataType="System.Int32" Enabled="true" TableName="tali_birim">
+        <Column Name="Id" DataType="System.Int64"/>
+        <Column Name="Tali_Birim_Ad" DataType="System.String"/>
+        <Column Name="Aciklama" DataType="System.String"/>
+        <Column Name="Birim_Id" DataType="System.Int64"/>
+        <Column Name="Isveren_Id" DataType="System.Int64"/>
+        <Column Name="Alt_IsverenId" DataType="System.Int64"/>
+        <Column Name="Yaratilma_Tarihi" DataType="System.DateTime"/>
+        <Column Name="Degistirilme_Tarihi" DataType="System.DateTime"/>
+        <Column Name="isDeleted" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="isActive" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Kullanici_Id" DataType="System.Int64"/>
+      </TableDataSource>
+      <TableDataSource Name="tehlike_tanim" DataType="System.Int32" Enabled="true" TableName="tehlike_tanim">
+        <Column Name="Id" DataType="System.Int64"/>
+        <Column Name="Tehlike_Tanim_Ad" DataType="System.String"/>
+        <Column Name="Yaratilma_Tarihi" DataType="System.DateTime"/>
+        <Column Name="Degistirilme_Tarihi" DataType="System.DateTime"/>
+        <Column Name="isDeleted" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="isActive" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="Kullanici_Id" DataType="System.Int64"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="ID" DataType="System.String"/>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="420" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="1512" Height="75.6"/>
+    <PageHeaderBand Name="PageHeader1" Top="79.6" Width="1512" Height="66.15">
+      <TextObject Name="Text8" Top="47.25" Width="94.5" Height="18.9" Text="Birim_Ad" Font="Arial, 10pt"/>
+      <TextObject Name="Text9" Left="94.5" Top="47.25" Width="94.5" Height="18.9" Text="Tali_Birim_Ad" Font="Arial, 10pt"/>
+      <TextObject Name="Text16" Left="189" Top="47.25" Width="94.5" Height="18.9" Text="Tehlike_Tanim_Ad" Font="Arial, 10pt"/>
+      <TextObject Name="Text18" Left="283.5" Top="47.25" Width="94.5" Height="18.9" Text="Risk" Font="Arial, 10pt"/>
+      <TextObject Name="Text20" Left="378" Top="47.25" Width="94.5" Height="18.9" Text="Tehlike" Font="Arial, 10pt"/>
+      <TextObject Name="Text22" Left="567" Top="47.25" Width="94.5" Height="18.9" Text="Ad_Soyad" Font="Arial, 10pt"/>
+      <TextObject Name="Text23" Left="472.5" Top="47.25" Width="94.5" Height="18.9" Text="Tc_No" Font="Arial, 10pt"/>
+      <TextObject Name="Text32" Left="850.5" Top="47.25" Width="94.5" Height="18.9" Text="Yasal_Dayanak" Font="Arial, 10pt"/>
+      <TextObject Name="Text34" Left="945" Top="47.25" Width="94.5" Height="18.9" Text="Duzeltici_Faaliyet" Font="Arial, 10pt"/>
+      <TextObject Name="Text36" Left="1039.5" Top="47.25" Width="94.5" Height="18.9" Text="Termin_Tarih" Font="Arial, 10pt"/>
+      <TextObject Name="Text40" Left="756" Top="47.25" Width="94.5" Height="18.9" Text="Risk_Seviye1" Font="Arial, 10pt"/>
+      <TextObject Name="Text50" Left="1219.05" Top="47.25" Width="94.5" Height="18.9" Text="Risk_Seviye2" Font="Arial, 8pt"/>
+      <TextObject Name="Text52" Left="1313.55" Top="47.25" Width="94.5" Height="18.9" Text="Kontrol_Degerlendirme" Font="Arial, 8pt"/>
+      <TextObject Name="Text25" Left="670.95" Width="28.35" Height="66.15" Text="Olasilik1" Angle="270" Font="Arial, 10pt"/>
+      <TextObject Name="Text27" Left="699.3" Width="18.9" Height="66.15" Text="Frekans1" Angle="270" Font="Arial, 10pt"/>
+      <TextObject Name="Text29" Left="718.2" Width="18.9" Height="66.15" Text="Siddet1" Angle="270" Font="Arial, 10pt"/>
+      <TextObject Name="Text38" Left="737.1" Width="18.9" Height="66.15" Text="Risk_Puan1" Angle="270" Font="Arial, 10pt"/>
+      <TextObject Name="Text42" Left="1134" Width="28.35" Height="66.15" Text="Olasilik2" Angle="270" Font="Arial, 8pt"/>
+      <TextObject Name="Text44" Left="1162.35" Width="18.9" Height="66.15" Text="Frekans2" Angle="270" Font="Arial, 8pt"/>
+      <TextObject Name="Text46" Left="1181.25" Width="18.9" Height="66.15" Text="Siddet2" Angle="270" Font="Arial, 8pt"/>
+      <TextObject Name="Text48" Left="1200.15" Width="18.9" Height="66.15" Text="Risk_Puan2" Angle="270" Font="Arial, 8pt"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="149.75" Width="1512" Height="75.6" DataSource="risk_analiz_tablo" Filter="[risk_analiz_tablo.Risk_Id]==[ID]">
+      <TextObject Name="Text13" Top="13.45" Width="94.5" Height="18.9" Text="[risk_analiz_tablo.Birim_Ad]" Font="Arial, 8pt"/>
+      <TextObject Name="Text14" Left="94.5" Top="13.45" Width="94.5" Height="18.9" Text="[risk_analiz_tablo.Tali_Birim_Ad]" Font="Arial, 8pt"/>
+      <TextObject Name="Text15" Left="189" Top="13.45" Width="94.5" Height="18.9" Text="[risk_analiz_tablo.Tehlike_Tanim_Ad]" Font="Arial, 8pt"/>
+      <TextObject Name="Text17" Left="283.5" Top="13.45" Width="94.5" Height="18.9" Text="[risk_analiz_tablo.Risk]" Font="Arial, 8pt"/>
+      <TextObject Name="Text19" Left="378" Top="13.45" Width="94.5" Height="18.9" Text="[risk_analiz_tablo.Tehlike]" Font="Arial, 8pt"/>
+      <TextObject Name="Text21" Left="567" Top="13.45" Width="94.5" Height="18.9" Text="[risk_analiz_tablo.Ad_Soyad]" Font="Arial, 8pt"/>
+      <TextObject Name="Text24" Left="670.95" Top="13.45" Width="28.35" Height="18.9" Text="[risk_analiz_tablo.Olasilik1]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text26" Left="699.3" Top="13.45" Width="18.9" Height="18.9" Text="[risk_analiz_tablo.Frekans1]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text28" Left="718.2" Top="13.45" Width="18.9" Height="18.9" Text="[risk_analiz_tablo.Siddet1]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text30" Left="472.5" Top="13.45" Width="94.5" Height="18.9" Text="[risk_analiz_tablo.Tc_No]" Font="Arial, 8pt"/>
+      <TextObject Name="Text31" Left="850.5" Top="13.45" Width="94.5" Height="18.9" Text="[risk_analiz_tablo.Yasal_Dayanak]" Font="Arial, 8pt"/>
+      <TextObject Name="Text33" Left="945" Top="13.45" Width="94.5" Height="18.9" Text="[risk_analiz_tablo.Duzeltici_Faaliyet]" Font="Arial, 8pt"/>
+      <TextObject Name="Text35" Left="1039.5" Top="13.45" Width="94.5" Height="18.9" Text="[risk_analiz_tablo.Termin_Tarih]" Format="Date" Format.Format="d" Font="Arial, 8pt"/>
+      <TextObject Name="Text37" Left="737.1" Top="13.45" Width="18.9" Height="18.9" Text="[risk_analiz_tablo.Risk_Puan1]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text39" Left="756" Top="13.45" Width="94.5" Height="18.9" Text="[risk_analiz_tablo.Risk_Seviye1]" Font="Arial, 8pt"/>
+      <TextObject Name="Text41" Left="1134" Top="13.45" Width="28.35" Height="18.9" Text="[risk_analiz_tablo.Olasilik2]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text43" Left="1162.35" Top="13.45" Width="18.9" Height="18.9" Text="[risk_analiz_tablo.Frekans2]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text45" Left="1181.25" Top="13.45" Width="18.9" Height="18.9" Text="[risk_analiz_tablo.Siddet2]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text47" Left="1200.15" Top="13.45" Width="18.9" Height="18.9" Text="[risk_analiz_tablo.Risk_Puan2]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 8pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text49" Left="1219.05" Top="13.45" Width="94.5" Height="18.9" Text="[risk_analiz_tablo.Risk_Seviye2]" Font="Arial, 8pt"/>
+      <TextObject Name="Text51" Left="1313.55" Top="13.45" Width="94.5" Height="18.9" Text="[risk_analiz_tablo.Kontrol_Degerlendirme]" Font="Arial, 8pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="229.35" Width="1512" Height="18.9"/>
+  </ReportPage>
+</Report>

@@ -1,0 +1,72 @@
+﻿@model InformsISG.Entities.Dtos.Egitim_Sinav_NotDTO
+
+@{
+    ViewData["Title"] = "Egitim_Sinav_Not";
+    var PersonelAtaList = (List<InformsISG.Entities.Dtos.Egitim_Personel_AtamaDTO>)ViewBag.PersonelAtaList;
+    var PersonelList = (List<InformsISG.Entities.Dtos.Personel_BilgiDTO>)ViewBag.PersonelList;
+    TempData["EgitimTanimlaId"] = TempData["EgitimTanimlaId"];
+    var id = ViewBag.ID;
+
+    var count = ViewBag.Count;
+    TempData["COUNT"] = TempData["COUNT"];
+}
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h3 class="card-title">EĞİTİM SINAV NOT EKLEME</h3>
+        <div class="card-toolbar">
+            <a href="@Url.Action("Index","Egitim_Sinav")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+        </div>
+    </div>
+    <form asp-action="Egitim_Sinav_Not" enctype="multipart/form-data" method="post">
+        <div class="card-body">
+            <div class="row">
+                @foreach (var item in PersonelAtaList)
+                {
+                    @if (item.Egitim_Tanimla_Id == id)
+                    {
+                        @foreach (var item2 in PersonelList)
+                        {
+                            @if (item.Personel_Id == item2.Id)
+                            {
+                                <div class="col-md-4">
+                                    <div class="form-group mb-5">
+                                        @item2.Ad_Soyad
+                                        <input asp-for="Personel_Id" class="form-control" disabled name="Id" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group mb-5">
+                                        <label asp-for="Sinav_Not" class="control-label"></label>
+                                        <input asp-for="Sinav_Not" class="form-control" name="SinavNot" />
+                                        <span asp-validation-for="Sinav_Not" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group mb-5">
+                                        <label asp-for="Aciklama" class="control-label"></label>
+                                        <input asp-for="Aciklama" class="form-control" name="Aciklama" />
+                                        <span asp-validation-for="Aciklama" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+                            }
+                        }
+
+                    }
+                }
+            </div>
+        </div>
+        <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">
+
+    </form>
+
+
+    <div class="card-footer">
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,212 @@
+﻿@model IEnumerable<InformsISG.Entities.Dtos.Isg_Kurul_ElemanDTO>
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "PersonelEkle";
+    var IsgKurulKararId = ViewBag.IsgKurulKararId;
+    var talibirimId = ViewBag.Tali_Birim_Id;
+    var personelId = ViewBag.Personel_Id;
+    var deneme = ViewBag.deneme;
+    var PersonelList = (List<InformsISG.Entities.Dtos.Personel_BilgiDTO>)ViewBag.PersonelList;
+    int siraNo = 1;
+}
+
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <div>
+            @await Component.InvokeAsync("IsgKurulKararGetir", new { Id = IsgKurulKararId })
+        </div>
+        <br /> <br /> <br /> <br />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <h3 class="card-title">TOPLANTIYA EKLENEN PERSONELLER</h3>
+                        </div>
+                        <table id="tblPersonelBilgi" class="table table-striped table-row-bordered gy-5 gs-7">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Ad Soyad
+                                    </th>
+                                    <th>
+                                        Sicil No
+                                    </th>
+                                    <th>
+                                        Tc No
+                                    </th>
+                                    <th>
+                                        Birim
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model)
+                            {
+                                @if (item.Isg_Kurul_Karar_Id == IsgKurulKararId)
+                                {
+                                    @foreach (var item2 in PersonelList)
+                                    {
+                                        @if (item.Personel_Id == item2.Id)
+                                        {
+
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>
+                                                        @item2.Ad_Soyad
+                                                    </td>
+                                                    <td>
+                                                        @item2.Sicil_No
+                                                    </td>
+                                                    <td>
+                                                        @item2.Tc_No
+                                                    </td>
+                                                    <td>
+                                                        @item2.Tali_Birim_Id
+                                                    </td>
+
+                                                    <td>
+                                                        <a asp-action="PersonelCikar" asp-route-id="@item.Id">
+                                                            Çıkar
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        }
+                                    }
+                                }
+                            }
+                        </table>
+
+
+                        <br /> <br /> <br />
+                        <div class="card-header">
+                            <h3 class="card-title">TOPLANTIYA EKLENECEK PERSONEL LİSTESİ</h3>
+                        </div>
+                        <div>
+                            @await Component.InvokeAsync("PersonelGetirKurul")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br /><br /><br />
+        </div>
+
+    </div>
+
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        function VeriCikar(ID, obj) {
+            var btn = $(obj);
+            Swal.fire({
+                title: 'SİLME İŞLEMİ',
+                text: "Silmek istediğinize emin misiniz?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#50cd89',
+                cancelButtonColor: '#f1416c',
+                confirmButtonText: 'Evet Sil!',
+                cancelButtonText: 'Hayır Silme!',
+                showClass: {
+                    popup: 'animate_animated animate_fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate_animated animate_fadeOutUp'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("EgitimVerenCikar", "Egitim_Tanimla")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: ID }
+                    }).done(function (d) {
+                        const result = $.parseJSON(d);
+                        if (result.ResultStatus == 0) {
+                            Swal.fire({
+                                title: 'SİLİNDİ',
+                                icon: 'success',
+                                text: `${result.Message}`,
+                                showClass: {
+                                    popup: 'animate_animated animate_fadeInDown'
+                                },
+                                hideClass: {
+                                    popup: 'animate_animated animate_fadeOutUp'
+                                }
+                            });
+                            btn.parent().parent().parent().parent().fadeOut(1000);
+                        }
+                    }).fail(function () {
+                        Swal.fire({
+                            title: 'HATALI İŞLEM',
+                            text: "Veri silinemedi",
+                            icon: 'error',
+                            showClass: {
+                                popup: 'animate_animated animate_fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate_animated animate_fadeOutUp'
+                            }
+                        })
+                    })
+                }
+            });
+        }
+    </script>
+    <script>
+        $("#tblBirim").DataTable({
+            "pageLength": 50,
+            language: {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(MAX kayıt içerisinden bulunan)",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada MENU kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            },
+            dom:
+                "<'row'" +
+                "<'col-sm-6 d-flex align-items-center justify-conten-start'>" +
+                "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+                ">" +
+
+                "<'table-responsive'tr>" +
+
+                "<'row'" +
+                "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                ">"
+
+        });
+    </script>
+}
+
+

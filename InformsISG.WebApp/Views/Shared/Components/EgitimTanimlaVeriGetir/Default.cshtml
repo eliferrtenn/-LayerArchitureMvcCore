@@ -1,0 +1,50 @@
+﻿@model InformsISG.Entities.Dtos.Egitim_TanimlaDTO
+
+    <div class="row">
+        <div class="col-md-12" >
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h3 class="card-title">EGİTİM BİLGİLERİ</h3>
+                    <div class="card-toolbar">
+                        <a href="@Url.Action("Index","Egitim_Tanimla")" class="btn btn-danger btn-hover-rotate-end">
+GERİ DÖN
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="text-danger"></div>
+                            <div class="form-group mb-5">
+                                <label asp-for="@Model.Egitim_Sebep" class="control-label"></label>
+                                @if (Model.Egitim_Sebep == 0)
+                                {
+                                    <input value="İşe Giriş Muayenesi"  class="form-control" disabled />
+                                }else if (Model.Egitim_Sebep == 1)
+                                {
+                                    <input value="Yeni Ekipman"  class="form-control" disabled />
+                                }else if (Model.Egitim_Sebep == 2)
+                                {
+                                    <input value="Meslek Hastalığı"  class="form-control" disabled />
+                                }else if (Model.Egitim_Sebep == 3)
+                                {
+                                    <input value="İş Değişikşiği"  class="form-control" disabled />
+                                }else if (Model.Egitim_Sebep == 4)
+                                {
+                                    <input value="İş Kazası"  class="form-control" disabled />
+                                }
+                                <span asp-validation-for="@Model.Egitim_Sebep" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-5">
+                                <label asp-for="@Model.Egitim_Tarih" class="control-label"></label>
+                                <input asp-for="@Model.Egitim_Tarih" class="form-control"  disabled/>
+                                <span asp-validation-for="@Model.Egitim_Tarih" class="text-danger"></span>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>

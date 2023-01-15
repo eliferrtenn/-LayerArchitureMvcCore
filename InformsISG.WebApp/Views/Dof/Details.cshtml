@@ -1,0 +1,153 @@
+﻿@model InformsISG.Entities.Dtos.DofDTO
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="">
+    <div class=" flex-column " id="kt_wrapper">
+        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+            <div class="post d-flex flex-column-fluid" id="kt_post">
+                <div id="kt_content_container" class="container-xxl">
+                    <div class="card mb-5 mb-xl-10">
+                        <div class="card-body pt-9 pb-0">
+                            <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
+                                <li class="nav-item mt-2">
+                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#">Genel Bilgi</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+                        <div class="card-header cursor-pointer">
+                            <div class="card-title m-0">
+                                <h3 class="fw-bolder m-0">Döf Bigileri</h3>
+                            </div>
+                            <a asp-action="Index" asp-route-id="@Model.Id" class="btn btn-primary align-self-center">Geri Dön</a>
+                        </div>
+                        <div class="card-body p-9">
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Döf No</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Dof_No</span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Düzenli Önleyici Faaliyetler</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Dof_Ad</span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Döf Tipi</label>
+                                <div class="col-lg-8">
+                                    @if (Model.Tip == 0)
+                                    {
+                                        <span class="fw-bolder fs-6 text-gray-800">Düzeltici</span>
+                                    }
+                                    else if (Model.Tip ==1)
+                                    {
+                                        <span class="fw-bolder fs-6 text-gray-800">Önleyici</span>
+                                    }
+                                </div>
+                            </div>     
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Geldiği Kaynak</label>
+                                <div class="col-lg-8">
+                                    @if (Model.Geldigi_Kaynak == 0)
+                                    {
+                                    <span class="fw-bolder fs-6 text-gray-800">Risk Değerlendirme</span>
+                                    }
+                                    else if (Model.Geldigi_Kaynak == 1)
+                                    {
+                                    <span class="fw-bolder fs-6 text-gray-800">İş Kazası</span>
+                                    }
+                                    else if (Model.Geldigi_Kaynak == 2)
+                                    {
+                                <span class="fw-bolder fs-6 text-gray-800">İç Denetim</span>
+                                    }
+                                    else if (Model.Geldigi_Kaynak == 3)
+                                    {
+                                <span class="fw-bolder fs-6 text-gray-800">Tehlike Bildirimi</span>
+                                    }
+                                    else if (Model.Geldigi_Kaynak == 4)
+                                    {
+                                <span class="fw-bolder fs-6 text-gray-800">Ramak Kala</span>
+                                    }
+                                    else if (Model.Geldigi_Kaynak == 5)
+                                    {
+                                        <span class="fw-bolder fs-6 text-gray-800">Dış Denetim</span>
+                                    }
+                                    else if (Model.Geldigi_Kaynak == 6)
+                                    {
+                                        <span class="fw-bolder fs-6 text-gray-800">ISG Kurulu</span>
+                                    }
+                                    else if (Model.Geldigi_Kaynak == 7)
+                                    {
+                                        <span class="fw-bolder fs-6 text-gray-800">Periyodik Kontrol</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Döf Durumu</label>
+                                <div class="col-lg-8">
+                                    @if (Model.Dof_Acik == false)
+                                    {
+                                        <span class="fw-bolder fs-6 text-gray-800">Kapalı</span>
+                                    }
+                                    else if (Model.Dof_Acik == true)
+                                    {
+                                        <span class="fw-bolder fs-6 text-gray-800">Açık</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Uygunsuzluk Tanımı</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Uygunsuzluk_Tanim</span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Tespit Eden</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Tespit_Eden</span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Sorumlular</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Sorumlular</span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Açılış Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Acilis_Tarih</span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Cevap Süresi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Cevap_Sure</span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Cevap Sonlanma Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Cevap_Sonlanma_Tarih</span>
+                                </div>
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Sonlanma Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Sonlanma_Tarih</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

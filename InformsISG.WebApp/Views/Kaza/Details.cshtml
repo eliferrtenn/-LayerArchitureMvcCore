@@ -1,0 +1,423 @@
+﻿@model InformsISG.Entities.Dtos.KazaDTO
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="">
+    <div class=" flex-column " id="kt_wrapper">
+        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+            <div class="post d-flex flex-column-fluid" id="kt_post">
+                <div id="kt_content_container" class="container-xxl">
+                    <div class="card mb-5 mb-xl-10">
+                        <div class="card-body pt-9 pb-0">
+                            <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
+                            </div>
+                            <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
+                                <li class="nav-item mt-2">
+                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#">Genel Bilgi</a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+      
+                    <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+                        <div class="card-body p-9">
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Kaza/Olay No</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Kaza_No</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Kaza Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Kaza_Tarih</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">
+                                    Kaza Saati
+                                </label>
+                                <div class="col-lg-8 d-flex align-items-center">
+                                    <span class="fw-bolder fs-6 text-gray-800 me-2">@Model.Kaza_Saat</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">
+                                    Kaza Bildirim Tarihi
+                                </label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800 me-2">@Model.Bildirim_Tarih</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">İşe Başlama Saati</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Ise_Baslama_Saat</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Kaza Hasar Tipi</label>
+                                <div class="col-lg-8">
+                                    @if (Model.Kaza_Hasar_Tipi == 0)
+                                    {
+                                        <span class="fw-bolder fs-6 text-gray-800">Yaralanma/Hastalık</span>
+                                    }
+                                    else if (Model.Kaza_Hasar_Tipi == 1)
+                                    {
+                                        <span class="fw-bolder fs-6 text-gray-800">Yaralanma Yok</span>
+                                    }
+                                    else if (Model.Kaza_Hasar_Tipi == 2)
+                                    {
+                                        <span class="fw-bolder fs-6 text-gray-800">Maddi Hasar</span>
+                                    }
+                                    else if (Model.Kaza_Hasar_Tipi == 3)
+                                    {
+                                        <span class="fw-bolder fs-6 text-gray-800">Dökülme/Çevresel/Toplumsal Hasar</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Kaza Anındaki Faaliyet</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800 me-2">@Model.Kaza_Anindaki_Faaliyet</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Kaza Yeri</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Kaza_Yer</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Yaralanmaya Neden Olan Olay</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Yaralanmaya_Neden_Olan_Olay</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Yaralanmaya Neden Olan Araç</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Yaralanmaya_Neden_Olan_Arac</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Tıbbi Müdahale</label>
+                                <div class="col-lg-8">
+                                    @if (Model.Tibbi_Mudahele == false)
+                                    {
+
+
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Tıbbi Müdahale Açıklama</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Tibbi_Mudahele_Aciklama</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">İş Görememeezlik</label>
+                                <div class="col-lg-8">
+                                    @if (Model.Is_Gorememezlik == false)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">İş Görememezlik Gün Sayısı</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Is_Gorememezlik_Gun_Sayi</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Kaza Sonrasında Çalışan Yaptıkları</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Kaza_Sonrasi_Calisan_Ne_Yapti</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Mesleki Eğitim</label>
+                                <div class="col-lg-8">
+                                    @if (Model.Mesleki_Egitim == false)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Isg Eğitimi</label>
+                                <div class="col-lg-8">
+                                    @if (Model.Isg_Egitim == false)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Yok</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Var</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Hasar Büyüklüğü</label>
+                                <div class="col-lg-8">
+                                    @if (Model.Hasar_Buyuklugu == 0)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Dikkate Alınmalı</span>
+                                    }
+                                    else if (Model.Hasar_Buyuklugu == 1)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Önemli</span>
+                                    }
+                                    else if (Model.Hasar_Buyuklugu == 2)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Ciddi</span>
+                                    }
+                                    else if (Model.Hasar_Buyuklugu == 3)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Çok Ciddi</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Tekrarlanma Olasılığı</label>
+                                <div class="col-lg-8">
+                                    @if (Model.Tekrarlanma_Olasiligi == 0)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Pratik Olarak İmkansız</span>
+                                    }
+                                    else if (Model.Tekrarlanma_Olasiligi == 1)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Zayıf İhtimal</span>
+                                    }
+                                    else if (Model.Tekrarlanma_Olasiligi == 2)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Oldukça Düşük İhtimal</span>
+                                    }
+                                    else if (Model.Tekrarlanma_Olasiligi == 3)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Nadir, Fakat Olabilir</span>
+                                    }
+                                    else if (Model.Tekrarlanma_Olasiligi == 4)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Kuvvetle İhtima</span>
+                                    }
+                                    else if (Model.Tekrarlanma_Olasiligi == 5)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Çok Kuvvetli İhtimal</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Gerçekleşme Frekansı</label>
+                                <div class="col-lg-8">
+                                    @if (Model.Gerceklesme_Frekansi == 0)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Çok Nadir</span>
+                                    }
+                                    else if (Model.Gerceklesme_Frekansi == 1)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Oldukça Nadir</span>
+                                    }
+                                    else if (Model.Gerceklesme_Frekansi == 2)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Nadir</span>
+                                    }
+                                    else if (Model.Gerceklesme_Frekansi == 3)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Arasıra</span>
+                                    }
+                                    else if (Model.Gerceklesme_Frekansi == 4)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Sıklıkla</span>
+                                    }
+                                    else if (Model.Gerceklesme_Frekansi == 5)
+                                    {
+                                        <span class="fw-bold fs-6 text-gray-800">Sürekli</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Maruz Kalan Çalışanın İfadesi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Maruz_Kalan_Calisanin_Ifadesi</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Görgü Tanığının İfadesi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Gorgu_Ifadesi</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Kazaya Yol Açan Sebepler</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Kaza_Yol_Acan_Sebepler</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Var Olmasındaki Temel Seebepler</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Varolmasinda_Temel_Nedenler</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Birim Sorumlusunun Önerisi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Birim_Sorumlu_Gorus_Oneri</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Isg Uzmanı Değerlendirmesi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Isg_Uzmani_Degerlendirme</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">Maruz Kalan Çalışanın İfadesi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Maruz_Kalan_Calisanin_Ifadesi</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">1.Tanık Kimlik No</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Tanik_Tcno1</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">1.Tanık Adı Soyadı</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Tanik_Ad_Soyad1</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">1.Tanık Telefon</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Tanik_Telefon1</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">1.Tanık Adresi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Tanik_Adres1</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">2.Tanık Kimlik No</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Tanik_Tcno2</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">2.Tanık Adı Soyadı</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Tanik_Ad_Soyad2</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">2.Tanık Telefon</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Tanik_Telefon2</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">2.Tanık Adresi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Tanik_Adres2</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">1.Dof</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Dof1</span>
+                                </div>
+                            </div>         <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">1.Dof Sorumlusu</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Sorumlu1</span>
+                                </div>
+                            </div>         <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">1.Dof Açılış Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Acilis_Tarih1</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">1.Dof Kapanış Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Kapanis_Tarih1</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">2.Dof</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Dof2</span>
+                                </div>
+                            </div>         <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">2.Dof Sorumlusu</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Sorumlu2</span>
+                                </div>
+                            </div>         <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">2.Dof Açılış Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Acilis_Tarih2</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">2.Dof Kapanış Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Kapanis_Tarih2</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">3.Dof</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Dof3</span>
+                                </div>
+                            </div>         <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">3.Dof Sorumlusu</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Sorumlu3</span>
+                                </div>
+                            </div>         <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">3.Dof Açılış Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Acilis_Tarih3</span>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <label class="col-lg-4 fw-bold text-muted">3.Dof Kapanış Tarihi</label>
+                                <div class="col-lg-8">
+                                    <span class="fw-bold fs-6 text-gray-800">@Model.Kapanis_Tarih3</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

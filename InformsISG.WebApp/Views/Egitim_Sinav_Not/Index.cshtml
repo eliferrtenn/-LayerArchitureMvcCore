@@ -1,0 +1,106 @@
+﻿@model IEnumerable<InformsISG.Entities.Dtos.Egitim_Sinav_NotDTO>
+
+@{
+    ViewData["Title"] = "Index";
+    var EgitimSinavId = ViewBag.EgitimSinav;
+}
+
+
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h3 class="card-title">EĞİTİM SINAV LİSTESİ</h3>
+        <div class="card-toolbar">
+            <a href="@Url.Action("Edit","Egitim_Sinav_Not")" class="btn btn-success btn-hover-rotate-end">KAYDET</a>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <table id="tblBirim" class="table table-striped table-row-bordered gy-5 gs-7">
+
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Sinav_Not)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Aciklama)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Sinav_Not)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Aciklama)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+
+        </table>
+    </div>
+
+    <div class="card-footer">
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $("#tblBirim").DataTable({
+            "pageLength": 50,
+            language: {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                 "sInfo": 'Toplam kayıttan _START_  - _END_ arasındaki kayıtlar gösteriliyor.' + "Toplam "+@ViewBag.SinavNot + " kayıt vardır.",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(MAX kayıt içerisinden bulunan)",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada MENU kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            },
+            dom:
+                "<'row'" +
+                "<'col-sm-6 d-flex align-items-center justify-conten-start'>" +
+                "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+                ">" +
+
+                "<'table-responsive'tr>" +
+
+                "<'row'" +
+                "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                ">"
+
+        });
+    </script>
+}

@@ -1,0 +1,67 @@
+﻿@model InformsISG.Entities.Dtos.KullaniciDTO
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@using System.Security.Claims
+@{
+    var currentrole = this.User.FindFirst(ClaimTypes.Role).Value;
+    var Birim = ViewBag.Birim;
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Index";
+    var RiskYuksekTablo = (List<InformsISG.Entities.Dtos.Risk_Analiz_TabloDTO>)ViewBag.RiskYuksekTablo;
+    var PersonelList = (List<InformsISG.Entities.Dtos.Personel_BilgiDTO>)ViewBag.PersonelList;
+    var KurulKararListe = (IEnumerable<InformsISG.Entities.Dtos.Isg_Kurul_KararDTO>)ViewBag.KurulKararListe;
+    var KurulKararDosyaListe = (List<InformsISG.Entities.Dtos.Isg_Kurul_Karar_DosyaDTO>)ViewBag.KurulKararDosyaListe;
+    var BakimPlanlari = (IEnumerable<InformsISG.Entities.Dtos.Makine_Ekipman_Bakim_PlanlariDTO>)ViewBag.BakimPlan;
+    var BakimPlanlari2 = (IEnumerable<InformsISG.Entities.Dtos.Makine_Ekipman_Bakim_PlanlariDTO>)ViewBag.BakimPlan2;
+    var EgitimList = (IEnumerable<InformsISG.Entities.Dtos.Egitim_TanimlaDTO>)ViewBag.EgitimList;
+    int i = 1;
+    int durumCount = 0;
+    }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../">
+    <title>Metronic - the world's #1 selling Bootstrap Admin Theme Ecosystem for HTML, Vue, React, Angular &amp; Laravel by Keenthemes</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
+    <meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
+    <meta property="og:url" content="https://keenthemes.com/metronic" />
+    <meta property="og:site_name" content="Keenthemes | Metronic" />
+    <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+    <link rel="shortcut icon" href="~/assets/media/logos/favicon.ico" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <link href="~/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="kt_body" class="bg-body">
+
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    </div>
+    <script>var hostUrl = "assets/";</script>
+    <script src="~/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="~/assets/js/scripts.bundle.js"></script>
+    <script src="~/assets/js/custom/authentication/sign-in/general.js"></script>
+    <script src="~/assets/js/custom/apps/projects/project/project.js"></script>
+    <script type="text/javascript">
+         $("#Birim_Id").change(function () {
+             var cid = $("#Birim_Id").val();
+             $.ajax({
+                 method: 'POST',
+                 url: '@Url.Action("deneme", "Home")',
+                 headers: { '@tokenSet.HeaderName': '@tokenSet.RequestToken' },
+                 data: { id: cid }
+
+             });
+             setTimeout(function () {
+                 location.reload();
+             },1000)
+         });
+    </script>
+</body>
+</html>

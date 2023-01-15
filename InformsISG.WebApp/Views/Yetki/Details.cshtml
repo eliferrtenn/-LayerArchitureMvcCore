@@ -1,0 +1,84 @@
+﻿@model InformsISG.Entities.Dtos.KullaniciDTO
+
+@{
+    ViewData["Title"] = "Details";
+    var yetki = (List<InformsISG.Entities.Dtos.YetkiDTO>)ViewBag.Yetki;
+    var Personel = (List<InformsISG.Entities.Dtos.Personel_BilgiDTO>)ViewBag.Personel;
+}
+<div class="">
+    <div class=" flex-column " id="kt_wrapper">
+        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+            <div class="post d-flex flex-column-fluid" id="kt_post">
+                <div id="kt_content_container" class="container-xxl">
+                    <div class="card mb-5 mb-xl-10">
+                        <div class="card-body pt-9 pb-0">
+                            <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">
+                                <li class="nav-item mt-2">
+                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="#">Genel Bilgi</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+                        <div class="card-header cursor-pointer">
+                            <div class="card-title m-0">
+                                <h3 class="fw-bolder m-0">Yetki Bigileri</h3>
+                            </div>
+                            <a asp-action="Index" asp-route-id="@Model.Id" class="btn btn-primary align-self-center">Geri Dön</a>
+                        </div>
+                        <div class="card-body p-9">
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Yetki Adı</label>
+                                @foreach (var item in yetki)
+                                {
+
+
+                                    @if (item.Id == Model.Yetki_Id)
+                                    {
+                                        <div class="col-lg-8">
+                                            <span class="fw-bolder fs-6 text-gray-800">@item.Yetki_Ad</span>
+                                        </div>
+                                    }
+                                }
+
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Personel Adı</label>
+                                @foreach (var item in Personel)
+                                {
+
+
+                                    @if (item.Id == Model.Personel_Id)
+                                    {
+                                        <div class="col-lg-8">
+                                            <span class="fw-bolder fs-6 text-gray-800">@item.Ad_Soyad</span>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Mail</label>
+
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Mail</span>
+                                </div>
+
+                            </div>   
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-bold text-muted">Şifre</label>
+
+                                <div class="col-lg-8">
+                                    <span class="fw-bolder fs-6 text-gray-800">@Model.Password</span>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

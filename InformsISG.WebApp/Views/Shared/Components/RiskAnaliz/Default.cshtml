@@ -1,0 +1,229 @@
+﻿@model InformsISG.Entities.Dtos.Risk_AnalizDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form asp-action="Edit">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">RİSK ANALİZ DÜZENLEME</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Risk_Analiz")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="Id" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+                    <label asp-for="Analiz_No" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Analiz_No" class="form-control" />
+                        <span asp-validation-for="Analiz_No" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-8 mb-5">
+                    <label asp-for="Analiz_Tanim" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Analiz_Tanim" class="form-control" />
+                        <span asp-validation-for="Analiz_Tanim" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Analiz_Tarih" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Analiz_Tarih" class="form-control" />
+                        <span asp-validation-for="Analiz_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Bitis_Tarih" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Bitis_Tarih" class="form-control" />
+                        <span asp-validation-for="Bitis_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Personel_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Personel_Id" class="form-control" asp-items="ViewBag.Personel_Id">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Birim_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Birim_Id" class="form-control" asp-items="ViewBag.Birim_Id">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Tali_Birim_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Tali_Birim_Id" class="form-control" asp-items="ViewBag.Tali_Birim_Id">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Risk_Yontem_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Risk_Yontem_Id" class="form-control" asp-items="ViewBag.Risk_Yontem_Id">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Notlar" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Notlar" class="form-control" />
+                        <span asp-validation-for="Notlar" class="text-danger"></span>
+                    </div>
+                </div>
+                @if (Model.Dosya != null)
+                {
+                    <div class="col-md-8">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <table id="tblBirim2" class="table table-striped table-row-bordered gy-5 gs-7">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Dosya)
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a asp-action="DownloadFileFromFileSystem" asp-route-id="@Model.Id">RİSK ANALİZ FOTOĞRAF</a>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group mb-5">
+                        <div class="col-md-10">
+                            <p>RİSK DOSYASI EKLEYİN : </p>
+                            <input type="file" name="Dosya" asp-for="Dosya" />
+
+                            <span asp-validation-for="Dosya" class="text-danger"></span>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer">
+
+    </div>
+
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+         $("#Birim_Id").change(function () {
+             var cid = $("#Birim_Id").val();
+             $("#Tali_Birim_Id option").remove();
+
+
+          $.ajax({
+            method: 'GET',
+            url: "@Url.Action("GetTaliBirim","Risk_Analiz")/" + cid
+         }).done(function (result) {
+             $.each(result, function (i, item) {
+                 $("#Tali_Birim_Id").append('<option value="' + item.value + '">' + item.text + '</option>');
+             });
+             $("#Tali_Birim_Id").trigger('change');
+         })
+
+         });
+    </script>
+
+    <script>
+        $("#tblBirim2").DataTable({
+            "pageLength": 50,
+            language: {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(MAX kayıt içerisinden bulunan)",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada MENU kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            },
+            dom:
+                "<'row'" +
+                "<'col-sm-6 d-flex align-items-center justify-conten-start'>" +
+                "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+                ">" +
+
+                "<'table-responsive'tr>" +
+
+                "<'row'" +
+                "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                ">"
+
+        });
+
+    </script>
+}
+

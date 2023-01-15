@@ -1,0 +1,42 @@
+﻿@model InformsISG.Entities.Concrete.Yaralanan_Vucut_Bolgesi
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<form asp-action="Create">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">YARALALNAN VUCÜT BÖLGESİNİ EKLEME</h3>
+
+            <div class="card-toolbar">
+
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Yaralanan_Vucut_Bolgesi")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Yaralanan_Vucut_Bolgesi_Ad" class="control-label"></label>
+                            <input asp-for="Yaralanan_Vucut_Bolgesi_Ad" class="form-control" />
+                            <span asp-validation-for="Yaralanan_Vucut_Bolgesi_Ad" class="text-danger"></span>
+                        </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer">
+            Footer
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+

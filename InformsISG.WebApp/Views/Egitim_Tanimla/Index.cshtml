@@ -1,0 +1,199 @@
+﻿@model IEnumerable<InformsISG.Entities.Dtos.Egitim_TanimlaDTO>
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Index";
+    var ddd = (List<InformsISG.Entities.Dtos.Egitim_Konu_Alt_BaslikDTO>)ViewBag.EgitimKonuAltBaslikListe;
+    var isgKurulListe = (List<InformsISG.Entities.Dtos.Isg_KurulDTO>)ViewBag.IsgKurulListe;
+    var siraNo = 1;
+}
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h3 class="card-title">TÜM EĞİTİMLER</h3>
+        <div class="card-toolbar">
+            <a href="@Url.Action("Create","Egitim_Tanimla")" class="btn btn-success btn-hover-rotate-end">YENİ EĞİTİM EKLE</a>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <table id="tblBirim" class="table table-striped table-row-bordered gy-5 gs-7">
+            <thead>
+                <tr>
+                    <th>Sıra No</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Egitim_Sebep)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Egitim_Tarih)
+                    </th>
+                    <th>
+                       Kurul
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                            <td>@siraNo</td>
+                            @if (item.Egitim_Sebep == 0)
+                            {
+                                <td>
+                                    İşe Giriş Muayenesi
+                                </td>
+                            }
+                            else if (item.Egitim_Sebep == 1)
+                            {
+                                <td>
+                                    Yeni Ekipman
+                                </td>
+                            }
+                            else if (item.Egitim_Sebep == 2)
+                            {
+                                <td>
+                                    Meslek Hastalığı
+                                </td>
+                            }
+                            else if (item.Egitim_Sebep == 3)
+                            {
+                                <td>
+                                    İş Değişikliği
+                                </td>
+                            }
+                            else if (item.Egitim_Sebep == 4)
+                            {
+                                <td>
+                                    İş Kazası
+                                </td>
+                            }
+                            <td data-filter="mastercard">
+                                @Html.DisplayFor(modelItem => item.Egitim_Ad)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Egitim_Tarih)
+                            </td>
+
+                            @foreach (var item2 in isgKurulListe)
+                            {
+                                @if (item2.Id == item.Isg_Kurul_Id)
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item2.Kurul_Ad)
+                                    </td>
+
+                                }
+                            }
+
+<td style="text-align:center">
+                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                    data-kt-menu-trigger="click"
+                                    data-kt-menu-placement="bottom-start">
+                                İşlemler
+                            </button>
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-100px py-4"
+                                 data-kt-menu="true">
+
+                                <div class="menu-item px-3">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="menu-link px-3">
+                                        Düzenle
+                                    </a>
+                                </div>
+                                <div class="menu-item px-3">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="menu-link px-3">
+                                        Detaylar
+                                    </a>
+                                </div>
+                                <div class="menu-item px-3">
+                                    <a asp-action="PersonelAta" asp-route-id="@item.Id" class="menu-link px-3">
+                                        Personel Ata
+                                    </a>
+                                </div>
+                                <div class="menu-item px-3">
+                                    <a onclick="VeriSil(@item.Id,this)" class="menu-link px-3">
+                                        Sil
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    siraNo++;
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+       function VeriSil(ID, obj) {
+            var btn = $(obj);
+            Swal.fire({
+                title: 'SİLME İŞLEMİ',
+                text: "Silmek istediğinize emin misiniz?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#50cd89',
+                cancelButtonColor: '#f1416c',
+                confirmButtonText: 'Evet Sil!',
+                cancelButtonText: 'Hayır Silme!',
+                showClass: {
+                    popup: 'animate_animated animate_fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate_animated animate_fadeOutUp'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Delete", "Egitim_Tanimla")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: ID }
+                    }).done(function (d) {
+                        const result = $.parseJSON(d);
+                        if (result.ResultStatus == 0) {
+                            Swal.fire({
+                                title: 'SİLİNDİ',
+                                icon: 'success',
+                                text: `${result.Message}`,
+                                showClass: {
+                                    popup: 'animate_animated animate_fadeInDown'
+                                },
+                                hideClass: {
+                                    popup: 'animate_animated animate_fadeOutUp'
+                                }
+                            });
+                            btn.parent().parent().parent().parent().fadeOut(1000);
+                        }
+                    }).fail(function () {
+                        Swal.fire({
+                            title: 'HATALI İŞLEM',
+                            text: "Veri silinemedi",
+                            icon: 'error',
+                            showClass: {
+                                popup: 'animate_animated animate_fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate_animated animate_fadeOutUp'
+                            }
+                        })
+                    })
+                }
+            });
+        }
+    </script>
+
+
+}

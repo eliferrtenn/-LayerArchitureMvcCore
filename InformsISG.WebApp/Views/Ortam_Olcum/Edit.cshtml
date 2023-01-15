@@ -1,0 +1,102 @@
+﻿@model InformsISG.Entities.Dtos.Ortam_OlcumDTO
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<form asp-action="Edit">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">Ortam Ölçümleri</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Ortam_Olcum")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="Id" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Tali_Birim_Id" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Tali_Birim_Id" class="form-control" asp-items="ViewBag.Tali_Birim_Id"></select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Olcum_Tur" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Olcum_Tur" class="form-control" />
+                        <span asp-validation-for="Olcum_Tur" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Olcum_Tarih" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Olcum_Tarih" class="form-control" />
+                        <span asp-validation-for="Olcum_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+
+                    <label asp-for="Olcum_Birim" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Olcum_Birim" class="form-control" />
+                        <span asp-validation-for="Olcum_Birim" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <span class="form-check-label">
+                        @Html.DisplayNameFor(model => model.Olcum_Sonuc)
+                    </span>
+                    <label class="form-check form-switch form-check-custom form-check-solid">
+                        <input class="form-check-input" type="checkbox" asp-for="Olcum_Sonuc" />
+                    </label>
+                </div>
+
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Aciklama" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon2">
+                            <i class="fa-solid fa-question"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Aciklama" class="form-control"></textarea>
+                        <span asp-validation-for="Aciklama" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+
+                    <div class="form-group">
+                        <label asp-for="Isveren_Id" class="control-label"></label>
+                        <select asp-for="Isveren_Id" class="form-control" asp-items="ViewBag.Isveren_Id"></select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+
+    </div>
+
+</form>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

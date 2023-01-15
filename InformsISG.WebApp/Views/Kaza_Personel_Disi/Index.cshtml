@@ -1,0 +1,243 @@
+﻿@model IEnumerable<InformsISG.Entities.Dtos.Kaza_Personel_DisiDTO>
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Index";
+    int siraNo = 1;
+    var KazaPersonelDisiDosya = (List<InformsISG.Entities.Dtos.Kaza_Personel_Disi_DosyaDTO>)ViewBag.KazaPersonelDisiDosya;
+    int i = 0;
+    var Count = ViewBag.Count;
+}
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h3 class="card-title">KAZA PERSONEL DIŞI LİSTESİ</h3>
+        <div class="card-toolbar">
+            <a href="@Url.Action("Create","Kaza_Personel_Disi")" class="btn btn-success btn-hover-rotate-end">YENİ KAZA DIŞI PERSONEL EKLE</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="tblBirim" class="table table-striped table-row-bordered gy-5 gs-7">
+            <thead>
+                <tr>
+                    <th>Sıra No</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Kaza_No)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Kaza_Tarih)
+                    </th>
+                    <th>
+                        Dosya
+                    </th>
+                    <th style="text-align:center">İŞLEMLER</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@siraNo</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Kaza_No)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Kaza_Tarih)
+                        </td>
+
+                        @if (KazaPersonelDisiDosya.Count == 0)
+                        {
+                            <td></td>
+                        }
+                        @foreach (var item2 in KazaPersonelDisiDosya)
+                        {
+                            @if (item2.Kaza_Personel_Disi_Id == item.Id)
+                            {
+                                <td>
+                                    <a asp-action="DownloadFileFromFileSystem" asp-route-id="@item2.Id">Dosya</a>
+                                </td>
+                                i = 1;
+                                break;
+                            }
+                            @if (Count == i)
+                            {
+                                <td></td>
+                                i = 1;
+                                break;
+                            }
+                            i++;
+                        }
+
+                        <td style="text-align:center">
+                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                    data-kt-menu-trigger="click"
+                                    data-kt-menu-placement="bottom-start">
+                                İşlemler
+                            </button>
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-100px py-4"
+                                 data-kt-menu="true">
+                                <div class="menu-item px-3">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="menu-link px-3">
+                                        Düzenle
+                                    </a>
+                                </div>
+                                <div class="menu-item px-3">
+                                    @if (Count == 0)
+                                    {
+                                        <a asp-action="KazaPersonelDisiDosyaEkle" asp-route-id="@item.Id" class="menu-link px-3">
+                                            Dosya Ekle
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        @foreach (var item2 in KazaPersonelDisiDosya)
+                                        {
+                                            @if (item2.Kaza_Personel_Disi_Id == item.Id)
+                                            {
+                                                <a asp-action="KazaPersonelDisiDosyaIslem" asp-route-id="@item.Id" class="menu-link px-3">
+                                                    Dosya İşlemleri
+                                                </a>
+                                                i = 1;
+                                                break;
+                                            }
+                                            @if (Count == i)
+                                            {
+                                                <a asp-action="KazaPersonelDisiDosyaEkle" asp-route-id="@item.Id" class="menu-link px-3">
+                                                    Dosya Ekle
+                                                </a>
+                                                i = 1;
+                                                break;
+                                            }
+                                            i++;
+
+                                        }
+                                    }
+
+
+                                </div>
+                                <div class="menu-item px-3">
+                                    <a onclick="VeriSil(@item.Id,this)" class="menu-link px-3">
+                                        Sil
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    siraNo++;
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</div>
+@section Scripts{
+    <script>
+        $("#tblBirim").DataTable({
+            "pageLength": 50,
+            language: {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                 "sInfo": 'Toplam kayıttan _START_  - _END_ arasındaki kayıtlar gösteriliyor.' + "Toplam "+@ViewBag.KazaPersonelDisi + " kayıt vardır.",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(MAX kayıt içerisinden bulunan)",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada MENU kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            },
+            dom:
+                "<'row'" +
+                "<'col-sm-6 d-flex align-items-center justify-conten-start'>" +
+                "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+                ">" +
+
+                "<'table-responsive'tr>" +
+
+                "<'row'" +
+                "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                ">"
+
+        });
+    </script>
+    <script type="text/javascript">
+       function VeriSil(ID, obj) {
+            var btn = $(obj);
+            Swal.fire({
+                title: 'SİLME İŞLEMİ',
+                text: "Silmek istediğinize emin misiniz?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#50cd89',
+                cancelButtonColor: '#f1416c',
+                confirmButtonText: 'Evet Sil!',
+                cancelButtonText: 'Hayır Silme!',
+                showClass: {
+                    popup: 'animate_animated animate_fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate_animated animate_fadeOutUp'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Delete", "Kaza_Personel_Disi")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: ID }
+                    }).done(function (d) {
+                        const result = $.parseJSON(d);
+                        if (result.ResultStatus == 0) {
+                            Swal.fire({
+                                title: 'SİLİNDİ',
+                                icon: 'success',
+                                text: `${result.Message}`,
+                                showClass: {
+                                    popup: 'animate_animated animate_fadeInDown'
+                                },
+                                hideClass: {
+                                    popup: 'animate_animated animate_fadeOutUp'
+                                }
+                            });
+                            btn.parent().parent().parent().parent().fadeOut(1000);
+                        }
+                    }).fail(function () {
+                        Swal.fire({
+                            title: 'HATALI İŞLEM',
+                            text: "Veri silinemedi",
+                            icon: 'error',
+                            showClass: {
+                                popup: 'animate_animated animate_fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate_animated animate_fadeOutUp'
+                            }
+                        })
+                    })
+                }
+            });
+        }
+    </script>
+}
+
+

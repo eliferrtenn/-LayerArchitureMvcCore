@@ -1,0 +1,115 @@
+﻿@model InformsISG.Entities.Dtos.Makine_EkipmanDTO
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../">
+    <title>Metronic - the world's #1 selling Bootstrap Admin Theme Ecosystem for HTML, Vue, React, Angular &amp; Laravel by Keenthemes</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
+    <meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
+    <meta property="og:url" content="https://keenthemes.com/metronic" />
+    <meta property="og:site_name" content="Keenthemes | Metronic" />
+    <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+    <link rel="shortcut icon" href="~/assets/media/logos/favicon.ico" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <link href="~/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="kt_body" class="bg-body">
+
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Post-->
+        <div class="post d-flex flex-column-fluid" id="kt_post">
+
+            <div id="kt_content_container" class="container-xxl">
+                <br />
+                <div class="row g-6 g-xl-9">
+                    <div class="col-lg-12 col-xxl-4">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h3 class="card-title"></h3>
+                                <div class="card-toolbar">
+                                    <a href="@Url.Action("Index","Makine_Ekipman")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+                                </div>
+                            </div>
+                            <div class="card-body p-9">
+                                <div class="fs-lg-1">QR Kod Görüntüleme</div>
+                                <div class="fs-4 fw-bold text-gray-400 mb-7">
+                                    <a href="#">
+
+                                    </a>
+                                </div>
+                                <div class="fs-6 d-flex justify-content-between mb-4">
+                                    <div class="fw-bold">Ekipman Kodu</div>
+                                    <div class="d-flex fw-bolder">
+                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr007.svg-->
+                                        <span class="svg-icon svg-icon-3 me-1 svg-icon-success">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M13.4 10L5.3 18.1C4.9 18.5 4.9 19.1 5.3 19.5C5.7 19.9 6.29999 19.9 6.69999 19.5L14.8 11.4L13.4 10Z" fill="black" />
+                                                <path opacity="0.3" d="M19.8 16.3L8.5 5H18.8C19.4 5 19.8 5.4 19.8 6V16.3Z" fill="black" />
+                                            </svg>
+                                        </span>
+                                        <p>
+                                            @Model.Ekipman_Kodu
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="separator separator-dashed  mb-4 "></div>
+                                <div class="fs-6 d-flex justify-content-between mb-4">
+                                    <div class="fw-bold">Seri No</div>
+                                    <div class="d-flex fw-bolder">
+                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr007.svg-->
+                                        <span class="svg-icon svg-icon-3 me-1 svg-icon-success">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M13.4 10L5.3 18.1C4.9 18.5 4.9 19.1 5.3 19.5C5.7 19.9 6.29999 19.9 6.69999 19.5L14.8 11.4L13.4 10Z" fill="black" />
+                                                <path opacity="0.3" d="M19.8 16.3L8.5 5H18.8C19.4 5 19.8 5.4 19.8 6V16.3Z" fill="black" />
+                                            </svg>
+                                        </span>
+                                        <p>
+                                            @Model.Firma_Adi
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="separator separator-dashed  mb-4 "></div>
+                                <div class="container" >
+                                    <div class="row">
+
+                                        <div class="col-md-4 mb-5">
+                                            <div class="col-md-12 mb-5">
+                                                @if (Model.QRCode != null)
+                                                {
+                                                    <img src="@Model.QRCode" style="width:100%; " />
+                                                }
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!--end::Budget-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>var hostUrl = "assets/";</script>
+    <script src="~/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="~/assets/js/scripts.bundle.js"></script>
+    <script src="~/assets/js/custom/authentication/sign-in/general.js"></script>
+    <script src="~/assets/js/custom/apps/projects/project/project.js"></script>
+</body>
+</html>

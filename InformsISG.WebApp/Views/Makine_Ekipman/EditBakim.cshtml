@@ -1,0 +1,272 @@
+﻿@model InformsISG.Entities.Dtos.Makine_Ekipman_Bakim_PlanlariDTO
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    var makineEkipmanListe = (List<InformsISG.Entities.Dtos.Makine_Ekipman_Bakim_PlanlariDTO>)ViewBag.Makine_EkipmanList;
+    ViewData["Title"] = "CreateBakim";
+    int siraNo = 1;
+}
+<form asp-action="EditBakim" enctype="multipart/form-data">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">MAKİNE EKİPMAN BAKIM PLANI</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Makine_Ekipman")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <input asp-for="Id" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+
+                <div class="col-md-12 mb-5">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Servis_Tarih" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Servis_Tarih" class="form-control" />
+                        <span asp-validation-for="Servis_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Diger_Servis_Tarih" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Diger_Servis_Tarih" class="form-control" />
+                        <span asp-validation-for="Diger_Servis_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Bakim_Tip" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Bakim_Tip" class="form-control">
+                            <option value="0" selected>Periyodik Planlı Bakım</option>
+                            <option value="1">Arıza Tamiri</option>
+                            <option value="2">Periyodik Kontrol</option>
+                        </select>
+                    </div>
+                </div>
+                @if (Model.Durum == 0)
+                {
+                    <div class="col-md-6 mb-5">
+                        <label asp-for="Durum" class="control-label"></label>
+                        <div class="input-group form-group mb-5">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-check-double"></i>
+                            </span>
+                            <select asp-for="Durum" class="form-control">
+                                <option value="0" selected>Uygun</option>
+                                <option value="1">Kusurlu</option>
+                                <option value="2">Ağır Kusurlu</option>
+                            </select>
+                        </div>
+                    </div>
+                }
+                @if (Model.Durum == 1)
+                {
+                    <div class="col-md-6 mb-5">
+                        <label asp-for="Durum" class="control-label"></label>
+                        <div class="input-group form-group mb-5">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-check-double"></i>
+                            </span>
+                            <select asp-for="Durum" class="form-control">
+                                <option value="0">Uygun</option>
+                                <option value="1" selected>Kusurlu</option>
+                                <option value="2">Ağır Kusurlu</option>
+                            </select>
+                        </div>
+                    </div>
+                }
+                else if (Model.Durum == 2)
+                {
+                    <div class="col-md-6 mb-5">
+                        <label asp-for="Durum" class="control-label"></label>
+                        <div class="input-group form-group mb-5">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-check-double"></i>
+                            </span>
+                            <select asp-for="Durum" class="form-control">
+                                <option value="0">Uygun</option>
+                                <option value="1">Kusurlu</option>
+                                <option value="2" selected>Ağır Kusurlu</option>
+                            </select>
+                        </div>
+                    </div>
+                }
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Yapilan_Islem" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Yapilan_Islem" class="form-control" />
+                        <span asp-validation-for="Yapilan_Islem" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Aciklama" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Aciklama" class="form-control" />
+                        <span asp-validation-for="Aciklama" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group mb-5">
+                    <div class="col-md-10">
+                        <p>BAKIM FOTOĞRAFI EKLEYİN : </p>
+                        <input type="file" name="file" multiple>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+        </div>
+    </div>
+</form>
+
+<div class="card shadow-sm">
+    <div class="card-header">
+
+    </div>
+    <div class="card-body">
+        <table id="tblBirim" class="table table-striped table-row-bordered gy-5 gs-7">
+            <thead>
+                <tr>
+                    <th>
+                        SIRA NO
+                    </th>
+                    <th>
+                        BAKIM TİPİ
+                    </th>
+                    <th>
+                        YAPILAN İŞLEM
+                    </th>
+                    <th>
+                        AÇIKLAMA
+                    </th>
+                    <th>
+                        SERVİS TARİHİ
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in makineEkipmanListe)
+                {
+                    <tr>
+                        <td>
+                            @siraNo
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Bakim_Tip)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Yapilan_Islem)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Aciklama)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Servis_Tarih)
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                    data-kt-menu-trigger="click"
+                                    data-kt-menu-placement="bottom-start">
+                                İşlemler
+                            </button>
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-100px py-4"
+                                 data-kt-menu="true">
+                                <div class="menu-item px-3">
+                                    <a asp-action="EditBakim" asp-route-id="@item.Id" class="menu-link px-3">
+                                        Düzenle
+                                    </a>
+                                </div>
+                                <div class="menu-item px-3">
+                                    <a onclick="VeriSil(@item.Id,this)" class="menu-link px-3">
+                                        Sil
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    siraNo++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+       function VeriSil(ID, obj) {
+            var btn = $(obj);
+            Swal.fire({
+                title: 'SİLME İŞLEMİ',
+                text: "Silmek istediğinize emin misiniz?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#50cd89',
+                cancelButtonColor: '#f1416c',
+                confirmButtonText: 'Evet Sil!',
+                cancelButtonText: 'Hayır Silme!',
+                showClass: {
+                    popup: 'animate_animated animate_fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate_animated animate_fadeOutUp'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("DeleteBakim", "Makine_Ekipman")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: ID }
+                    }).done(function (d) {
+                        const result = $.parseJSON(d);
+                        if (result.ResultStatus == 0) {
+                            Swal.fire({
+                                title: 'SİLİNDİ',
+                                icon: 'success',
+                                text: `${result.Message}`,
+                                showClass: {
+                                    popup: 'animate_animated animate_fadeInDown'
+                                },
+                                hideClass: {
+                                    popup: 'animate_animated animate_fadeOutUp'
+                                }
+                            });
+                            btn.parent().parent().parent().parent().fadeOut(1000);
+                        }
+                    }).fail(function () {
+                        Swal.fire({
+                            title: 'HATALI İŞLEM',
+                            text: "Veri silinemedi",
+                            icon: 'error',
+                            showClass: {
+                                popup: 'animate_animated animate_fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate_animated animate_fadeOutUp'
+                            }
+                        })
+                    })
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,145 @@
+﻿using AutoMapper;
+using InformsISG.Core.Utilities.Results;
+using InformsISG.Core.Utilities.Results.Abstract;
+using InformsISG.Core.Utilities.Results.Concrete;
+using InformsISG.Data.Abstract;
+using InformsISG.Entities.Concrete;
+using InformsISG.Entities.Dtos;
+using InformsISG.Services.Abstract;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InformsISG.Services.Concrete
+{
+    public class Makine_Kontrol_Kriter_BaslikManager : IMakine_Kontrol_Kriter_BaslikService
+    {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+
+        public Makine_Kontrol_Kriter_BaslikManager(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+        public async Task<IResult> AddAsync(Makine_Kontrol_Kriter_BaslikDTO addObject, long createdByUserId)
+        {
+            var exist = await _unitOfWork.makine_Kontrol_Kriter_BaslikRepository.AnyAsync(x => x.Baslik_Ad == addObject.Baslik_Ad && !x.isDeleted);
+            if (exist == false)
+            {
+                var result = _mapper.Map<Makine_Kontrol_Kriter_Baslik>(addObject);
+                DateTime dateTime = DateTime.Now;
+                result.Kullanici_Id = createdByUserId;
+                result.Yaratilma_Tarihi = dateTime;
+                result.Degistirilme_Tarihi = dateTime;
+                await _unitOfWork.makine_Kontrol_Kriter_BaslikRepository.AddAsync(result);
+                await _unitOfWork.SaveAsync();
+                return new Result(ResultStatus.Success, $"{result.Baslik_Ad} başarılı bir şekilde eklenmiştir.");
+            }
+            else
+            {
+                return new Result(ResultStatus.Error, $"{addObject.Baslik_Ad} zaten kayıtlıdır. Lütfen kontrol edip tekrar deneyiniz.");
+            }
+        }
+
+        public async Task<IResult> DeleteAsync(long Id, long deletedByUserId)
+        {
+            var deleteObject = await _unitOfWork.makine_Kontrol_Kriter_BaslikRepository.GetAsync(x => x.Id == Id);
+            if (deleteObject != null)
+            {
+                deleteObject.isDeleted = true;
+                deleteObject.Degistirilme_Tarihi = DateTime.Now;
+                deleteObject.Kullanici_Id = deletedByUserId;
+                await _unitOfWork.makine_Kontrol_Kriter_BaslikRepository.UpdateAsync(deleteObject);
+                await _unitOfWork.SaveAsync();
+                return new Result(ResultStatus.Success, $"{deleteObject.Baslik_Ad} başarılı bir şekilde silinmiştir.");
+            }
+            return new Result(ResultStatus.Error, $"{deleteObject.Baslik_Ad} bulunamadı.");
+        }
+
+        public async Task<IDataResult<IList<Makine_Kontrol_Kriter_BaslikDTO>>> GetAllAsync()
+        {
+            var resultObject = await _unitOfWork.makine_Kontrol_Kriter_BaslikRepository.GetAllAsync(x => x.isActive && !x.isDeleted);
+            if (resultObject.Count >= 0)
+            {
+                var result = _mapper.Map<IList<Makine_Kontrol_Kriter_BaslikDTO>>(resultObject);
+                return new DataResult<IList<Makine_Kontrol_Kriter_BaslikDTO>>(ResultStatus.Success, result);
+            }
+            return new DataResult<IList<Makine_Kontrol_Kriter_BaslikDTO>>(ResultStatus.Error, "Aradığınız kriterlere uygun veri bulunamadı",
+            null);
+        }
+
+
+        public async Task<IDataResult<Makine_Kontrol_Kriter_BaslikDTO>> GetAsync(long Id)
+        {
+            var resultObject = await _unitOfWork.makine_Kontrol_Kriter_BaslikRepository.GetAsync(x => x.Id == Id);
+            if (resultObject != null)
+            {
+                var result = _mapper.Map<Makine_Kontrol_Kriter_BaslikDTO>(resultObject);
+                return new DataResult<Makine_Kontrol_Kriter_BaslikDTO>(ResultStatus.Success, result);
+            }
+            return new DataResult<Makine_Kontrol_Kriter_BaslikDTO>(ResultStatus.Error, "Aradığınız kriterlere uygun veri bulunamadı",
+            null);
+        }
+
+        public async Task<IResult> HardDeleteAsync(long Id)
+        {
+            var deleteObject = await _unitOfWork.makine_Kontrol_Kriter_BaslikRepository.GetAsync(x => x.Id == Id);
+            if (deleteObject != null)
+            {
+
+                await _unitOfWork.makine_Kontrol_Kriter_BaslikRepository.RemoveAsync(deleteObject);
+                await _unitOfWork.SaveAsync();
+                return new Result(ResultStatus.Success, $"{deleteObject.Baslik_Ad} veritabanından başarılı bir şekilde silinmiştir.");
+            }
+            return new Result(ResultStatus.Error, $"{deleteObject.Baslik_Ad} bulunamadı.");
+        }
+
+        public async Task<IResult> UpdateAsync(Makine_Kontrol_Kriter_BaslikDTO updateObject, long modifiedByUserId)
+        {
+            var exist = await _unitOfWork.makine_Kontrol_Kriter_BaslikRepository.AnyAsync(x => x.Baslik_Ad == updateObject.Baslik_Ad && !x.isDeleted
+             && x.Id != updateObject.Id);
+            if (exist == false)
+            {
+                var resultObject = await _unitOfWork.makine_Kontrol_Kriter_BaslikRepository.GetAsync(x => x.Id == updateObject.Id);
+                if (resultObject != null)
+                {
+                    var result = _mapper.Map<Makine_Kontrol_Kriter_BaslikDTO, Makine_Kontrol_Kriter_Baslik>(updateObject, resultObject);
+                    DateTime dateTime = DateTime.Now;
+                    result.Kullanici_Id = modifiedByUserId;
+                    result.Degistirilme_Tarihi = dateTime;
+                    await _unitOfWork.makine_Kontrol_Kriter_BaslikRepository.UpdateAsync(result);
+                    await _unitOfWork.SaveAsync();
+                    return new Result(ResultStatus.Success, $"{resultObject.Baslik_Ad} başarılı bir şekilde Güncellenmiştir.");
+                }
+                else
+                {
+                    return new Result(ResultStatus.Error, $"{resultObject.Baslik_Ad} bulunamadı.");
+                }
+            }
+            else
+            {
+                return new Result(ResultStatus.Error, $"{updateObject.Baslik_Ad} zaten kayıtlıdır. Lütfen kontrol edip tekrar deneyiniz.");
+            }
+        }
+
+
+        public async Task<IDataResult<IList<Makine_Kontrol_Kriter_BaslikDTO>>> GetAllMakineAsync(long Id)
+        {
+            var resultObject = await _unitOfWork.makine_Kontrol_Kriter_BaslikRepository.GetAllAsync(x => x.isActive && !x.isDeleted && x.Makine_Id==Id);
+
+            if (resultObject.Count >= 0)
+            {
+                var result = _mapper.Map<IList<Makine_Kontrol_Kriter_BaslikDTO>>(resultObject);
+                return new DataResult<IList<Makine_Kontrol_Kriter_BaslikDTO>>(ResultStatus.Success, result);
+            }
+            return new DataResult<IList<Makine_Kontrol_Kriter_BaslikDTO>>(ResultStatus.Error, "Aradığınız kriterlere uygun veri bulunamadı",
+            null);
+        }
+
+
+    }
+
+}

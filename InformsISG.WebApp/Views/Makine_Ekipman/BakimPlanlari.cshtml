@@ -1,0 +1,242 @@
+﻿@model IEnumerable<InformsISG.Entities.Dtos.Makine_Ekipman_Bakim_PlanlariDTO>
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Index";
+    int siraNo = 1;
+}
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h3 class="card-title">MAKİNE EKİPMAN BAKIM LİSTESİ</h3>
+        <div class="card-toolbar">
+            <a href="@Url.Action("Create","Makine_Ekipman")" class="btn btn-success btn-hover-rotate-end">YENİ MAKİNE EKİPMAN EKLE</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="tblBirim" class="table table-striped table-row-bordered gy-5 gs-7">
+            <thead>
+                <tr>
+                    <th>Sıra No</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Servis_Tarih)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Diger_Servis_Tarih)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Bakim_Tip)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Durum)
+                    </th>
+                    <th> Onay Durumu
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@siraNo</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Servis_Tarih)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Diger_Servis_Tarih)
+                    </td>
+                    @if (item.Bakim_Tip == 0)
+                    {
+                        <td>
+                            Periyodik Planlı Bakım
+                        </td>
+                    }
+                    else if (item.Bakim_Tip == 1)
+                    {
+                        <td>
+                            Arıza Tamiri
+                        </td>
+                    }
+                    else if (item.Bakim_Tip == 2)
+                    {
+                        <td>
+                            Periyodik Kontrol
+                        </td>
+                    }
+                    @if (item.Durum == 0)
+                    {
+                        <td>
+                            Uygun
+                        </td>
+                    }
+                    else if (item.Durum == 1)
+                    {
+                        <td>
+                            Kusurlu
+                        </td>
+                    }
+                    else if (item.Durum == 2)
+                    {
+                        <td>
+                            Ağır Kusurlu
+                        </td>
+                    }
+                    @if (item.OnayIsgUzman == 1 && item.OnayBirimSorumlu==1)
+                    {
+                        <td>
+                            Onaylandı
+                        </td>
+                    }
+                    else if (item.OnayIsgUzman == 2 && item.OnayBirimSorumlu==2)
+                    {
+                        <td>
+                            Reddedildi
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                           Beklemede
+                        </td>
+                    }
+
+
+                    <td style="text-align:end">
+                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                data-kt-menu-trigger="click"
+                                data-kt-menu-placement="bottom-start">
+                            İşlemler
+                        </button>
+                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-100px py-4"
+                             data-kt-menu="true">
+                            <div class="menu-item px-3">
+                                <a onclick="VeriSil(@item.Id,this)" class="menu-link px-3">
+                                    Sil
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                    siraNo++;
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card-footer">
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $("#tblBirim").DataTable({
+            "pageLength": 50,
+            language: {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                 "sInfo": 'Toplam kayıttan _START_  - _END_ arasındaki kayıtlar gösteriliyor.' + "Toplam "+@ViewBag.Ekipman + " kayıt vardır.",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(MAX kayıt içerisinden bulunan)",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada MENU kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            },
+            dom:
+                "<'row'" +
+                "<'col-sm-6 d-flex align-items-center justify-conten-start'>" +
+                "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+                ">" +
+
+                "<'table-responsive'tr>" +
+
+                "<'row'" +
+                "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                ">"
+
+        });
+    </script>
+
+
+    <script type="text/javascript">
+       function VeriSil(ID, obj) {
+            var btn = $(obj);
+            Swal.fire({
+                title: 'SİLME İŞLEMİ',
+                text: "Silmek istediğinize emin misiniz?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#50cd89',
+                cancelButtonColor: '#f1416c',
+                confirmButtonText: 'Evet Sil!',
+                cancelButtonText: 'Hayır Silme!',
+                showClass: {
+                    popup: 'animate_animated animate_fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate_animated animate_fadeOutUp'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("DeleteBakim", "Makine_Ekipman")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: ID }
+                    }).done(function (d) {
+                        const result = $.parseJSON(d);
+                        if (result.ResultStatus == 0) {
+                            Swal.fire({
+                                title: 'SİLİNDİ',
+                                icon: 'success',
+                                text: `${result.Message}`,
+                                showClass: {
+                                    popup: 'animate_animated animate_fadeInDown'
+                                },
+                                hideClass: {
+                                    popup: 'animate_animated animate_fadeOutUp'
+                                }
+                            });
+                            btn.parent().parent().parent().parent().fadeOut(1000);
+                        }
+                    }).fail(function () {
+                        Swal.fire({
+                            title: 'HATALI İŞLEM',
+                            text: "Veri silinemedi",
+                            icon: 'error',
+                            showClass: {
+                                popup: 'animate_animated animate_fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate_animated animate_fadeOutUp'
+                            }
+                        })
+                    })
+                }
+            });
+        }
+    </script>
+}
+
+

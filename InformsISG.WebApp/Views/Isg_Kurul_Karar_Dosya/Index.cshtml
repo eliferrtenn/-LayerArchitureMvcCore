@@ -1,0 +1,118 @@
+﻿@model IEnumerable<InformsISG.Entities.Dtos.Isg_Kurul_Karar_DosyaDTO>
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h3 class="card-title">KURUL KARARI LİSTESİ</h3>
+        <div class="card-toolbar">
+            <a href="@Url.Action("Create","Isg_Kurul_Karar")" class="btn btn-success btn-hover-rotate-end">YENİ KURUL KARARI EKLE</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="tblBirim" class="table table-striped table-row-bordered gy-5 gs-7">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Dosya)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Aciklama)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Isg_Kurul_Karar_Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Isveren_Id)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dosya)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Aciklama)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Isg_Kurul_Karar_Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Isveren_Id)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">
+                                <i class="fa-regular fa-pen-to-square fa-xl"></i>
+                            </a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">
+                                <i class="fa-regular fa-trash-can fa-xl"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card-footer">
+        Footer
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $("#tblBirim").DataTable({
+            "pageLength": 50,
+            language: {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                 "sInfo": 'Toplam kayıttan _START_  - _END_ arasındaki kayıtlar gösteriliyor.' + "Toplam "+@ViewBag.KurulKararDosya + " kayıt vardır.",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(MAX kayıt içerisinden bulunan)",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada MENU kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            },
+            dom:
+                "<'row'" +
+                "<'col-sm-6 d-flex align-items-center justify-conten-start'>" +
+                "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+                ">" +
+
+                "<'table-responsive'tr>" +
+
+                "<'row'" +
+                "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                ">"
+
+        });
+    </script>
+}

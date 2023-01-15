@@ -1,0 +1,122 @@
+﻿@model InformsISG.Entities.Dtos.Egitim_KonuDTO
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Kontrol Listesi";
+    var EgitimAdi= (List<InformsISG.Entities.Dtos.Egitim_Konu_Alt_BaslikDTO>)ViewBag.EgitimAdi;
+    int siraNo = 1;
+    TempData["EgitimId"] = TempData["EgitimId"];
+}
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h3 class="card-title"></h3>
+        <div class="card-toolbar">
+            
+            <a href="@Url.Action("Index","Egitim_Konu")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="Egitim_Ad" class="control-label"></label>
+                    <input asp-for="Egitim_Ad" class="form-control" disabled />
+                </div>
+                <input asp-for="Id" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <table id="tblBirim" class="table table-striped table-row-bordered gy-5 gs-7">
+                <thead>
+                    <tr>
+                        <th>
+                            Sıra  No
+                        </th>
+                        <th>
+                            Eğitim Adı
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in EgitimAdi)
+                    {
+                        <tr>
+                            <td>
+                                @siraNo
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Alt_Baslik_Ad)
+                            </td>
+
+                        </tr>
+                        siraNo++;
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+    <br /><br /><br />
+
+    <form asp-action="CreateAltBaslik">
+        <div class="card-header">
+            <h3 class="card-title">Eğitim Adı Ekle</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET" id="btnkaydet">&nbsp;
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-10 mb-5">
+                    <label class="control-label">Eğitim No</label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input name="EgitimNo" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-10 mb-5">
+                    <label class="control-label">Eğitim Adı</label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input name="EgitimAd" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-10 mb-5">
+                    <label class="control-label">Eğitim Süresi</label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input name="Sure" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

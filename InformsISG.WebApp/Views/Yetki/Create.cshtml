@@ -1,0 +1,97 @@
+﻿@model InformsISG.Entities.Dtos.KullaniciDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form asp-action="Create">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">YETKİ EKLEME</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Yetki")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <label asp-for="Yetki_Id" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Yetki_Id" class="form-control" asp-items="ViewBag.Yetki_Id"></select>
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+                    <label asp-for="Personel_Id" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <select id="personel_select" asp-for="Personel_Id" class="form-control" asp-items="ViewBag.Personel_Id"></select>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Mail" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Mail" class="form-control" />
+                        <span asp-validation-for="Mail" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <label asp-for="Password" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Password" id="passw" class="form-control" value="@ViewBag.deneme" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    @*<script>
+        $("#passw").change(function () {
+            var pw = document.getElementById("passw").value;
+            var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+            if (pw.match(passw)) {
+                alert('Yalnızca karakter, rakam, alt çizgi içeren 7 ila 15 karakterde bir cümle olmalıdır.')
+                return true;
+            }
+            else {
+                return false;
+            }
+        });
+
+
+    </script>*@
+
+    <script>
+        $(document).ready(function () {
+            $('#personel_select').select2({
+                language: {
+                    inputTooShort: function () {
+                        return "En az üç karakter giriniz";
+                    }
+                },
+                minimumInputLength: 3, // at least 20 results must be displayed
+                tags: false,
+
+            });
+        });
+    </script>
+}
+

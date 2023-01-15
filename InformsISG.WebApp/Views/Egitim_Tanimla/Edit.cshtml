@@ -1,0 +1,256 @@
+﻿@model InformsISG.Entities.Dtos.Egitim_TanimlaDTO
+
+@{
+    ViewData["Title"] = "Edit";
+    var EgitimKonu = (List<InformsISG.Entities.Dtos.Egitim_KonuDTO>)ViewBag.EgitimKonu;
+    var EgitimKonuAltBaslik = (List<InformsISG.Entities.Dtos.Egitim_Konu_Alt_BaslikDTO>)ViewBag.EgitimKonuAltBaslik;
+    int i = 1;
+    int count = 0;
+}
+<head>
+    <style>
+        .table-bordered {
+            border: 1px solid #dee2e6;
+        }
+
+            .table-bordered th,
+            .table-bordered td {
+                border: 1px solid #dee2e6;
+            }
+
+            .table-bordered thead th,
+            .table-bordered thead td {
+                border-bottom-width: 2px;
+            }
+
+        .table-dark.table-bordered {
+            border: 0;
+        }
+    </style>
+</head>
+<form asp-action="Edit">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">EĞİTİM TANIMI DÜZENLEME</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Egitim_Tanimla")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <input asp-for="Id" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+
+                @foreach (var item in EgitimKonu)
+                {
+                    <div class="col-md-6">
+                        <span class="d-flex flex-column mb-1">
+                            <span class="fw-bolder fs-6">@item.Egitim_Ad</span>
+                        </span>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr style="text-align:center">
+                                    <th>#</th>
+                                    <th style="padding-left:0 !important">Seçim</th>
+                                    <th style="padding-left:0 !important">Eğitim Ad</th>
+                                    <th style="padding-left:0 !important">Süre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @foreach (var item2 in EgitimKonuAltBaslik)
+                                    {
+                                        @if (item.Id == item2.Egitim_Konu_Id)
+                                        {
+                                        <tr style="text-align:center">
+                                            <th scope="row">@i</th>
+
+                                            <td>
+                                                <span class="form-check form-check-custom form-check-solid" style="text-align:center">
+                                                    <input class="form-check-input" type="radio" value="@item2.Id" />
+                                                </span>
+                                            </td>
+                                            <td style="padding-left: 0 !important;padding-top:0.75rem !important;padding-bottom:0.75rem">
+                                                @item2.Alt_Baslik_Ad
+                                            </td>
+                                            <td style="padding-left: 0 !important;padding-top:0.75rem !important;padding-bottom:0.75rem;">
+                                                @item2.Sure
+                                            </td>
+                                        </tr>
+                                        i++;
+
+                                    }
+                                    }
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        count++;
+                        @if (EgitimKonu.Count == count && (i % 2) == 0)
+                        {
+                            <div class="col-md-6" style="margin-bottom:9rem">
+                            </div>
+                        }
+                    }
+                <div class="col-md-6">
+                    <input asp-for="Id" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <label asp-for="Egitim_Ad" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Egitim_Ad" class="form-control" />
+                        <span asp-validation-for="Egitim_Ad" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Egitim_Sebep" class="control-label"></label>
+                    <div class="input-group form-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        @if (Model.Egitim_Sebep == 0)
+                        {
+                            <select asp-for="Egitim_Sebep" class="form-control">
+                                <option value="0" selected>İşe Giriş Muayenesi</option>
+                                <option value="1">Yeni Ekipman</option>
+                                <option value="2">Meslek Hastalığı</option>
+                                <option value="3">İş Değişikliği</option>
+                                <option value="4">İş Kazası</option>
+                            </select>
+                        }
+                        else if (Model.Egitim_Sebep == 1)
+                        {
+                            <select asp-for="Egitim_Sebep" class="form-control">
+                                <option value="0">İşe Giriş Muayenesi</option>
+                                <option value="1" selected>Yeni Ekipman</option>
+                                <option value="2">Meslek Hastalığı</option>
+                                <option value="3">İş Değişikliği</option>
+                                <option value="4">İş Kazası</option>
+                            </select>
+                        }
+                        else if (Model.Egitim_Sebep == 2)
+                        {
+                            <select asp-for="Egitim_Sebep" class="form-control">
+                                <option value="0">İşe Giriş Muayenesi</option>
+                                <option value="1">Yeni Ekipman</option>
+                                <option value="2" selected>Meslek Hastalığı</option>
+                                <option value="3">İş Değişikliği</option>
+                                <option value="4">İş Kazası</option>
+                            </select>
+                        }
+                        else if (Model.Egitim_Sebep == 3)
+                        {
+                            <select asp-for="Egitim_Sebep" class="form-control">
+                                <option value="0">İşe Giriş Muayenesi</option>
+                                <option value="1">Yeni Ekipman</option>
+                                <option value="2">Meslek Hastalığı</option>
+                                <option value="3" selected>İş Değişikliği</option>
+                                <option value="4">İş Kazası</option>
+                            </select>
+                        }
+                        else if (Model.Egitim_Sebep == 4)
+                        {
+                            <select asp-for="Egitim_Sebep" class="form-control">
+                                <option value="0">İşe Giriş Muayenesi</option>
+                                <option value="1">Yeni Ekipman</option>
+                                <option value="2">Meslek Hastalığı</option>
+                                <option value="3">İş Değişikliği</option>
+                                <option value="4" selected>İş Kazası</option>
+                            </select>
+                        }
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Egitim_Tarih" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Egitim_Tarih" class="form-control" />
+                        <span asp-validation-for="Egitim_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Tekrar_Tarih" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Tekrar_Tarih" class="form-control" />
+                        <span asp-validation-for="Tekrar_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Egitim_Tur" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Egitim_Tur" class="form-control">
+                            <option value="0" selected>Yüz yüze eğitim</option>
+                            <option value="1">Uzaktan Eğitim</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Egitim_Yer" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Egitim_Yer" class="form-control">
+                            <option value="" selected>** SEÇİM YAPNIZ **</option>
+                            <option value="0" selected>İş Yerinde</option>
+                            <option value="1">İş Yeri Dışında</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Egitim_Yer_Ad" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Egitim_Yer_Ad" class="form-control" />
+                        <span asp-validation-for="Egitim_Yer_Ad" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <label asp-for="Aciklama" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                        <input asp-for="Aciklama" class="form-control" />
+                        <span asp-validation-for="Aciklama" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Isveren_Id" class="control-label"></label>
+                    <div class="form-group mb-5">
+                        <select asp-for="Isveren_Id" class="form-control" asp-items="ViewBag.Isveren_Id"></select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card-footer">
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+        $(".js-example-basic-multiple-limit").select2({
+            maximumSelectionLength: 10
+        });
+        });
+    </script>
+}

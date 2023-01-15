@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Description="This report demonstrates the Digital Signature object" ReportInfo.Created="04/29/2019 13:05:51" ReportInfo.Modified="11/22/2022 03:01:05" ReportInfo.CreatorVersion="2022.2.0.0">
+  <Dictionary>
+    <TableDataSource Name="Order Details" ReferenceName="NorthWind.Order Details" DataType="System.Int32" Enabled="true">
+      <Column Name="OrderID" DataType="System.Int32"/>
+      <Column Name="ProductID" DataType="System.Int32"/>
+      <Column Name="UnitPrice" DataType="System.Decimal"/>
+      <Column Name="Quantity" DataType="System.Int16"/>
+      <Column Name="Discount" DataType="System.Single"/>
+    </TableDataSource>
+    <TableDataSource Name="Orders" ReferenceName="NorthWind.Orders" DataType="System.Int32" Enabled="true">
+      <Column Name="OrderID" DataType="System.Int32"/>
+      <Column Name="CustomerID" DataType="System.String"/>
+      <Column Name="EmployeeID" DataType="System.Int32"/>
+      <Column Name="OrderDate" DataType="System.DateTime"/>
+      <Column Name="RequiredDate" DataType="System.DateTime"/>
+      <Column Name="ShippedDate" DataType="System.DateTime"/>
+      <Column Name="ShipVia" DataType="System.Int32"/>
+      <Column Name="Freight" DataType="System.Decimal"/>
+      <Column Name="ShipName" DataType="System.String"/>
+      <Column Name="ShipAddress" DataType="System.String"/>
+      <Column Name="ShipCity" DataType="System.String"/>
+      <Column Name="ShipRegion" DataType="System.String"/>
+      <Column Name="ShipPostalCode" DataType="System.String"/>
+      <Column Name="ShipCountry" DataType="System.String"/>
+      <Column Name="Latitude" DataType="System.Double"/>
+      <Column Name="Longitude" DataType="System.Double"/>
+    </TableDataSource>
+    <TableDataSource Name="Categories" ReferenceName="NorthWind.Categories" DataType="System.Int32" Enabled="true">
+      <Column Name="CategoryID" DataType="System.Int32"/>
+      <Column Name="CategoryName" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+      <Column Name="Picture" DataType="System.Byte[]" BindableControl="Picture"/>
+    </TableDataSource>
+    <TableDataSource Name="Customers" ReferenceName="NorthWind.Customers" DataType="System.Int32" Enabled="true">
+      <Column Name="CustomerID" DataType="System.String"/>
+      <Column Name="CompanyName" DataType="System.String"/>
+      <Column Name="ContactName" DataType="System.String"/>
+      <Column Name="ContactTitle" DataType="System.String"/>
+      <Column Name="Address" DataType="System.String"/>
+      <Column Name="City" DataType="System.String"/>
+      <Column Name="Region" DataType="System.String"/>
+      <Column Name="PostalCode" DataType="System.String"/>
+      <Column Name="Country" DataType="System.String"/>
+      <Column Name="Phone" DataType="System.String"/>
+      <Column Name="Fax" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="Employees" ReferenceName="NorthWind.Employees" DataType="System.Int32" Enabled="true">
+      <Column Name="EmployeeID" DataType="System.Int32"/>
+      <Column Name="LastName" DataType="System.String"/>
+      <Column Name="FirstName" DataType="System.String"/>
+      <Column Name="Title" DataType="System.String"/>
+      <Column Name="TitleOfCourtesy" DataType="System.String"/>
+      <Column Name="BirthDate" DataType="System.DateTime"/>
+      <Column Name="HireDate" DataType="System.DateTime"/>
+      <Column Name="Address" DataType="System.String"/>
+      <Column Name="City" DataType="System.String"/>
+      <Column Name="Region" DataType="System.String"/>
+      <Column Name="PostalCode" DataType="System.String"/>
+      <Column Name="Country" DataType="System.String"/>
+      <Column Name="HomePhone" DataType="System.String"/>
+      <Column Name="Extension" DataType="System.String"/>
+      <Column Name="Photo" DataType="System.Byte[]" BindableControl="Picture"/>
+      <Column Name="Notes" DataType="System.String"/>
+      <Column Name="ReportsTo" DataType="System.Int32"/>
+    </TableDataSource>
+    <TableDataSource Name="Products" ReferenceName="NorthWind.Products" DataType="System.Int32" Enabled="true">
+      <Column Name="ProductID" DataType="System.Int32"/>
+      <Column Name="ProductName" DataType="System.String"/>
+      <Column Name="SupplierID" DataType="System.Int32"/>
+      <Column Name="CategoryID" DataType="System.Int32"/>
+      <Column Name="QuantityPerUnit" DataType="System.String"/>
+      <Column Name="UnitPrice" DataType="System.Decimal"/>
+      <Column Name="UnitsInStock" DataType="System.Int16"/>
+      <Column Name="UnitsOnOrder" DataType="System.Int16"/>
+      <Column Name="ReorderLevel" DataType="System.Int16"/>
+      <Column Name="Discontinued" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="EAN13" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="Shippers" ReferenceName="NorthWind.Shippers" DataType="System.Int32" Enabled="true">
+      <Column Name="ShipperID" DataType="System.Int32"/>
+      <Column Name="CompanyName" DataType="System.String"/>
+      <Column Name="Phone" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="Suppliers" ReferenceName="NorthWind.Suppliers" DataType="System.Int32" Enabled="true">
+      <Column Name="SupplierID" DataType="System.Int32"/>
+      <Column Name="CompanyName" DataType="System.String"/>
+      <Column Name="ContactName" DataType="System.String"/>
+      <Column Name="ContactTitle" DataType="System.String"/>
+      <Column Name="Address" DataType="System.String"/>
+      <Column Name="City" DataType="System.String"/>
+      <Column Name="Region" DataType="System.String"/>
+      <Column Name="PostalCode" DataType="System.String"/>
+      <Column Name="Country" DataType="System.String"/>
+      <Column Name="Phone" DataType="System.String"/>
+      <Column Name="Fax" DataType="System.String"/>
+      <Column Name="HomePage" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="MatrixDemo" ReferenceName="NorthWind.MatrixDemo" DataType="System.Int32" Enabled="true">
+      <Column Name="Name" DataType="System.String"/>
+      <Column Name="Year" DataType="System.Int32"/>
+      <Column Name="Month" DataType="System.Int32"/>
+      <Column Name="ItemsSold" DataType="System.Int32"/>
+      <Column Name="Revenue" DataType="System.Decimal"/>
+    </TableDataSource>
+    <TableDataSource Name="Unicode" ReferenceName="NorthWind.Unicode" DataType="System.Int32" Enabled="true">
+      <Column Name="Name" DataType="System.String"/>
+      <Column Name="UnicodeName" DataType="System.String"/>
+      <Column Name="Text" DataType="System.String"/>
+      <Column Name="Rtl" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Active" DataType="System.Boolean" BindableControl="CheckBox"/>
+    </TableDataSource>
+    <BusinessObjectDataSource Name="Categories BusinessObject" ReferenceName="Categories BusinessObject" DataType="System.Collections.Generic.List`1[[DemoNew.DemoModel.Model+Category, Demo, Version=2022.2.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+      <Column Name="Name" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+      <BusinessObjectDataSource Name="Products1" Alias="Products" Enabled="false" DataType="System.Collections.Generic.List`1[[DemoNew.DemoModel.Model+Product, Demo, Version=2022.2.0.0, Culture=neutral, PublicKeyToken=null]]" PropName="Products"/>
+    </BusinessObjectDataSource>
+    <Relation Name="OrdersOrderDetails" ReferenceName="NorthWind.OrdersOrderDetails" ParentDataSource="Orders" ChildDataSource="Order Details" ParentColumns="OrderID" ChildColumns="OrderID" Enabled="true"/>
+    <Relation Name="CategoriesProducts" ReferenceName="NorthWind.CategoriesProducts" ParentDataSource="Categories" ChildDataSource="Products" ParentColumns="CategoryID" ChildColumns="CategoryID" Enabled="true"/>
+    <Relation Name="SuppliersProducts" ReferenceName="NorthWind.SuppliersProducts" ParentDataSource="Suppliers" ChildDataSource="Products" ParentColumns="SupplierID" ChildColumns="SupplierID" Enabled="true"/>
+    <Relation Name="CustomersOrders" ReferenceName="NorthWind.CustomersOrders" ParentDataSource="Customers" ChildDataSource="Orders" ParentColumns="CustomerID" ChildColumns="CustomerID" Enabled="true"/>
+    <Relation Name="ShippersOrders" ReferenceName="NorthWind.ShippersOrders" ParentDataSource="Shippers" ChildDataSource="Orders" ParentColumns="ShipperID" ChildColumns="ShipVia" Enabled="true"/>
+    <Relation Name="EmployeesOrders" ReferenceName="NorthWind.EmployeesOrders" ParentDataSource="Employees" ChildDataSource="Orders" ParentColumns="EmployeeID" ChildColumns="EmployeeID" Enabled="true"/>
+    <Relation Name="ProductsOrderDetails" ReferenceName="NorthWind.ProductsOrderDetails" ParentDataSource="Products" ChildDataSource="Order Details" ParentColumns="ProductID" ChildColumns="ProductID" Enabled="true"/>
+    <Total Name="Sub-Total" Expression="[Order Details.UnitPrice] * [Order Details.Quantity]" Evaluator="Data2" ResetAfterPrint="false"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="141.75">
+      <TextObject Name="Text49" Width="718.2" Height="28.35" Anchor="Top, Left, Right" Fill.Color="WhiteSmoke" CanGrow="true" Text="[Report.ReportInfo.Description]" Padding="4, 4, 4, 4" VertAlign="Center" Font="Tahoma, 8pt"/>
+      <TableObject Name="Table1" Left="-9450" Top="-9450" Width="9639" Height="4943.3" IsIntersectedWithOtherObject="true">
+        <TableColumn Name="Column1" Width="1927.8"/>
+        <TableColumn Name="Column2" Width="1927.8"/>
+        <TableColumn Name="Column3" Width="1927.8"/>
+        <TableColumn Name="Column4" Width="1927.8"/>
+        <TableColumn Name="Column5" Width="1927.8"/>
+        <TableRow Name="Row1" Height="988.66">
+          <TableCell Name="Cell1" Font="Arial, 10pt"/>
+          <TableCell Name="Cell2" Font="Arial, 10pt"/>
+          <TableCell Name="Cell3" Font="Arial, 10pt"/>
+          <TableCell Name="Cell4" Font="Arial, 10pt"/>
+          <TableCell Name="Cell5" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row2" Height="988.66">
+          <TableCell Name="Cell6" Font="Arial, 10pt"/>
+          <TableCell Name="Cell7" Font="Arial, 10pt"/>
+          <TableCell Name="Cell8" Font="Arial, 10pt"/>
+          <TableCell Name="Cell9" Font="Arial, 10pt"/>
+          <TableCell Name="Cell10" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row3" Height="988.66">
+          <TableCell Name="Cell11" Font="Arial, 10pt"/>
+          <TableCell Name="Cell12" Font="Arial, 10pt"/>
+          <TableCell Name="Cell13" Font="Arial, 10pt"/>
+          <TableCell Name="Cell14" Font="Arial, 10pt"/>
+          <TableCell Name="Cell15" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row4" Height="988.66">
+          <TableCell Name="Cell16" Font="Arial, 10pt"/>
+          <TableCell Name="Cell17" Font="Arial, 10pt"/>
+          <TableCell Name="Cell18" Font="Arial, 10pt"/>
+          <TableCell Name="Cell19" Font="Arial, 10pt"/>
+          <TableCell Name="Cell20" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row5" Height="988.66">
+          <TableCell Name="Cell21" Font="Arial, 10pt"/>
+          <TableCell Name="Cell22" Font="Arial, 10pt"/>
+          <TableCell Name="Cell23" Font="Arial, 10pt"/>
+          <TableCell Name="Cell24" Font="Arial, 10pt"/>
+          <TableCell Name="Cell25" Font="Arial, 10pt"/>
+        </TableRow>
+      </TableObject>
+      <CrossViewObject Name="CrossView1" Top="28.35" Width="718.3" Height="113.4" IsIntersectedWithOtherObject="true" FixedRows="2" FixedColumns="1">
+        <CrossViewColumns/>
+        <CrossViewRows/>
+        <CrossViewCells/>
+        <TableColumn Name="Column6" Width="156.01"/>
+        <TableColumn Name="Column7" Width="562.29"/>
+        <TableRow Name="Row6" Height="37.8">
+          <TableCell Name="Cell26" AllowExpressions="false" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell27" AllowExpressions="false" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt">
+            <TextObject Name="Text50" Left="113.4" Width="217.35" Height="28.35" Text="Formlar&#13;&#10;" HorzAlign="Right" Font="Arial, 20pt, style=Bold"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row7" Height="37.8">
+          <TableCell Name="Cell28" Font="Arial, 10pt"/>
+          <TableCell Name="Cell29" Text="Set FastCube source" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextFill.Color="Gray">
+            <TextObject Name="Text51" Top="9.45" Width="396.9" Height="18.9" Text="Döküman Adı : Toplantı Tutanağı Formu" Font="Arial, 10pt"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row8" Height="37.8">
+          <TableCell Name="Cell30" Text="Set FastCube source" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" TextFill.Color="Gray"/>
+          <TableCell Name="Cell31" Text="Set FastCube source" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" TextFill.Color="Gray"/>
+        </TableRow>
+      </CrossViewObject>
+      <AdvMatrixObject Name="Matrix1" Left="160.65" Top="103.95" Width="264.58" Height="37.8" IsIntersectedWithOtherObject="true">
+        <Columns>
+          <Descriptor/>
+        </Columns>
+        <Rows>
+          <Descriptor/>
+        </Rows>
+        <TableColumn Name="Column8" Width="132.29"/>
+        <TableColumn Name="Column9" Width="132.29"/>
+        <TableRow Name="Row9">
+          <TableCell Name="Cell32" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell33" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row10">
+          <TableCell Name="Cell34" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell35" AllowExpressions="false" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+      </AdvMatrixObject>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="145.75" Width="718.2" Height="321.3" Border.Lines="All" Filter="[Order Details.OrderID] == 10278">
+      <MatrixObject Name="Matrix3" Top="18.9" Width="252.45" Height="70.66" FixedRows="1" FixedColumns="1">
+        <MatrixColumns/>
+        <MatrixRows/>
+        <MatrixCells/>
+        <TableColumn Name="Column19" Width="116.3" AutoSize="true"/>
+        <TableColumn Name="Column20" Width="136.15" AutoSize="true"/>
+        <TableRow Name="Row21" Height="35.33" AutoSize="true">
+          <TableCell Name="Cell71" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell72" Text="Drag data here to&#13;&#10;create a new column" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" TextFill.Color="Gray"/>
+        </TableRow>
+        <TableRow Name="Row22" Height="35.33" AutoSize="true">
+          <TableCell Name="Cell73" Text="Drag data here to&#13;&#10;create a new row" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" TextFill.Color="Gray"/>
+          <TableCell Name="Cell74" Text="Drag data here to&#13;&#10;create a new cell" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" TextFill.Color="Gray"/>
+        </TableRow>
+      </MatrixObject>
+      <DataBand Name="Data2" Top="471.05" Width="718.2" Height="28.35" DataSource="Order Details" Filter="[Order Details.OrderID] == 10278">
+        <TextObject Name="Text21" Left="85.05" Width="349.65" Height="28.35" Border.Lines="All" Text="[Order Details.Products.ProductName]" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text22" Left="434.7" Width="85.05" Height="28.35" Border.Lines="All" Text="[Order Details.UnitPrice]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 10pt" Trimming="EllipsisCharacter"/>
+        <TextObject Name="Text23" Left="519.75" Width="94.5" Height="28.35" Border.Lines="All" Text="[Order Details.Quantity]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text24" Width="85.05" Height="28.35" Border.Lines="All" Text="[Order Details.Products.ProductID]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text25" Left="614.25" Width="103.95" Height="28.35" Border.Lines="All" Text="[[Order Details.UnitPrice] * [Order Details.Quantity]]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 10pt" Trimming="EllipsisCharacter"/>
+      </DataBand>
+    </DataBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="503.4" Width="718.2" Height="132.3" Border.Lines="All">
+      <TextObject Name="Text11" Left="548.1" Width="170.1" Height="18.9" Border.Lines="All" Fill.Color="33, 82, 140" Text="[Sub-Total]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextFill.Color="White"/>
+      <TextObject Name="Text43" Left="548.1" Top="18.9" Width="170.1" Height="18.9" Border.Lines="All" Fill.Color="33, 82, 140" Text="[[Sub-Total] * 0.21]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextFill.Color="White"/>
+      <TextObject Name="Text44" Left="548.1" Top="37.8" Width="170.1" Height="18.9" Border.Lines="All" Fill.Color="33, 82, 140" Text="[[Sub-Total] * 1.21]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextFill.Color="White"/>
+      <TextObject Name="Text45" Left="434.7" Width="113.4" Height="18.9" Border.Lines="All" Fill.Color="33, 82, 140" Text="Sub-Total" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextFill.Color="White"/>
+      <TextObject Name="Text46" Left="434.7" Top="18.9" Width="113.4" Height="18.9" Border.Lines="All" Fill.Color="33, 82, 140" Text="Plus Tax of 21%" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextFill.Color="White"/>
+      <TextObject Name="Text47" Left="434.7" Top="37.8" Width="113.4" Height="18.9" Border.Lines="All" Fill.Color="33, 82, 140" Text="Total" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextFill.Color="White"/>
+      <TextObject Name="Text48" Width="434.7" Height="56.7" Border.Lines="All" Text="Note:" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text14" Top="66.15" Width="113.4" Height="56.7" Text="Authorized by:" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <DigitalSignatureObject Name="DigitalSignature1" Left="113.4" Top="66.15" Width="359.1" Height="47.25" Border.Lines="Bottom"/>
+      <TextObject Name="Text15" Left="113.4" Top="113.4" Width="94.5" Height="18.9" Text="Signature" VertAlign="Center" Font="Arial, 7pt"/>
+    </ReportSummaryBand>
+    <PageFooterBand Name="PageFooter1" Top="639.7" Width="718.2" Height="37.8">
+      <TextObject Name="Text34" Top="9.45" Width="217.35" Height="28.35" Hyperlink.Value="https://www.fast-report.com/en/product/fast-report-net/" Text="Generated by FastReport .NET" VertAlign="Center" Font="Segoe UI, 8pt, style=Underline" TextFill.Color="Blue"/>
+    </PageFooterBand>
+  </ReportPage>
+  <ReportPage Name="Page2" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle2" Width="718.2" Height="141.75">
+      <TextObject Name="Text1" Width="718.2" Height="28.35" Anchor="Top, Left, Right" Fill.Color="WhiteSmoke" CanGrow="true" Text="[Report.ReportInfo.Description]" Padding="4, 4, 4, 4" VertAlign="Center" Font="Tahoma, 8pt"/>
+      <TableObject Name="Table2" Left="-9450" Top="-9450" Width="9639" Height="4943.3" IsIntersectedWithOtherObject="true">
+        <TableColumn Name="Column10" Width="1927.8"/>
+        <TableColumn Name="Column11" Width="1927.8"/>
+        <TableColumn Name="Column12" Width="1927.8"/>
+        <TableColumn Name="Column13" Width="1927.8"/>
+        <TableColumn Name="Column14" Width="1927.8"/>
+        <TableRow Name="Row11" Height="988.66">
+          <TableCell Name="Cell36" Font="Arial, 10pt"/>
+          <TableCell Name="Cell37" Font="Arial, 10pt"/>
+          <TableCell Name="Cell38" Font="Arial, 10pt"/>
+          <TableCell Name="Cell39" Font="Arial, 10pt"/>
+          <TableCell Name="Cell40" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row12" Height="988.66">
+          <TableCell Name="Cell41" Font="Arial, 10pt"/>
+          <TableCell Name="Cell42" Font="Arial, 10pt"/>
+          <TableCell Name="Cell43" Font="Arial, 10pt"/>
+          <TableCell Name="Cell44" Font="Arial, 10pt"/>
+          <TableCell Name="Cell45" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row13" Height="988.66">
+          <TableCell Name="Cell46" Font="Arial, 10pt"/>
+          <TableCell Name="Cell47" Font="Arial, 10pt"/>
+          <TableCell Name="Cell48" Font="Arial, 10pt"/>
+          <TableCell Name="Cell49" Font="Arial, 10pt"/>
+          <TableCell Name="Cell50" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row14" Height="988.66">
+          <TableCell Name="Cell51" Font="Arial, 10pt"/>
+          <TableCell Name="Cell52" Font="Arial, 10pt"/>
+          <TableCell Name="Cell53" Font="Arial, 10pt"/>
+          <TableCell Name="Cell54" Font="Arial, 10pt"/>
+          <TableCell Name="Cell55" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row15" Height="988.66">
+          <TableCell Name="Cell56" Font="Arial, 10pt"/>
+          <TableCell Name="Cell57" Font="Arial, 10pt"/>
+          <TableCell Name="Cell58" Font="Arial, 10pt"/>
+          <TableCell Name="Cell59" Font="Arial, 10pt"/>
+          <TableCell Name="Cell60" Font="Arial, 10pt"/>
+        </TableRow>
+      </TableObject>
+      <CrossViewObject Name="CrossView2" Top="28.35" Width="718.3" Height="113.4" IsIntersectedWithOtherObject="true" FixedRows="2" FixedColumns="1">
+        <CrossViewColumns/>
+        <CrossViewRows/>
+        <CrossViewCells/>
+        <TableColumn Name="Column15" Width="156.01"/>
+        <TableColumn Name="Column16" Width="562.29"/>
+        <TableRow Name="Row16" Height="37.8">
+          <TableCell Name="Cell61" AllowExpressions="false" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell62" AllowExpressions="false" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt">
+            <TextObject Name="Text16" Left="113.4" Width="217.35" Height="28.35" Text="Formlar&#13;&#10;" HorzAlign="Right" Font="Arial, 20pt, style=Bold"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row17" Height="37.8">
+          <TableCell Name="Cell63" Font="Arial, 10pt"/>
+          <TableCell Name="Cell64" Text="Set FastCube source" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextFill.Color="Gray">
+            <TextObject Name="Text19" Left="28.35" Top="9.45" Width="396.9" Height="18.9" Text="Döküman Adı : Toplantı Tutanağı Formu" Font="Arial, 10pt"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row18" Height="37.8">
+          <TableCell Name="Cell65" Text="Set FastCube source" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" TextFill.Color="Gray"/>
+          <TableCell Name="Cell66" Text="Set FastCube source" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" TextFill.Color="Gray"/>
+        </TableRow>
+      </CrossViewObject>
+      <AdvMatrixObject Name="Matrix2" Left="160.65" Top="103.95" Width="264.58" Height="37.8" IsIntersectedWithOtherObject="true">
+        <Columns>
+          <Descriptor/>
+        </Columns>
+        <Rows>
+          <Descriptor/>
+        </Rows>
+        <TableColumn Name="Column17" Width="132.29"/>
+        <TableColumn Name="Column18" Width="132.29"/>
+        <TableRow Name="Row19">
+          <TableCell Name="Cell67" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell68" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row20">
+          <TableCell Name="Cell69" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell70" AllowExpressions="false" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+      </AdvMatrixObject>
+    </ReportTitleBand>
+    <DataBand Name="Data3" Top="145.75" Width="718.2" Height="321.3" Border.Lines="All" Filter="[Order Details.OrderID] == 10278">
+      <TextObject Name="Text91" Top="28.35" Width="198.45" Height="28.35" Border.Lines="All" Font="Arial, 10pt"/>
+      <TextObject Name="Text92" Left="198.45" Top="28.35" Width="226.8" Height="28.35" Border.Lines="All" Font="Arial, 10pt"/>
+      <TextObject Name="Text93" Left="425.25" Top="28.35" Width="292.95" Height="28.35" Border.Lines="All" Font="Arial, 10pt"/>
+      <TextObject Name="Text94" Top="56.7" Width="727.65" Height="28.35" Border.Lines="All" IsIntersectedWithOtherObject="true" Font="Arial, 10pt"/>
+      <TextObject Name="Text95" Top="85.05" Width="718.2" Height="28.35" Border.Lines="All" Text="&#13;&#10;" Font="Arial, 10pt"/>
+      <DataBand Name="Data4" Top="471.05" Width="718.2" Height="28.35" DataSource="Order Details" Filter="[Order Details.OrderID] == 10278">
+        <TextObject Name="Text76" Left="85.05" Width="349.65" Height="28.35" Border.Lines="All" Text="[Order Details.Products.ProductName]" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text77" Left="434.7" Width="85.05" Height="28.35" Border.Lines="All" Text="[Order Details.UnitPrice]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 10pt" Trimming="EllipsisCharacter"/>
+        <TextObject Name="Text78" Left="519.75" Width="94.5" Height="28.35" Border.Lines="All" Text="[Order Details.Quantity]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text79" Width="85.05" Height="28.35" Border.Lines="All" Text="[Order Details.Products.ProductID]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text80" Left="614.25" Width="103.95" Height="28.35" Border.Lines="All" Text="[[Order Details.UnitPrice] * [Order Details.Quantity]]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 10pt" Trimming="EllipsisCharacter"/>
+      </DataBand>
+    </DataBand>
+    <ReportSummaryBand Name="ReportSummary2" Top="503.4" Width="718.2" Height="132.3" Border.Lines="All">
+      <TextObject Name="Text81" Left="548.1" Width="170.1" Height="18.9" Border.Lines="All" Fill.Color="33, 82, 140" Text="[Sub-Total]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextFill.Color="White"/>
+      <TextObject Name="Text82" Left="548.1" Top="18.9" Width="170.1" Height="18.9" Border.Lines="All" Fill.Color="33, 82, 140" Text="[[Sub-Total] * 0.21]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextFill.Color="White"/>
+      <TextObject Name="Text83" Left="548.1" Top="37.8" Width="170.1" Height="18.9" Border.Lines="All" Fill.Color="33, 82, 140" Text="[[Sub-Total] * 1.21]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextFill.Color="White"/>
+      <TextObject Name="Text84" Left="434.7" Width="113.4" Height="18.9" Border.Lines="All" Fill.Color="33, 82, 140" Text="Sub-Total" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextFill.Color="White"/>
+      <TextObject Name="Text85" Left="434.7" Top="18.9" Width="113.4" Height="18.9" Border.Lines="All" Fill.Color="33, 82, 140" Text="Plus Tax of 21%" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextFill.Color="White"/>
+      <TextObject Name="Text86" Left="434.7" Top="37.8" Width="113.4" Height="18.9" Border.Lines="All" Fill.Color="33, 82, 140" Text="Total" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextFill.Color="White"/>
+      <TextObject Name="Text87" Width="434.7" Height="56.7" Border.Lines="All" Text="Note:" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text88" Top="66.15" Width="113.4" Height="56.7" Text="Authorized by:" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <DigitalSignatureObject Name="DigitalSignature2" Left="113.4" Top="66.15" Width="359.1" Height="47.25" Border.Lines="Bottom"/>
+      <TextObject Name="Text89" Left="113.4" Top="113.4" Width="94.5" Height="18.9" Text="Signature" VertAlign="Center" Font="Arial, 7pt"/>
+    </ReportSummaryBand>
+    <PageFooterBand Name="PageFooter2" Top="639.7" Width="718.2" Height="37.8">
+      <TextObject Name="Text90" Top="9.45" Width="217.35" Height="28.35" Hyperlink.Value="https://www.fast-report.com/en/product/fast-report-net/" Text="Generated by FastReport .NET" VertAlign="Center" Font="Segoe UI, 8pt, style=Underline" TextFill.Color="Blue"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

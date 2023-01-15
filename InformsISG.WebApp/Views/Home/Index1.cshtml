@@ -1,0 +1,317 @@
+﻿@model InformsISG.Entities.Dtos.KullaniciDTO
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@using System.Security.Claims
+@{
+    var currentrole = this.User.FindFirst(ClaimTypes.Role).Value;
+    var Birim = ViewBag.Birim;
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Index";
+    var RiskYuksekTablo = (List<InformsISG.Entities.Dtos.Risk_Analiz_TabloDTO>)ViewBag.RiskYuksekTablo;
+    var PersonelList = (List<InformsISG.Entities.Dtos.Personel_BilgiDTO>)ViewBag.PersonelList;
+    var KurulKararListe = (IEnumerable<InformsISG.Entities.Dtos.Isg_Kurul_KararDTO>)ViewBag.KurulKararListe;
+    var KurulKararDosyaListe = (List<InformsISG.Entities.Dtos.Isg_Kurul_Karar_DosyaDTO>)ViewBag.KurulKararDosyaListe;
+    var BakimPlanlari = (IEnumerable<InformsISG.Entities.Dtos.Makine_Ekipman_Bakim_PlanlariDTO>)ViewBag.BakimPlan;
+    var BakimPlanlari2 = (IEnumerable<InformsISG.Entities.Dtos.Makine_Ekipman_Bakim_PlanlariDTO>)ViewBag.BakimPlan2;
+    var EgitimList = (IEnumerable<InformsISG.Entities.Dtos.Egitim_TanimlaDTO>)ViewBag.EgitimList;
+    int i = 1;
+    int durumCount = 0;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../">
+    <title>Metronic - the world's #1 selling Bootstrap Admin Theme Ecosystem for HTML, Vue, React, Angular &amp; Laravel by Keenthemes</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
+    <meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
+    <meta property="og:url" content="https://keenthemes.com/metronic" />
+    <meta property="og:site_name" content="Keenthemes | Metronic" />
+    <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+    <link rel="shortcut icon" href="~/assets/media/logos/favicon.ico" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <link href="~/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="kt_body" class="bg-body">
+
+    @if (currentrole.Equals("IsgUzman") || currentrole.Equals("BirimSorumlusu"))
+    {
+        <div class="card" style="background-color:#fff !important;border:none !important; margin-top:0.2rem !important">
+            <div class="card-header" style="background-color: #fff !important; border: none !important;text-align:right !important">
+                <div class="col-md-6 mb-5" style="background-color: #fff !important; border: none !important;margin-top:1rem;margin:auto">
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Birim_Id" class="form-control" asp-items="ViewBag.Birim_Id" disabled>
+                        </select>
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card" style="background-color:#fff !important;border:none !important; margin-top:0.2rem !important">
+            <div class="card-header" style="background-color: #fff !important; border: none !important;text-align:right !important">
+                <div class="col-md-6 mb-5" style="background-color: #fff !important; border: none !important;margin-top:1rem;margin:auto">
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Birim_Id" class="form-control" asp-items="ViewBag.Birim_Id">
+                            <option value="">BİRİM SEÇİMİ</option>
+                        </select>
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Post-->
+        <div class="post d-flex flex-column-fluid" id="kt_post">
+            <div id="kt_content_container" class="container-xxl">
+                <div class="row g-6 g-xl-9">
+                    <!--begin::Col-->
+                    @if (currentrole.Equals("IsgUzman"))
+                    {
+                        <div class="col-lg-6 col-xxl-4">
+                            <!--begin::Budget-->
+                            <div class="card h-100">
+                                <div class="card-body p-9">
+                                    <div class="fs-lg-1" style="color: #f1416c">BAKIM PLANLARI DURUMU</div>
+                                    <div class="fs-4 fw-bold text-gray-400 mb-7">
+                                        <a href="@Url.Action("OnayBekleyenBakimIsgUzman","Makine_Ekipman")">
+                                            Onay Bekleyen Tüm Bakımlar
+                                        </a>
+                                    </div>
+                                    @foreach (var item in BakimPlanlari2)
+                                    {
+                                        <div class="fs-6 d-flex justify-content-between mb-4">
+
+                                            <div class="fw-bold">@item.Servis_Tarih</div>
+                                            <div class="d-flex fw-bolder">
+                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr007.svg-->
+                                                <span class="svg-icon svg-icon-3 me-1 svg-icon-success">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M13.4 10L5.3 18.1C4.9 18.5 4.9 19.1 5.3 19.5C5.7 19.9 6.29999 19.9 6.69999 19.5L14.8 11.4L13.4 10Z" fill="black" />
+                                                        <path opacity="0.3" d="M19.8 16.3L8.5 5H18.8C19.4 5 19.8 5.4 19.8 6V16.3Z" fill="black" />
+                                                    </svg>
+                                                </span>
+                                                <p>@item.Yapilan_Islem.</p>
+                                            </div>
+                                        </div>
+                                        <div class="separator separator-dashed"></div>
+                                        durumCount++;
+                                        if (durumCount == 4)
+                                            break;
+                                    }
+
+                                </div>
+                            </div>
+                            <!--end::Budget-->
+                        </div>
+                    }
+                    else if (!currentrole.Equals("BirimSorumlusu"))
+                    {
+                        <div class="col-lg-6 col-xxl-4">
+                            <!--begin::Budget-->
+                            <div class="card h-100">
+                                <div class="card-body p-9">
+                                    <div class="fs-lg-1" style="color: #f1416c">YAKLAŞAN KURUL TOPLANTILARI</div>
+                                    <div class="fs-4 fw-bold text-gray-400 mb-7">
+                                        <a href="@Url.Action("YaklasanKurulToplanti","Ozet")">
+                                            Tüm Kurul Kararları
+                                        </a>
+                                    </div>
+                                    @foreach (var item in KurulKararListe)
+                                    {
+
+                                        @foreach (var item2 in KurulKararDosyaListe)
+                                        {
+                                            @if (item2.Isg_Kurul_Karar_Id == item.Id)
+                                            {
+                                                <div class="fs-6 d-flex justify-content-between mb-4">
+
+                                                    <div class="fw-bold">@item.Toplanti_No</div>
+                                                    <div class="d-flex fw-bolder">
+                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr007.svg-->
+                                                        <span class="svg-icon svg-icon-3 me-1 svg-icon-success">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M13.4 10L5.3 18.1C4.9 18.5 4.9 19.1 5.3 19.5C5.7 19.9 6.29999 19.9 6.69999 19.5L14.8 11.4L13.4 10Z" fill="black" />
+                                                                <path opacity="0.3" d="M19.8 16.3L8.5 5H18.8C19.4 5 19.8 5.4 19.8 6V16.3Z" fill="black" />
+                                                            </svg>
+                                                        </span>
+                                                        <a asp-action="DownloadFileFromFileSystem" asp-controller="Isg_Kurul_Karar" asp-route-id="@item2.Id">Dosya</a>
+                                                    </div>
+                                                </div>
+                                                <div class="separator separator-dashed"></div>}}}
+
+                                </div>
+                            </div>
+                            <!--end::Budget-->
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-lg-6 col-xxl-4">
+                            <!--begin::Budget-->
+                            <div class="card h-100">
+                                <div class="card-body p-9">
+                                    <div class="fs-lg-1" style="color: #f1416c">BAKIM PLANLARI</div>
+                                    <div class="fs-4 fw-bold text-gray-400 mb-7">
+                                        <a href="@Url.Action("OnayBekleyenBakim","Makine_Ekipman")">
+                                            Onay Bekleyen Tüm Bakımlar
+                                        </a>
+                                    </div>
+                                    @foreach (var item in BakimPlanlari)
+                                    {
+
+                                        <div class="fs-6 d-flex justify-content-between mb-4">
+
+                                            <div class="fw-bold">@item.Servis_Tarih</div>
+                                            <div class="d-flex fw-bolder">
+                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr007.svg-->
+                                                <span class="svg-icon svg-icon-3 me-1 svg-icon-success">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M13.4 10L5.3 18.1C4.9 18.5 4.9 19.1 5.3 19.5C5.7 19.9 6.29999 19.9 6.69999 19.5L14.8 11.4L13.4 10Z" fill="black" />
+                                                        <path opacity="0.3" d="M19.8 16.3L8.5 5H18.8C19.4 5 19.8 5.4 19.8 6V16.3Z" fill="black" />
+                                                    </svg>
+                                                </span>
+                                                <p>@item.Yapilan_Islem.</p>
+                                            </div>
+                                        </div>
+                                        <div class="separator separator-dashed"></div>
+                                        durumCount++;
+                                        if (durumCount == 4)
+                                        {
+                                            durumCount = 0;
+                                            break;
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                            <!--end::Budget-->
+                        </div>
+                    }
+
+                    <div class="col-lg-6 col-xxl-4">
+                        <!--begin::Budget-->
+                        <div class="card h-100">
+                            <div class="card-body p-9">
+                                <div class="fs-lg-1" style="color: #f1416c">TAMAMLANMAMIŞ KURUL KARARLARI</div>
+                                <div class="fs-4 fw-bold text-gray-400 mb-7">
+                                    <a href="@Url.Action("TamamlanmamisKurul","Isg_Kurul_Karar")">
+                                        Hepsini Gör
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Budget-->
+                    </div>
+                </div>
+                <br />
+
+                <div class="row g-6 g-xl-9">
+                    <div class="col-lg-6 col-xxl-4">
+                        <!--begin::Budget-->
+                        <div class="card h-100">
+                            <div class="card-body p-9">
+                                <div class="fs-lg-1" style="color: #f1416c">EĞİTİMLER</div>
+                                <div class="fs-4 fw-bold text-gray-400 mb-7">
+                                    <a href="@Url.Action("YaklasanEgitimler","Ozet")">
+                                        Yaklaşan Eğitimler
+                                    </a>
+                                </div>
+                                @foreach (var item in EgitimList)
+                                {
+
+                                    <div class="fs-6 d-flex justify-content-between mb-4">
+
+                                        <div class="fw-bold">@item.Egitim_Ad</div>
+                                        <div class="d-flex fw-bolder">
+                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr007.svg-->
+                                            <span class="svg-icon svg-icon-3 me-1 svg-icon-success">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M13.4 10L5.3 18.1C4.9 18.5 4.9 19.1 5.3 19.5C5.7 19.9 6.29999 19.9 6.69999 19.5L14.8 11.4L13.4 10Z" fill="black" />
+                                                    <path opacity="0.3" d="M19.8 16.3L8.5 5H18.8C19.4 5 19.8 5.4 19.8 6V16.3Z" fill="black" />
+                                                </svg>
+                                            </span>
+                                            <p>
+                                                @item.Egitim_Tarih
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="separator separator-dashed"></div>
+                                    durumCount++;
+                                    if (durumCount == 4)
+                                    {
+                                        durumCount = 0;
+                                        break;
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                        <!--end::Budget-->
+                    </div>
+
+
+                    <div class="col-lg-6 col-xxl-4">
+                        <!--begin::Budget-->
+                        <div class="card h-100">
+                            <div class="card-body p-9">
+                                <div class="fs-lg-1" style="color: #f1416c">YAKLAŞAN BAKIM PLANLARI</div>
+                                <div class="fs-4 fw-bold text-gray-400 mb-7">
+                                    <a href="@Url.Action("YaklasanBakimPlanlari","Ozet")">
+                                        Tüm Bakım Planlarını Analizleri Gör
+                                    </a>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <!--end::Budget-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>var hostUrl = "assets/";</script>
+    <script src="~/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="~/assets/js/scripts.bundle.js"></script>
+    <script src="~/assets/js/custom/authentication/sign-in/general.js"></script>
+    <script src="~/assets/js/custom/apps/projects/project/project.js"></script>
+    <script type="text/javascript">
+         $("#Birim_Id").change(function () {
+             var cid = $("#Birim_Id").val();
+             $.ajax({
+                 method: 'POST',
+                 url: '@Url.Action("deneme", "Home")',
+                 headers: { '@tokenSet.HeaderName': '@tokenSet.RequestToken' },
+                 data: { id: cid }
+
+             });
+             setTimeout(function () {
+                 location.reload();
+             },1000)
+         });
+    </script>
+</body>
+</html>

@@ -1,0 +1,927 @@
+﻿@model InformsISG.Entities.Dtos.Risk_Analiz_TabloDTO
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery antiforgery
+@{
+    var tokenSet = antiforgery.GetAndStoreTokens(Context);
+    ViewData["Title"] = "Edit";
+    var RiskAnalizId = ViewBag.RiskAnalizId;
+    TempData["RiskAnalizId"] = TempData["RiskAnalizId"];
+    var RiskAnalizTabloList = (List<InformsISG.Entities.Dtos.Risk_Analiz_TabloDTO>)ViewBag.RiskAnalizTabloList;
+    var TehlikeList = (List<InformsISG.Entities.Dtos.Tehlike_TanimDTO>)ViewBag.TehlikeList;
+    var RiskAnalizList = (List<InformsISG.Entities.Dtos.Risk_Analiz_RiskDTO>)ViewBag.RiskAnalizList;
+    var PersonelList = (List<InformsISG.Entities.Dtos.Personel_BilgiDTO>)ViewBag.PersonelList;
+
+    var BirimList = (List<InformsISG.Entities.Dtos.BirimDTO>)ViewBag.BirimList;
+    var TaliBirimList = (List<InformsISG.Entities.Dtos.Tali_BirimDTO>)ViewBag.TaliBirimList;
+    var RiskAnalizYontem = ViewBag.RiskAnalizSelect;
+    int siraNo = 1;
+}
+<div>
+    @await Component.InvokeAsync("RiskAnaliz", new { Id = RiskAnalizId })
+</div>
+
+<form asp-action="EditTablo" enctype="multipart/form-data">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">RİSK ANALİZ TABLOSU</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Risk_Analiz")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <input asp-for="Id" type="hidden" class="form-control" aria-describedby="basic-addon1" />
+
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Birim_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Birim_Id" class="form-control" asp-items="ViewBag.Birim_Id">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Tali_Birim_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Tali_Birim_Id" class="form-control" asp-items="ViewBag.Tali_Birim_Id">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <label asp-for="Faaliyet" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Faaliyet" class="form-control"></textarea>
+                        <span asp-validation-for="Faaliyet" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Tehlike" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Tehlike" class="form-control"></textarea>
+                        <span asp-validation-for="Tehlike" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Risk" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Risk" class="form-control"></textarea>
+                        <span asp-validation-for="Risk" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Yasal_Dayanak" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Yasal_Dayanak" class="form-control"></textarea>
+                        <span asp-validation-for="Yasal_Dayanak" class="text-danger"></span>
+                    </div>
+                </div>
+                @if (RiskAnalizYontem == 1)
+                {
+                    <div class="col-md-3 mb-5">
+                        <label asp-for="Olasilik1" class="control-label"></label>
+                        <div class="input-group form-group mb-5">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-check-double"></i>
+                            </span>
+                            <select id="FinneKeyOlasilik1" asp-for="Olasilik1" class="form-control">
+                                <option value="" selected>** SEÇİM YAPINIZ **</option>
+                                <option value="0">Beklenmez (0,2)</option>
+                                <option value="1">Beklenmez Fakat Mümkün (0,5)</option>
+                                <option value="2">Mümkün Fakat Düşük (1)</option>
+                                <option value="3">Olası (1)</option>
+                                <option value="4">Oldukça Mümkün/Yüksek (6)</option>
+                                <option value="5">Beklenir, Kesin(10)</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3 mb-5">
+                        <label asp-for="Frekans1" class="control-label"></label>
+                        <div class="input-group form-group mb-5">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-check-double"></i>
+                            </span>
+                            <select id="FinneKeyFrekans1" asp-for="Frekans1" class="form-control">
+                                <option value="" selected>** SEÇİM YAPINIZ **</option>
+                                <option value="0">Çok Seyrek (Yılda bir veya daha seyrek) (0,5)</option>
+                                <option value="1">Seyrek (Yılda birkaç defa) (1)</option>
+                                <option value="2">Sık Değil (Ayda bir veya birkaç defa) (2)</option>
+                                <option value="3">Ara Sıra (Haftada bir veya birkaç defa) (3)</option>
+                                <option value="4">Sık (Günde bir veya birkaç defa) (6)</option>
+                                <option value="5">Hemen Hemen Sürekli (Bir saatte birkaç defa) (10)</option>
+                            </select>
+                        </div>
+                    </div>
+                   
+                    <div class="col-md-3 mb-5">
+                        <label asp-for="Siddet1" class="control-label"></label>
+                        <div class="input-group form-group mb-5">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-check-double"></i>
+                            </span>
+                            <select id="FinneKeySiddet1" asp-for="Siddet1" class="form-control">
+                                <option value="" selected>** SEÇİM YAPINIZ **</option>
+                                <option value="0">Ucuz Atlatma/Çevresel Zarar Yok (1)</option>
+                                <option value="1">Küçük Hasar/Yaralanma, Dahili İlk Yardım/Arazi İçinde Sınırlı Çevresel Zarar (3)</option>
+                                <option value="2">Önemli Hasar/Yaralanma, Dış İlk Yardım İhtiyacı/Arazi Sınırları Dışında Çevresel Zarar (7)</option>
+                                <option value="3">Kalıcı Hasar/Yaralanma, İş Kaybı/Çevresel Engel Oluşturma, Yakın Çevreden Şikayet (15)</option>
+                                <option value="4">Öldürücü Kaza / Ciddi Çevresel Zarar (40)</option>
+                                <option value="5">Birden Fazla Ölümlü Kaza / Çevresel Felaket (100)</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3 mb-5">
+                        <label asp-for="Risk_Puan1" class="control-label"></label>
+                        <div class="input-group form-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-align-justify"></i>
+                            </span>
+                            <input asp-for="Risk_Puan1" class="form-control" disabled />
+                            <span asp-validation-for="Risk_Puan1" class="text-danger"></span>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-3 mb-5">
+                        <label asp-for="Olasilik2" class="control-label"></label>
+                        <div class="input-group form-group mb-5">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-check-double"></i>
+                            </span>
+                            <select id="matrisOlasilik2" asp-for="Olasilik2" class="form-control">
+                                <option value="" selected>** SEÇİM YAPINIZ **</option>
+                                <option value="0">Çok Düşük (1)</option>
+                                <option value="1">Düşük (2)</option>
+                                <option value="2">Orta (3)</option>
+                                <option value="3">Yüksek (4)</option>
+                                <option value="4">Çok Yüksek (5)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-5">
+                        <label asp-for="Siddet2" class="control-label"></label>
+                        <div class="input-group form-group mb-5">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-check-double"></i>
+                            </span>
+                            <select id="matrisSiddet2" asp-for="Siddet2" class="form-control">
+                                <option value="" selected>** SEÇİM YAPINIZ **</option>
+                                <option value="0">Çok Düşük (1)</option>
+                                <option value="1">Düşük (2)</option>
+                                <option value="2">Orta (3)</option>
+                                <option value="3">Yüksek (4)</option>
+                                <option value="4">Çok Yüksek (5)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-5">
+                        <label asp-for="Risk_Puan2" class="control-label"></label>
+                        <div class="input-group form-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fa-solid fa-align-justify"></i>
+                            </span>
+                            <input asp-for="Risk_Puan2" class="form-control" disabled />
+                            <span asp-validation-for="Risk_Puan2" class="text-danger"></span>
+                        </div>
+                    </div>
+                }
+
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Rutin_Durum" class="form-check-label"> </label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Rutin_Durum" class="form-control">
+                            <option value="" selected>**SEÇİM YAPINIZ**</option>
+                            <option value="0">Rutin</option>
+                            <option value="1">Rutin Olmayan</option>
+                        </select>
+                        <span asp-validation-for="Rutin_Durum" class="text-danger"></span>
+
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <span class="form-check-label">
+                        @Html.DisplayNameFor(model => model.Uygun_Durum)
+                    </span>
+                    <label class="form-check form-switch form-check-custom form-check-solid">
+                        <input class="form-check-input" type="checkbox" asp-for="Uygun_Durum" />
+                    </label>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Personel_Id" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-check-double"></i>
+                        </span>
+                        <select asp-for="Personel_Id" class="form-control" asp-items="ViewBag.Personel_Id">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-5">
+                    <label asp-for="Duzeltici_Faaliyet" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <textarea rows="5" cols="40" asp-for="Duzeltici_Faaliyet" class="form-control"></textarea>
+                        <span asp-validation-for="Duzeltici_Faaliyet" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Termin_Tarih" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Termin_Tarih" class="form-control" />
+                        <span asp-validation-for="Termin_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-5">
+                    <label asp-for="Sorumlular" class="control-label"></label>
+                    <div class="input-group form-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Sorumlular" class="form-control" />
+                        <span asp-validation-for="Sorumlular" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group mb-5">
+                    <div class="col-md-10">
+                        <p>RİSK ANALİZ FOTOĞRAF EKLEYİN : </p>
+                        <input type="file" name="Resim" asp-for="Resim" />
+
+                        <span asp-validation-for="Resim" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer">
+    </div>
+</form>
+
+<div class="card shadow-sm">
+    <div class="card-header">
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="tblBirim" class="table table-striped table-row-bordered gy-5 gs-7">
+                <thead>
+                    <tr>
+                        <th>
+                            Risk Sıra No
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Tali_Birim_Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Birim_Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Faaliyet)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Rutin_Durum)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Tehlike)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Risk)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Uygun_Durum)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Yasal_Dayanak)
+                        </th>
+                        @if (RiskAnalizYontem == 1)
+                        {
+                            <th>
+                                @Html.DisplayNameFor(model => model.Olasilik1)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Frekans1)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Siddet1)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Risk_Puan1)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Risk_Seviye1)
+                            </th>
+                        }
+                        else
+                        {
+                            <th>
+                                @Html.DisplayNameFor(model => model.Olasilik2)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Siddet2)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Risk_Puan2)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Risk_Seviye2)
+                            </th>
+                        }
+                        <th>
+                            @Html.DisplayNameFor(model => model.Duzeltici_Faaliyet)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Termin_Tarih)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Sorumlular)
+                        </th>
+                        @if (RiskAnalizYontem == 1)
+                        {
+                            <th>
+                                @Html.DisplayNameFor(model => model.Olasilik2)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Frekans2)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Siddet2)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Risk_Puan2)
+                            </th>
+                        }
+                        else
+                        {
+                            <th>
+                                @Html.DisplayNameFor(model => model.Olasilik1)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Siddet1)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Risk_Puan1)
+                            </th>
+
+                        }
+                        <th>
+                            @Html.DisplayNameFor(model => model.Etkinlik_Kontrol_Tarih)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Kontrol_Degerlendirme)
+                        </th>
+                        <th>
+                            Analiz Resmi
+                        </th>
+                        <th>İŞLEMLER</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in RiskAnalizTabloList)
+                    {
+                        @if (item.Risk_Id == RiskAnalizId)
+                        {
+                            <tr>
+                                <td>
+                                    @siraNo
+                                </td>
+                                <td>
+                                    @foreach (var item2 in TaliBirimList)
+                                    {
+                                        @if (item2.Id == item.Tali_Birim_Id)
+                                        {
+                                            @item2.Tali_Birim_Ad
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @foreach (var item2 in BirimList)
+                                    {
+                                        @if (item2.Id == item.Birim_Id)
+                                        {
+                                            @item2.Birim_Ad
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Faaliyet)
+                                </td>
+                                @if (item.Rutin_Durum == 0)
+                                {
+                                    <td>
+                                        R
+                                    </td>
+
+                                }
+                                else if (item.Rutin_Durum == 1)
+                                {
+                                    <td>
+                                        RO
+                                    </td>
+                                }
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tehlike)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Risk)
+                                </td>
+
+
+                                @if (item.Uygun_Durum == false)
+                                {
+                                    <td>
+                                        UYGUN DEĞİLDİR
+                                    </td>
+
+                                }
+                                else if (item.Uygun_Durum == true)
+                                {
+                                    <td>
+                                        UYGUN
+                                    </td>
+                                }
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Yasal_Dayanak)
+                                </td>
+                                @if (RiskAnalizYontem == 1)
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Olasilik1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Frekans1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Siddet1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Risk_Puan1)
+                                    </td>
+                                    @if (item.Risk_Puan1 <= 71)
+                                    {
+                                        <td style="background-color: limegreen; --bs-table-accent-bg:none">
+
+                                            @Html.DisplayFor(modelItem => item.Risk_Seviye1)
+                                        </td>
+                                    }
+                                    else if (item.Risk_Puan1 > 6 && item.Risk_Puan1 <= 201)
+                                    {
+                                        <td style="background-color: yellow; --bs-table-accent-bg: none">
+
+                                            @Html.DisplayFor(modelItem => item.Risk_Seviye1)
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td style="background-color: red; --bs-table-accent-bg: none">
+
+                                            @Html.DisplayFor(modelItem => item.Risk_Seviye1)
+                                        </td>
+                                    }
+                                }
+                                else
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Olasilik2)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Siddet2)
+                                    </td>
+                                    <td>
+
+                                        @Html.DisplayFor(modelItem => item.Risk_Puan2)
+                                    </td>
+                                    @if (item.Risk_Puan2 <= 6)
+                                    {
+                                        <td style="background-color: limegreen; --bs-table-accent-bg:none">
+
+                                            @Html.DisplayFor(modelItem => item.Risk_Seviye2)
+                                        </td>
+                                    }
+                                    else if (item.Risk_Puan2 > 6 && item.Risk_Puan2 <= 12)
+                                    {
+                                        <td style="background-color: yellow; --bs-table-accent-bg: none">
+
+                                            @Html.DisplayFor(modelItem => item.Risk_Seviye2)
+                                        </td>
+                                    }
+                                    else if (item.Risk_Puan2 > 12)
+                                    {
+                                        <td style="background-color: red; --bs-table-accent-bg: none">
+
+                                            @Html.DisplayFor(modelItem => item.Risk_Seviye2)
+                                        </td>
+                                    }
+                                }
+
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Duzeltici_Faaliyet)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Termin_Tarih)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Sorumlular)
+                                </td>
+
+                                @if (RiskAnalizYontem == 1)
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Olasilik2)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Frekans2)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Siddet2)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Risk_Puan2)
+                                    </td>
+
+                                }
+                                else
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Olasilik1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Siddet1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Risk_Puan1)
+                                    </td>
+                                }
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Etkinlik_Kontrol_Tarih)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Kontrol_Degerlendirme)
+                                </td>
+                                <td>
+                                    <a asp-action="DownloadFileFromFileSystem" asp-route-id="@item.Id">Fotoğraf</a>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
+                                            data-kt-menu-trigger="click"
+                                            data-kt-menu-placement="bottom-start">
+                                        İşlemler
+                                    </button>
+                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-100px py-4"
+                                         data-kt-menu="true">
+                                        <div class="menu-item px-3">
+                                            <a asp-action="EditFile" asp-route-id="@item.Id" class="menu-link px-3">
+                                                Düzenle
+                                            </a>
+                                        </div>
+                                        <div class="menu-item px-3">
+                                            <a onclick="VeriSil(@item.Id,this)" class="menu-link px-3">
+                                                Sil
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            siraNo++;
+                        }
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+       function VeriSil(ID, obj) {
+            var btn = $(obj);
+            Swal.fire({
+                title: 'SİLME İŞLEMİ',
+                text: "Silmek istediğinize emin misiniz?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#50cd89',
+                cancelButtonColor: '#f1416c',
+                confirmButtonText: 'Evet Sil!',
+                cancelButtonText: 'Hayır Silme!',
+                showClass: {
+                    popup: 'animate_animated animate_fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate_animated animate_fadeOutUp'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("DeleteTablo", "Risk_Analiz")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: ID }
+                    }).done(function (d) {
+                        const result = $.parseJSON(d);
+                        if (result.ResultStatus == 0) {
+                            Swal.fire({
+                                title: 'SİLİNDİ',
+                                icon: 'success',
+                                text: `${result.Message}`,
+                                showClass: {
+                                    popup: 'animate_animated animate_fadeInDown'
+                                },
+                                hideClass: {
+                                    popup: 'animate_animated animate_fadeOutUp'
+                                }
+                            });
+                            btn.parent().parent().parent().parent().fadeOut(1000);
+                        }
+                    }).fail(function () {
+                        Swal.fire({
+                            title: 'HATALI İŞLEM',
+                            text: "Veri silinemedi",
+                            icon: 'error',
+                            showClass: {
+                                popup: 'animate_animated animate_fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate_animated animate_fadeOutUp'
+                            }
+                        })
+                    })
+                }
+            });
+        }
+    </script>
+
+    <script type="text/javascript">
+        $("#FinneKeyOlasilik2").change(function () {
+            var cid = $("#FinneKeyOlasilik2").val();
+            var cid2 = $("#FinneKeySiddet2").val();
+            var cid3 = $("#FinneKeyFrekans2").val();
+            var cid4 = cid + cid2 + cid3;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan2").val(result);
+
+
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#FinneKeySiddet2").change(function () {
+            var cid = $("#FinneKeyOlasilik2").val();
+            var cid2 = $("#FinneKeySiddet2").val();
+            var cid3 = $("#FinneKeyFrekans2").val();
+            var cid4 = cid + cid2 + cid3;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan2").val(result);
+
+
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#FinneKeyFrekans2").change(function () {
+         var cid = $("#FinneKeyOlasilik2").val();
+         var cid2 = $("#FinneKeySiddet2").val();
+         var cid3 = $("#FinneKeyFrekans2").val();
+            var cid4 = cid + cid2 + cid3;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan2").val(result);
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#FinneKeyOlasilik1").change(function () {
+            var cid = $("#FinneKeyOlasilik1").val();
+            var cid2 = $("#FinneKeySiddet1").val();
+            var cid3 = $("#FinneKeyFrekans1").val();
+            var cid4 = cid + cid2 + cid3;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan1").val(result);
+
+
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#FinneKeySiddet1").change(function () {
+            var cid = $("#FinneKeyOlasilik1").val();
+            var cid2 = $("#FinneKeySiddet1").val();
+            var cid3 = $("#FinneKeyFrekans1").val();
+            var cid4 = cid + cid2 + cid3;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan1").val(result);
+
+
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#FinneKeyFrekans1").change(function () {
+         var cid = $("#FinneKeyOlasilik1").val();
+         var cid2 = $("#FinneKeySiddet1").val();
+         var cid3 = $("#FinneKeyFrekans1").val();
+            var cid4 = cid + cid2 + cid3;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan1").val(result);
+                         })
+         });
+    </script>
+
+
+
+    <script type="text/javascript">
+        $("#matrisOlasilik2").change(function () {
+            var cid = $("#matrisOlasilik2").val();
+            var cid2 = $("#matrisSiddet2").val();
+            var cid4 = cid + cid2 ;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap2", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan2").val(result);
+
+
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#matrisSiddet2").change(function () {
+            var cid = $("#matrisOlasilik2").val();
+            var cid2 = $("#matrisSiddet2").val();
+            var cid4 = cid + cid2 ;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap2", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan2").val(result);
+
+
+                         })
+         });
+    </script> 
+   <script type="text/javascript">
+        $("#matrisOlasilik1").change(function () {
+            var cid = $("#matrisOlasilik1").val();
+            var cid2 = $("#matrisSiddet1").val();
+            var cid4 = cid + cid2 ;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap2", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan1").val(result);
+
+
+                         })
+         });
+    </script>
+    <script type="text/javascript">
+        $("#matrisSiddet1").change(function () {
+            var cid = $("#matrisSiddet1").val();
+            var cid2 = $("#matrisOlasilik1").val();
+            var cid4 = cid + cid2 ;
+                        $.ajax({
+                        method: 'POST',
+                        url: '@Url.Action("Hesap2", "Risk_Kutuphane")',
+                        headers: {'@tokenSet.HeaderName' : '@tokenSet.RequestToken'},
+                        data: { id: cid4 }
+                        }).done(function (result) {
+                            $("#Risk_Puan1").val(result);
+
+
+                         })
+         });
+    </script>
+
+
+    <script>
+        $("#tblBirim").DataTable({
+            "pageLength": 20,
+            language: {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfo": 'Toplam kayıttan _START_  - _END_ arasındaki kayıtlar gösteriliyor.',
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(MAX kayıt içerisinden bulunan)",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada MENU kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            },
+            dom:
+                "<'row'" +
+                "<'col-sm-6 d-flex align-items-center justify-conten-start'>" +
+                "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+                ">" +
+
+                "<'table-responsive'tr>" +
+
+                "<'row'" +
+                "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                ">"
+
+        });
+    </script>
+
+
+
+}

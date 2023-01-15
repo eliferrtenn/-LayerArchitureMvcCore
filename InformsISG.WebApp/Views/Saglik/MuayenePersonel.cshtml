@@ -1,0 +1,661 @@
+﻿@model InformsISG.Entities.Dtos.MuayeneDTO
+
+@{
+    ViewData["Title"] = "Create";
+    var id = ViewBag.PersonelId;
+}
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h3 class="card-title"></h3>
+        <div class="card-toolbar">
+        </div>
+    </div>
+
+    <div>
+        @await Component.InvokeAsync("SelectedPersonel", new { Id = id })
+    </div>
+    <form asp-action="Create">
+        <div class="card-body">
+
+            <div class="row">
+
+
+                <div class="col-md-4">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group mb-5">
+                        <label asp-for="Muayene_Tarih" class="control-label"></label>
+                        <input asp-for="Muayene_Tarih" class="form-control" disabled/>
+                        <span asp-validation-for="Muayene_Tarih" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group mb-5">
+                        <label asp-for="Muayene_Tur" class="control-label"></label>
+                        <input asp-for="Muayene_Tur" class="form-control" disabled/>
+                        <span asp-validation-for="Muayene_Tur" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <div class="form-group">
+                        <label asp-for="Kan_Grup" class="control-label"></label>
+                        <input asp-for="Kan_Grup" class="form-control" disabled/>
+                        <span asp-validation-for="Kan_Grup" class="text-danger"></span>
+                        <span asp-validation-for="Kan_Grup" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                    <div class="form-group">
+                        <label asp-for="El_Kullanim" class="control-label"></label>
+                        <input asp-for="El_Kullanim" class="form-control" disabled />
+                        <span asp-validation-for="El_Kullanim" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+
+                    <div class="form-group">
+                        <label asp-for="Kilo" class="control-label"></label>
+                        <input asp-for="Kilo" class="form-control" disabled/>
+                        <span asp-validation-for="Kilo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                    <div class="form-group">
+                        <label asp-for="Boy" class="control-label"></label>
+                        <input asp-for="Boy" class="form-control" disabled/>
+                        <span asp-validation-for="Boy" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Kitle_Endeks" class="control-label"></label>
+                        <input asp-for="Kitle_Endeks" class="form-control" disabled/>
+                        <span asp-validation-for="Kitle_Endeks" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-5">
+
+                    <div class="form-group">
+                        <label asp-for="Kronik_Hastalik" class="control-label"></label>
+                        <input asp-for="Kronik_Hastalik" class="form-control" disabled/>
+                        <span asp-validation-for="Kronik_Hastalik" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Is_Kolu1" class="control-label"></label>
+                        <input asp-for="Is_Kolu1" class="form-control" disabled />
+                        <span asp-validation-for="Is_Kolu1" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Yaptigi_Is1" class="control-label"></label>
+                        <input asp-for="Yaptigi_Is1" class="form-control" disabled />
+                        <span asp-validation-for="Yaptigi_Is1" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <div class="form-group">
+                        <label asp-for="Giris_Cikis1" class="control-label"></label>
+                        <input asp-for="Giris_Cikis1" class="form-control" disabled/>
+                        <span asp-validation-for="Giris_Cikis1" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Is_Kolu2" class="control-label"></label>
+                        <input asp-for="Is_Kolu2" class="form-control" disabled />
+                        <span asp-validation-for="Is_Kolu2" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Yaptigi_Is2" class="control-label"></label>
+                        <input asp-for="Yaptigi_Is2" class="form-control" disabled/>
+                        <span asp-validation-for="Yaptigi_Is2" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Giris_Cikis2" class="control-label"></label>
+                        <input asp-for="Giris_Cikis2" class="form-control" disabled />
+                        <span asp-validation-for="Giris_Cikis2" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <div class="form-group">
+                        <label asp-for="Is_Kolu3" class="control-label"></label>
+                        <input asp-for="Is_Kolu3" class="form-control" disabled/>
+                        <span asp-validation-for="Is_Kolu3" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Yaptigi_Is3" class="control-label"></label>
+                        <input asp-for="Yaptigi_Is3" class="form-control" disabled/>
+                        <span asp-validation-for="Yaptigi_Is3" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Giris_Cikis3" class="control-label"></label>
+                        <input asp-for="Giris_Cikis3" class="form-control" disabled/>
+                        <span asp-validation-for="Giris_Cikis3" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <br /><br /><br />
+                <hr style="margin-top:3rem" />
+                <h3 class="card-title">Bağışıklama</h3>
+                <br /><br /><br />
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Bagisiklik_Tetanoz"  disabled/> @Html.DisplayNameFor(model => model.Bagisiklik_Tetanoz)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Bagisiklik_Hepatit" disabled/> @Html.DisplayNameFor(model => model.Bagisiklik_Hepatit)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Bagisiklik_Diger" class="control-label"></label>
+                        <input asp-for="Bagisiklik_Diger" class="form-control" disabled/>
+                        <span asp-validation-for="Bagisiklik_Diger" class="text-danger"></span>
+                    </div>
+                </div>
+                <hr style="margin-top:3rem" />
+                <h3 class="card-title">Soy Geçmiş</h3>
+                <br /><br /><br />
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Soygecmis_Anne" class="control-label"></label>
+                        <input asp-for="Soygecmis_Anne" class="form-control" disabled/>
+                        <span asp-validation-for="Soygecmis_Anne" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Soygecmis_Baba" class="control-label"></label>
+                        <input asp-for="Soygecmis_Baba" class="form-control" disabled />
+                        <span asp-validation-for="Soygecmis_Baba" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Kardes" class="control-label"></label>
+                        <input asp-for="Kardes" class="form-control" disabled/>
+                        <span asp-validation-for="Kardes" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Cocuk" class="control-label"></label>
+                        <input asp-for="Cocuk" class="form-control" disabled />
+                        <span asp-validation-for="Cocuk" class="text-danger"></span>
+                    </div>
+                </div>
+                <hr style="margin-top:3rem" />
+                <h3 class="card-title">Anamnez / Mesleki Anamnez</h3>
+                <br /><br /><br />
+                <p>Aşağıdaki yakınmalardan herhangi birini yaşadınız mı?</p>
+                <div class="col-md-3 mb-5">
+
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Nefes_Darligi" disabled/> @Html.DisplayNameFor(model => model.Nefes_Darligi)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Balgamli_Oksuruk" disabled/> @Html.DisplayNameFor(model => model.Balgamli_Oksuruk)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Gogus_Agrisi" disabled/> @Html.DisplayNameFor(model => model.Gogus_Agrisi)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Carpinti" disabled/> @Html.DisplayNameFor(model => model.Carpinti)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Sirt_Agrisi" disabled/> @Html.DisplayNameFor(model => model.Sirt_Agrisi)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Ishal_Kabizlik" disabled/> @Html.DisplayNameFor(model => model.Ishal_Kabizlik)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-5">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Eklem_Agri" disabled /> @Html.DisplayNameFor(model => model.Eklem_Agri)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <br /><br /><br>
+                <p>Aşağıdaki hastalıklardan herhangi birini geçirdiniz mi?</p>
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Kalp_Hastalik" disabled/> @Html.DisplayNameFor(model => model.Kalp_Hastalik)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Bobrek_Rahatsizlik" disabled/> @Html.DisplayNameFor(model => model.Bobrek_Rahatsizlik)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Sarilik" disabled/> @Html.DisplayNameFor(model => model.Sarilik)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Mide_Ulser" disabled /> @Html.DisplayNameFor(model => model.Mide_Ulser)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Isitme_Kayip" disabled/> @Html.DisplayNameFor(model => model.Isitme_Kayip)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Gorme_Bozukluk" disabled/> @Html.DisplayNameFor(model => model.Gorme_Bozukluk)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-5">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Sinir_Sistemi" disabled/> @Html.DisplayNameFor(model => model.Sinir_Sistemi)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Deri_Hastalik" disabled /> @Html.DisplayNameFor(model => model.Deri_Hastalik)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Besin_Zehirlenme" disabled/> @Html.DisplayNameFor(model => model.Besin_Zehirlenme)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Besin_Zehirlenme" disabled/> @Html.DisplayNameFor(model => model.Besin_Zehirlenme)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Kas_Iskelet" disabled/> @Html.DisplayNameFor(model => model.Kas_Iskelet)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Akciger_Solunum" disabled/> @Html.DisplayNameFor(model => model.Akciger_Solunum)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Seker_Hastalik" disabled/> @Html.DisplayNameFor(model => model.Seker_Hastalik)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="margin-top:3rem" />
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Hastane_Yatis" class="control-label"></label>
+                        <input asp-for="Hastane_Yatis" class="form-control" disabled/>
+                        <span asp-validation-for="Hastane_Yatis" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="form-group">
+                        <label asp-for="Ameliyat" class="control-label"></label>
+                        <input asp-for="Ameliyat" class="form-control" disabled/>
+                        <span asp-validation-for="Ameliyat" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Is_Kazasi" class="control-label"></label>
+                        <input asp-for="Is_Kazasi" class="form-control" disabled/>
+                        <span asp-validation-for="Is_Kazasi" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Meslek_Hastalik" class="control-label"></label>
+                        <input asp-for="Meslek_Hastalik" class="form-control" disabled/>
+                        <span asp-validation-for="Meslek_Hastalik" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Maluliyet" class="control-label"></label>
+                        <input asp-for="Maluliyet" class="form-control" disabled />
+                        <span asp-validation-for="Maluliyet" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Guncel_Tedavi" class="control-label"></label>
+                        <input asp-for="Guncel_Tedavi" class="form-control" disabled/>
+                        <span asp-validation-for="Guncel_Tedavi" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Aliskanlik_Sigara" class="control-label"></label>
+                        <input asp-for="Aliskanlik_Sigara" class="form-control" disabled/>
+                        <span asp-validation-for="Aliskanlik_Sigara" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Aliskanlik_Alkol" class="control-label"></label>
+                        <input asp-for="Aliskanlik_Alkol" class="form-control" disabled/>
+                        <span asp-validation-for="Aliskanlik_Alkol" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Aliskanlik_Uyusturucu" class="control-label"></label>
+                        <input asp-for="Aliskanlik_Uyusturucu" class="form-control" disabled/>
+                        <span asp-validation-for="Aliskanlik_Uyusturucu" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Fizik_Goz" class="control-label"></label>
+                        <input asp-for="Fizik_Goz" class="form-control" disabled/>
+                        <span asp-validation-for="Fizik_Goz" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Fizik_Kbb" class="control-label"></label>
+                        <input asp-for="Fizik_Kbb" class="form-control" disabled/>
+                        <span asp-validation-for="Fizik_Kbb" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Fizik_Deri" class="control-label"></label>
+                        <input asp-for="Fizik_Deri" class="form-control" disabled/>
+                        <span asp-validation-for="Fizik_Deri" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Fizik_Kardiyovaskuler" class="control-label"></label>
+                        <input asp-for="Fizik_Kardiyovaskuler" class="form-control" disabled />
+                        <span asp-validation-for="Fizik_Kardiyovaskuler" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Fizik_Solunum_Sistemi" class="control-label"></label>
+                        <input asp-for="Fizik_Solunum_Sistemi" class="form-control" disabled/>
+                        <span asp-validation-for="Fizik_Solunum_Sistemi" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Fizik_Sindirim_Sistemi" class="control-label"></label>
+                        <input asp-for="Fizik_Sindirim_Sistemi" class="form-control" disabled/>
+                        <span asp-validation-for="Fizik_Sindirim_Sistemi" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Fizik_Urogenital" class="control-label"></label>
+                        <input asp-for="Fizik_Urogenital" class="form-control" disabled/>
+                        <span asp-validation-for="Fizik_Urogenital" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Fizik_Kas_Iskelet" class="control-label"></label>
+                        <input asp-for="Fizik_Kas_Iskelet" class="form-control" disabled/>
+                        <span asp-validation-for="Fizik_Kas_Iskelet" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Fizik_Norolojik" class="control-label"></label>
+                        <input asp-for="Fizik_Norolojik" class="form-control" disabled/>
+                        <span asp-validation-for="Fizik_Norolojik" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Fizik_Psikiyatri" class="control-label"></label>
+                        <input asp-for="Fizik_Psikiyatri" class="form-control" disabled/>
+                        <span asp-validation-for="Fizik_Psikiyatri" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Tansiyon" class="control-label"></label>
+                        <input asp-for="Tansiyon" class="form-control" disabled/>
+                        <span asp-validation-for="Tansiyon" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Nabiz" class="control-label"></label>
+                        <input asp-for="Nabiz" class="form-control" disabled/>
+                        <span asp-validation-for="Nabiz" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Lab_Biyolojik_Kan" class="control-label"></label>
+                        <input asp-for="Lab_Biyolojik_Kan" class="form-control" disabled/>
+                        <span asp-validation-for="Lab_Biyolojik_Kan" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Lab_Biyolojik_Idrar" class="control-label"></label>
+                        <input asp-for="Lab_Biyolojik_Idrar" class="form-control" disabled/>
+                        <span asp-validation-for="Lab_Biyolojik_Idrar" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Lab_Radyolojik" class="control-label"></label>
+                        <input asp-for="Lab_Radyolojik" class="form-control" disabled/>
+                        <span asp-validation-for="Lab_Radyolojik" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Lab_Fizyolojik_Odyometre" class="control-label"></label>
+                        <input asp-for="Lab_Fizyolojik_Odyometre" class="form-control" disabled/>
+                        <span asp-validation-for="Lab_Fizyolojik_Odyometre" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Lab_Fizyolojik_Sft" class="control-label"></label>
+                        <input asp-for="Lab_Fizyolojik_Sft" class="form-control" disabled/>
+                        <span asp-validation-for="Lab_Fizyolojik_Sft" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Lab_Psikolojik" class="control-label"></label>
+                        <input asp-for="Lab_Psikolojik" class="form-control" disabled/>
+                        <span asp-validation-for="Lab_Psikolojik" class="text-danger"></span>
+                    </div>
+                </div>
+                <hr style="margin-top:3rem" />
+
+                <p>Kanaat</p>
+                <br /><br /><br />
+                <div class="col-md-6 mb-5">
+                    <div class="form-group">
+                        <label asp-for="Kanaat1" class="control-label"></label>
+                        <input asp-for="Kanaat1" class="form-control" disabled />
+                        <span asp-validation-for="Kanaat1" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Kanaat2" class="control-label"></label>
+                        <input asp-for="Kanaat2" class="form-control" disabled/>
+                        <span asp-validation-for="Kanaat2" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+
+                    <div class="form-check form-switch form-check-custom form-check-solid">
+                        <div class="form-group form-check mb-5">
+                            <div class="form-group form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" asp-for="Yuksekte_Calisma" disabled/> @Html.DisplayNameFor(model => model.Yuksekte_Calisma)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group form-check mb-5">
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Vardiyali_Calisma" disabled/> @Html.DisplayNameFor(model => model.Vardiyali_Calisma)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                    <div class="form-check form-switch form-check-custom form-check-solid">
+                        <input class="form-check-input" type="checkbox" value="0" id="flexSwitchDefault" asp-for="Vardiyali_Calisma" checked="checked" disabled />
+                        <label class="form-check-label" for="flexSwitchDefault">
+                            @Html.DisplayNameFor(model => model.Vardiyali_Calisma)
+                        </label>
+                    </div>
+                </div>
+
+                <br /><br />
+            </div>
+        </div>
+    </form>
+    <div class="card-footer">
+
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

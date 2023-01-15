@@ -1,0 +1,73 @@
+﻿@model InformsISG.Entities.Dtos.Tali_BirimDTO
+
+@{
+    ViewData["Title"] = "Create";
+    var talibirimList = (List<InformsISG.Entities.Dtos.Tali_BirimDTO>)ViewBag.TaliBirimList;
+    int siraNo = 1;
+
+}
+<form asp-action="Create">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">TALİ BİRİM EKLEME</h3>
+            <div class="card-toolbar">
+                <input type="submit" class="btn btn-success btn-hover-rotate-end" value="KAYDET">&nbsp;
+                <a href="@Url.Action("Index","Tali_Birim")" class="btn btn-danger btn-hover-rotate-start">GERİ DÖN</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 mb-5">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                </div>
+                <div class="col-md-10 mb-5">
+                    <label asp-for="Tali_Birim_Ad" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Tali_Birim_Ad" class="form-control" />
+                        <span asp-validation-for="Tali_Birim_Ad" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-10 mb-5">
+                    <label asp-for="Aciklama" class="control-label"></label>
+                    <div class="input-group form-group mb-5">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-align-justify"></i>
+                        </span>
+                        <input asp-for="Aciklama" class="form-control" />
+                        <span asp-validation-for="Aciklama" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+
+
+         $("#Birim_Id").change(function () {
+             var cid = $("#Birim_Id").val();
+
+          $.ajax({
+            method: 'GET',
+            url: "@Url.Action("GetTaliBirim","Tali_Birim")/" + cid
+         }).done(function (result) {
+             $.each(result, function (i, item) {
+             });
+             $("#Kkd_Tur_Alt_Id").trigger('change');
+         })
+
+         });
+
+
+    </script>
+}
