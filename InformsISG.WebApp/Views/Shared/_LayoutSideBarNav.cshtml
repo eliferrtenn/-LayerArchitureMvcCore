@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Antiforgery
+@using Microsoft.AspNetCore.Antiforgery
 @inject IAntiforgery antiforgery
 @using System.Security.Claims
 @{
@@ -63,19 +63,24 @@
         </div>
 
         <div class="aside-menu flex-column-fluid">
+            <!--begin::Aside Menu-->
             <div class="hover-scroll-overlay-y px-2 my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="{default: '#kt_aside_toolbar, #kt_aside_footer', lg: '#kt_header, #kt_aside_toolbar, #kt_aside_footer'}" data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset="5px">
+                <!--begin::Menu-->
                 <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
 
                     <div class="menu-item">
                         <a class="menu-link" href="@Url.Action("Index","Home")">
                             <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
                                 <span class="svg-icon svg-icon-2">
                                     <i class="fa-solid fa-house-chimney"></i>
                                 </span>
+                                <!--end::Svg Icon-->
                             </span>
                             <span class="menu-title">ANA SAYFA</span>
                         </a>
                     </div>
+                    <!--Acil Durum Ekipleri-->
                     <div class="menu-item">
                         <div class="menu-content pt-8 pb-2">
                             <span class="menu-section text-muted text-uppercase fs-8 ls-1">GENEL</span>
@@ -84,9 +89,11 @@
                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <span class="menu-link">
                             <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
                                 <span class="svg-icon svg-icon-2">
                                     <i class="fa-solid fa-user fa-lg"></i>
                                 </span>
+                                <!--end::Svg Icon-->
                             </span>
                             <span class="menu-title">Personel</span>
                             <span class="menu-arrow"></span>
@@ -107,61 +114,674 @@
 
                         </div>
                     </div>
+
+
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-book-open fa-lg"></i>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Eğitim</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" data-bs-toggle="tooltip"
+                                   title="Eğitim Güncellemek Silmek için kullanılır"
+                                   data-bs-custom-class="tooltip-dark"
+                                   data-bs-placement="right"
+                                   href="@Url.Action("Index","Egitim_Tanimla")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Eğitim İşlemleri</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link" data-bs-toggle="tooltip"
+                                   href="@Url.Action("Index","Egitim_Konu")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Eğitim Konuları</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link" data-bs-toggle="tooltip"
+                                   href="@Url.Action("KalanEgitim","Egitim_Konu")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Kalan Eğitim Konuları</span>
+                                </a>
+                            </div>
+                            @*<div class="menu-item">
+                                    <a class="menu-link" data-bs-toggle="tooltip"
+                                       href="@Url.Action("Index","Egitim_Sinav")">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Eğitim Sınav </span>
+                                    </a>
+                                </div>*@
+                        </div>
+                    </div>
                     @if (currentrole.Equals("SuperAdmin") || currentrole.Equals("Admin"))
                     {
                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                             <span class="menu-link">
                                 <span class="menu-icon">
+                                    <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
                                     <span class="svg-icon svg-icon-2">
-                                        <i class="fa-solid fa-asterisk fa-xl"></i>
+                                        <i class="fa-solid fa-user fa-lg"></i>
                                     </span>
+                                    <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">Risk</span>
+                                <span class="menu-title">Birim/Tali Birim</span>
                                 <span class="menu-arrow"></span>
                             </span>
                             <div class="menu-sub menu-sub-accordion menu-active-bg">
                                 <div class="menu-item">
-                                    <a class="menu-link" href="@Url.Action("Index","Risk_Analiz")">
+                                    <a class="menu-link" data-bs-toggle="tooltip"
+                                       title="Personel Güncellemek Silmek için kullanılır"
+                                       data-bs-custom-class="tooltip-dark"
+                                       data-bs-placement="right"
+                                       href="@Url.Action("Index","Birim")">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
-                                        <span class="menu-title">Risk İşlemleri</span>
+                                        <span class="menu-title">Birim İşlemleri</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link" data-bs-toggle="tooltip"
+                                       title="Personel Güncellemek Silmek için kullanılır"
+                                       data-bs-custom-class="tooltip-dark"
+                                       data-bs-placement="right"
+                                       href="@Url.Action("Index","Tali_Birim")">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Tali Birim İşlemleri</span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+
+
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/technology/teh004.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-asterisk fa-xl"></i>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Risk</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Index","Risk_Analiz")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Risk İşlemleri</span>
+                                </a>
+                            </div>
+
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Create","Risk_Analiz")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Risk Ekle</span>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    @if (currentrole.Equals("SuperAdmin") || currentrole.Equals("IsYeriHekim"))
+                    {
+                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
+                                    <span class="svg-icon svg-icon-2">
+                                        <i class="fa-solid fa-clapperboard fa-lg"></i>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <span class="menu-title">Sağlık</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                <div class="menu-item">
+                                    <a class="menu-link" data-bs-toggle="tooltip"
+                                       title="Muayene Güncellemek Silmek için kullanılır"
+                                       data-bs-custom-class="tooltip-dark"
+                                       data-bs-placement="right"
+                                       href="@Url.Action("Index", "Saglik")">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Muayene İşlemleri</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link" data-bs-toggle="tooltip"
+                                       href="@Url.Action("Create", "Saglik")">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Muayene Ekle</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-tower-broadcast fa-lg"></i>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Makine Ekipman</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" data-bs-toggle="tooltip"
+                                   title="Makine Ekipman Güncellemek Silmek için kullanılır"
+                                   data-bs-custom-class="tooltip-dark"
+                                   data-bs-placement="right"
+                                   href="@Url.Action("Index","Makine_Ekipman")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Makine Ekipman İşlemleri</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-clapperboard fa-lg"></i>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Kurul</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" data-bs-toggle="tooltip"
+                                   title="Kurul Güncellemek Silmek için kullanılır"
+                                   data-bs-custom-class="tooltip-dark"
+                                   data-bs-placement="right"
+                                   href="@Url.Action("Index","Isg_Kurul")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Kurul İşlemleri</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-clapperboard fa-lg"></i>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Kurul Toplantı</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" data-bs-toggle="tooltip"
+                                   title="Kurul Güncellemek Silmek için kullanılır"
+                                   data-bs-custom-class="tooltip-dark"
+                                   data-bs-placement="right"
+                                   href="@Url.Action("Index","Isg_Kurul_Karar")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Kurul Toplantı İşlemleri</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-pen-to-square fa-xl"></i>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">DÖF</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Index","Dof")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">DÖF İşlemleri</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Create","Dof")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">DÖF Ekle</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-person-falling-burst fa-lg"></i>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Kaza</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Index","Kaza")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Kaza İşlemleri</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Index","Kaza_Personel_Disi")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Kaza İşlemleri</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Create","Kaza")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Kaza Ekle</span>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-person-falling-burst fa-lg"></i>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Ramak Kala </span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Index","Ramak_Kala")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Ramak Kala İşlemleri</span>
+                                </a>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-flask fa-lg"></i>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">KKD</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Index","Kkd")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">KKD İşlemleri</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Index","Kkd_Tur")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">KKD Tür İşlemleri</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Index","Kkd_Tur_Alt")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">KKD Tür Alt İşlemleri</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-flask fa-lg"></i>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">MSDS</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Index","Msds")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">MSDS İşlemleri</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Create","Msds")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Msds Ekle</span>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-ruler fa-lg"></i>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Ortam Ölçümleri</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Index","Ortam_Olcum")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Ortam Ölçüm İşlemleri</span>
+                                </a>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <div class="menu-item">
+                            <a class="menu-link" href="https://www.mevzuat.gov.tr/" target="_blank">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Mevzuat</span>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+                    <!--Acil Durum Ekipleri-->
+                    <div class="menu-item">
+                        <div class="menu-content pt-8 pb-2">
+                            <span class="menu-section text-muted text-uppercase fs-8 ls-1">Acil Durum</span>
+                        </div>
+                    </div>
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/communication/com013.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-people-group fa-xl"></i>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Acil Durum Ekipleri</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Create","Acil_Durum_Ekip_Personel",new { Id=1})">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Söndürme Ekibi</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Create","Acil_Durum_Ekip_Personel",new { Id=2})">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Kurtarma Ekibi</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Create","Acil_Durum_Ekip_Personel",new { Id=3})">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Koruma Ekibi</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Create","Acil_Durum_Ekip_Personel",new { Id=4})">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">İlkyardım Ekibi</span>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-tower-broadcast fa-lg"></i>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Acil Eylem Planı</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" data-bs-toggle="tooltip"
+                                   title="Acil Eylem Planı Güncellemek Silmek için kullanılır"
+                                   data-bs-custom-class="tooltip-dark"
+                                   data-bs-placement="right"
+                                   href="@Url.Action("Index","Acil_Eylem_Plani")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Acil Eylem Planı İşlemleri</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link" href="@Url.Action("Create","Acil_Eylem_Plani")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Acil Eylem Planı Ekle</span>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-tower-broadcast fa-lg"></i>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Acil Durum Tatbikatı</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" data-bs-toggle="tooltip"
+                                   title="Acil Durum Tatbikatı Güncellemek Silmek için kullanılır"
+                                   data-bs-custom-class="tooltip-dark"
+                                   data-bs-placement="right"
+                                   href="@Url.Action("Index","Acil_Durum_Tatbikat")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Acil Durum Tatbikat İşlemleri</span>
+                                </a>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fa-solid fa-tower-broadcast fa-lg"></i>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Alt İşveren</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" data-bs-toggle="tooltip"
+                                   title="Acil Eylem Planı Güncellemek Silmek için kullanılır"
+                                   data-bs-custom-class="tooltip-dark"
+                                   data-bs-placement="right"
+                                   href="@Url.Action("Index","Alt_Isveren")">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Alt İşveren İşlemleri</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    @if (currentrole.Equals("SuperAdmin"))
+                    {
+                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen022.svg-->
+                                    <span class="svg-icon svg-icon-2">
+                                        <i class="fa-solid fa-tower-broadcast fa-lg"></i>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </span>
+                                <span class="menu-title">Yetki</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                <div class="menu-item">
+                                    <a class="menu-link" data-bs-toggle="tooltip"
+                                       title="Yetki Güncellemek Silmek için kullanılır"
+                                       data-bs-custom-class="tooltip-dark"
+                                       data-bs-placement="right"
+                                       href="@Url.Action("Index","Yetki")">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Yetki İşlemleri</span>
                                     </a>
                                 </div>
                             </div>
                         </div>
                     }
 
-                    @if (currentrole.Equals("SuperAdmin") || currentrole.Equals("Admin") || currentrole.Equals("IsgUzman"))
-                    {
-                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                            <span class="menu-link">
-                                <span class="menu-icon">
-                                    <span class="svg-icon svg-icon-2">
-                                        <i class="fa-solid fa-tower-broadcast fa-lg"></i>
-                                    </span>
-                                </span>
-                                <span class="menu-title">Makine Ekipman</span>
-                                <span class="menu-arrow"></span>
-                            </span>
-                            <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                <div class="menu-item">
-                                    <a class="menu-link" data-bs-toggle="tooltip"
-                                       title="Makine Ekipman Güncellemek Silmek için kullanılır"
-                                       data-bs-custom-class="tooltip-dark"
-                                       data-bs-placement="right"
-                                       href="@Url.Action("Index","Makine_Ekipman")">
-                                        <span class="menu-bullet">
-                                            <span class="bullet bullet-dot"></span>
-                                        </span>
-                                        <span class="menu-title">Makine Ekipman İşlemleri</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    }
                 </div>
+                <!--end::Menu-->
+
             </div>
+            <!--end::Aside Menu-->
         </div>
     </div>
+
+
+
+
+
 </div>
